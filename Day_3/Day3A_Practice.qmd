@@ -1,0 +1,8 @@
+---
+title: "Day 3A Practice"
+format:
+  html:
+    df-print: paged
+---
+
+https://easystats.github.io/correlation/articles/types.html

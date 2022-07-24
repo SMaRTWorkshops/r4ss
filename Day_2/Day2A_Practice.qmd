@@ -1,0 +1,231 @@
+---
+title: "Day 2A Practice"
+format:
+  html:
+    df-print: paged
+---
+
+![](../img/maintenance_2780E3.svg){.hero}
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## Question 1
+
+a) Transform the `drv` variable in the `mpg` tibble into a factor where "4" is labeled Four Wheel Drive, "r" is labelled Rear Wheel Drive, and "f" is labeled Front Wheel Drive. Save this updated tibble as `mpg2`.
+
+b) Transform the `manufacturer` and `model` variables in the `mpg2` tibble so that the first letter of each word is capitalized. Save this updated tibble as `mpg3`.
+
+c) Create a new variable in the `mpg3` tibble called `name` which merges/unites the `manufacturer`, `model`, and `drv` variables into a single string (separated by spaces).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+mpg2 <- 
+  mpg |> 
+  mutate(
+    drv = factor(
+      drv, 
+      levels = c("4", "r", "f"), 
+      labels = c("Four Wheel Drive", "Rear Wheel Drive", "Front Wheel Drive")
+    )
+  )
+mpg2
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+mpg3 <- 
+  mpg2 |> 
+  mutate(
+    manufacturer = str_to_title(manufacturer),
+    model = str_to_title(model)
+  )
+mpg3
+```
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+mpg3 |> 
+  unite(col = "name", manufacturer, model, drv, sep = " ")
+```
+
+</blockquote></details></p>
+
+## Question 2
+
+a) Load the `txhousing` tibble (included in \{tidyverse\}). This contains the number of homes listed (`listings`) and the typical home sales price (`median`) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. *Note:* For these descriptive purposes, you can ignore missing values.
+
+b) Recreate your answer to Question 2a using `across()`.
+
+c) Modify your answer to Question 2b to generate the same summary statistics but *per city* this time (still averaging across all months).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+txhousing |> 
+  summarize(
+    listings = mean(listings, na.rm = TRUE), 
+    median = mean(median, na.rm = TRUE)
+  )
+
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+txhousing |> 
+  summarize(
+    across(
+      .cols = c(listings, median),
+      .fns = mean, 
+      na.rm = TRUE
+    )
+  )
+```
+
+```{r}
+# Or, more compactly:
+
+txhousing |> summarize(across(c(listings, median), mean, na.rm = TRUE))
+```
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+txhousing |> 
+  group_by(city) |> 
+  summarize(
+    across(
+      .cols = c(listings, median),
+      .fns = mean, 
+      na.rm = TRUE
+    )
+  )
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+a) Use `if_else()` to add a new variable to the `txhousing` tibble called `crisis` which is equal to "pre" if `date` is less than 2007.5 and "post" otherwise.
+
+b) Recreate your answer to Question 3a using `case_when()`.
+
+c) *Bonus:* Add a new variable to the `txhousing` tibble called `season` which is equal to: "spring" when `month` is 3, 4, or 5; "summer" when `month` is 6, 7, or 8; "autumn" when `month` is 9, 10, or 11; and "winter" when `month` is 1, 2, or 12.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+txhousing |> 
+  mutate(
+    crisis = if_else(
+      condition = date < 2007.5,
+      true = "pre",
+      false = "post"
+    )
+  )
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+txhousing |> 
+  mutate(
+    crisis = case_when(
+      date < 2007.5 ~ "pre",
+      date >= 2007.5 ~ "post"
+    )
+  )
+```
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+txhousing |> 
+  mutate(
+    season = case_when(
+      month %in% c(3, 4, 5) ~ "spring",
+      month %in% c(6, 7, 8) ~ "summer",
+      month %in% c(9, 10, 11) ~ "autumn",
+      month %in% c(12, 1, 2) ~ "winter"
+    )
+  )
+```
+
+</blockquote></details></p>
+
+## Resources
+
+- [R4DS Chapter 5](https://r4ds.had.co.nz/transform.html) (§5.6–§5.7): Read more about grouped summaries and mutates
+
+- [R4DS Chapter 14](https://r4ds.had.co.nz/strings.html): Read more about working with strings in R
+
+- [R4DS Chapter 15](https://r4ds.had.co.nz/factors.html): Read more about working with factors in R
+
+- [R4DS Chapter 12](https://r4ds.had.co.nz/tidy-data.html): Read more about reshaping and tidying data in R
+
+## Fun Stuff
+
+### Advanced Reshaping
+
+"We have to be careful with the <del>clay</del>[data]{.blue} that <del>Mother Nature</del>[Mechanical Turk]{.blue} has given us..."
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K_OLh6ZTyhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Let's Enhance
+
+If you want to be able to do this, save your images as `.pdf` or `.svg`...
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LhF_56SxrGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

@@ -1,0 +1,228 @@
+---
+title: "Day 2B Practice"
+format:
+  html:
+    df-print: paged
+---
+
+![](../img/making_art_2780E3.svg){.hero}
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## Question 1
+
+For each of the following code snippets, find and fix the error(s).
+
+a) "The Scatterbrained Scatterplot"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(mpg, x = displ, y = hwy) + 
+  geom_point()
+```
+
+b) "Not-so-smooth Smoothing"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
+  geom_smooth() +
+  scale_y_continuous("Highway MPG") +
+  scale_x_discrete("Engine Size")
+```
+
+c) "A Leaky Pipeline"
+
+```{r}
+#| eval: false
+#| error: true
+
+ggplot(economics, aes(x = date, y = unemploy)) |> 
+  geom_line() |> 
+  geom_point()
+```
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+The code forgot to put the mappings inside `aes()`.
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+ggplot(mpg, aes(x = displ, y = hwy)) + # fix 1
+  geom_point() 
+```
+
+**Answer (b)**
+
+The code forgot a `+` and set the x-axis to discrete instead of continuous.
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + # fix 1
+  geom_smooth() +
+  scale_y_continuous("Highway MPG") +
+  scale_x_continuous("Engine Size") # fix 2
+```
+
+**Answer (c)**
+
+The code used pipes instead of plus signs to connect ggplot2 commands.
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+ggplot(economics, aes(x = date, y = unemploy)) + # fix 1
+  geom_line() + # fix 2
+  geom_point()
+```
+
+</blockquote></details></p>
+
+## Question 2
+
+a) Install and load the \{palmerpenguins\} package.
+
+b) Recreate the following graphic as closely as you can from the `penguins` tibble in that package (don't worry about getting the geom settings exactly right).
+
+c) Clean up the x and y axis titles so that they are more readable (e.g., "Flipper length (mm)" instead of "flipper_length_mm"). *Bonus:* See if you can figure out how to also rename the legend title.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+ggplot(palmerpenguins::penguins,
+       aes(x = flipper_length_mm, y = bill_length_mm,
+           color = species, shape = species)) +
+  geom_point(size = 3, alpha = 0.75)
+```
+
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+# Extra pane > Packages tab > Install button > palmerpenguins > Install
+
+library(palmerpenguins)
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 3, alpha = 0.75)
+```
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+p <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 3, alpha = 0.75) +
+  scale_x_continuous(name = "Flipper length (mm)") +
+  scale_y_continuous(name = "Body mass (g)") +
+  scale_color_discrete(name = "Penguin species") +
+  scale_shape_discrete(name = "Penguin species")
+p
+```
+
+</blockquote></details></p>
+
+## Question 3
+
+a) Use your graphic from Question 2(c) a starting graphic object. Apply the "classic" complete theme to it and move the legend to the top. *Bonus:* Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).
+
+b) Export this graphic as an image file to include in a paper. Make it 6.5 inches wide and 4 inches high. *Bonus:* Open Microsoft Word or Google Docs and insert the image.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+p2 <- 
+  p + 
+  theme_classic() + 
+  theme(
+    legend.position = "top",
+    axis.title = element_text(face = "italic") # bonus
+  )
+p2
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| eval: false
+
+ggsave("practice.png", plot = p2, width = 6.5, height = 4, units = "in")
+```
+
+</blockquote></details></p>
+
+## Resources
+
+- [R4DS Chapter 3](https://r4ds.had.co.nz/data-visualisation.html): Read an introduction to visualization
+
+- [GGP2 Chapter 11](https://ggplot2-book.org/scale-colour.html): Read more about color in ggplot2
+
+- [GGP2 Chapter 8](https://ggplot2-book.org/annotations.html): Read about annotating ggplot2 objects
+
+- [GGP2 Chapter 17](https://ggplot2-book.org/facet.html): Read about faceting in ggplot2
+
+## Fun Stuff
+
+### How to Spot a Misleading Graph
+
+Here are some mistakes to avoid (unless you want to work at a shitty newspaper)...
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/E91bGT9BjYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Don McMillan's Gratest Charts
+
+Would these be more or less funny if he had used ggplot2... ?
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LYE3GtXqDV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

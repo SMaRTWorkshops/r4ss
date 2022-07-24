@@ -1,0 +1,38 @@
+---
+title: "Jeffrey Girard"
+about:
+  template: trestles
+  image: ../img/Girard_500x500.jpg
+  links:
+    - icon: link
+      text: website
+      href: https://www.jmgirard.com/
+    - icon: twitter
+      text: twitter
+      href: https://www.twitter.com/jeffreymgirard
+    - icon: github
+      text: github
+      href: https://www.github.com/jmgirard
+---
+
+<!-- Jeffrey Girard studies how emotions are expressed through verbal and nonverbal behavior, as well as how interpersonal communication is influenced by individual differences (e.g., personality and mental health) and social factors (e.g., culture and context). This work is deeply interdisciplinary and draws insights and tools from various areas of social science, computer science, statistics, and medicine. -->
+
+## Experience
+
+**University of Kansas** | Lawrence, KS<br />
+Quantitative Area Head | 2022 – present<br />
+E. Wright Assistant Professor | 2020 – present
+
+**Carnegie Mellon University** | Pittsburgh, PA<br />
+Postdoctoral Research Fellow | 2018 – 2020
+
+## Education
+
+**University of Pittsburgh** | Pittsburgh, PA<br />
+PhD in Clinical Psychology | 2018
+
+**University of Pittsburgh** | Pittsburgh, PA<br />
+MS in Clinical Psychology | 2013
+
+**University of Washington** | Seattle, WA<br />
+BA in Psychology/Philosophy | 2008

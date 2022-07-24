@@ -1,0 +1,169 @@
+---
+title: "Datasets"
+format:
+  html:
+    df-print: paged
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+
+## Datasets to download
+
+### cereal
+
+Real data on 77 cereal products from the early 1990s. \[[Source](https://www.kaggle.com/datasets/crawford/80-cereals)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/cereal.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/cereal.csv")
+```
+
+### diary
+
+Real data from 112 participants in a "daily diary" study on stress and affect. \[[Source](https://doi.org/10.1521/pedi.2015.29.4.503)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/diary.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/diary.csv")
+```
+
+### gradebook
+
+Simulated data on the scores of 10 students on 5 tests.
+
+<a href="https://pittmethods.github.io/r4ss/data/gradebook.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/gradebook.csv")
+```
+
+### elicitation
+
+Real data about 139 participants' emotions during four emotion elicitation tasks. \[[Source](https://doi.org/10.1016/j.imavis.2014.06.002)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/elicitation.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/elicitation.csv")
+```
+
+### interpersonal
+
+Real data about the interpersonal problems of 34 psychotherapy clients. \[[Source](https://doi.org/10.1109/FG52635.2021.9667021)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/interpersonal.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/interpersonal.csv")
+```
+
+### salaries
+
+Real data about 397 professors during 2008 to 2009. \[[Source](https://cran.r-project.org/package=carData)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/salaries.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/salaries.csv")
+```
+
+## Datasets in Packages
+
+### economics 
+
+Real economic time series data about the US from 1967 to 2015. \[[Source](https://fred.stlouisfed.org/)\]
+
+Included in the \{ggplot2\} package and loaded by \{tidyverse\}.
+
+```{r}
+#| echo: false
+
+economics
+```
+
+### flights
+
+Real data about all 336,766 flights in and out of New York City in 2013. \[[Source](https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236)\]
+
+Included in the \{nycflights13\} package.
+
+```{r}
+#| echo: false
+
+nycflights13::flights
+```
+
+### mpg
+
+Real data about 234 car models from 1999 and 2008. \[[Source](https://fueleconomy.gov/)\]
+
+Included in the \{ggplot2\} package and loaded by \{tidyverse\}.
+
+```{r}
+#| echo: false
+
+mpg
+```
+
+### penguins
+
+Real data about 344 penguins observed in Palmer Archipelago. \[[Source](https://doi.org/10.1371/journal.pone.0090081)\]
+
+Included in the \{palmerpenguins\} package.
+
+```{r}
+#| echo: false
+
+palmerpenguins::penguins
+```
+
+### starwars
+
+Real data about 87 characters in the Star Wars franchise. \[[Source](https://swapi.dev)\]
+
+Included in the \{dplyr\} package and loaded by \{tidyverse\}.
+
+```{r}
+#| echo: false
+
+starwars
+```
+
+### txhousing
+
+Real data about the Texas housing market from 2000 to 2015. \[[Source](https://www.recenter.tamu.edu/)\]
+
+Included in the \{ggplot2\} package and loaded by \{tidyverse\}.
+
+```{r}
+#| echo: false
+
+txhousing
+```
+

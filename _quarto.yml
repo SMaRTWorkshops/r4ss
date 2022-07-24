@@ -1,0 +1,61 @@
+project:
+  type: website
+  resources:
+    - "data/*.csv"
+
+website:
+  title: "R4SS Workshop"
+  navbar:
+    background: primary
+    right:
+      - href: index.qmd
+        text: Home
+      - text: "Details"
+        menu:
+          - text: "Instructor"
+            href: Details/instructor.qmd
+          - text: "Schedule"
+            href: Details/schedule.qmd
+          - text: "Datasets"
+            href: Details/datasets.qmd
+          - text: "Resources"
+            href: construction.qmd #Details/resources.qmd
+      - text: "Day 1"
+        menu:
+          - text: "Day 1A Slides"
+            href: Day_1/Day1A_Slides.qmd
+          - text: "Day 1A Practice"
+            href: Day_1/Day1A_Practice.qmd
+          - text: "Day 1B Slides"
+            href: Day_1/Day1B_Slides.qmd
+          - text: "Day 1B Practice"
+            href: Day_1/Day1B_Practice.qmd
+      - text: "Day 2"
+        menu:
+          - text: "Day 2A Slides"
+            href: Day_2/Day2A_Slides.qmd
+          - text: "Day 2A Practice"
+            href: Day_2/Day2A_Practice.qmd
+          - text: "Day 2B Slides"
+            href: Day_2/Day2B_Slides.qmd
+          - text: "Day 2B Practice"
+            href: Day_2/Day2B_Practice.qmd
+      - text: "Day 3"
+        menu:
+          - text: "Day 3A Slides"
+            href: construction.qmd #Day_3/Day3A_Slides.qmd
+          - text: "Day 3A Practice"
+            href: construction.qmd #Day_3/Day3A_Practice.qmd
+      - icon: github
+        href: https://www.github.com/pittmethods/r4ss
+  search: false
+  page-footer: "Copyright 2022 © Jeffrey Girard"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+execute: 
+  freeze: auto
+  

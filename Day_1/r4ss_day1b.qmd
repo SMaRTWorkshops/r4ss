@@ -1,0 +1,1470 @@
+---
+format: 
+  revealjs:
+    css: ../styles.css
+    slide-number: true
+    show-slide-number: all
+    preview-links: auto
+    self-contained: true
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "R4SS Day 1B"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2022-07-25"
+---
+
+::: {.my-title}
+# [Introduction to R]{.blue} <br />for Social Scientists
+
+::: {.my-grey}
+[Workshop Day 1B | 2022-07-25]{}<br />
+[Jeffrey M. Girard | Pitt Methods]{}
+:::
+
+![](../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+<!-- Wrangle I -->
+
+# Wrangle I
+
+## Tidy Data Principles {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- There are many ways to store data
+
+::: {.fragment .mt1}
+- We will be learning the [tidy data]{.b .blue} format
+    - Data should be *rectangular*
+    - Each [variable]{.green} has its own column
+    - Each [observation]{.green} has its own row
+    - Each [value]{.green} has its own cell
+:::
+
+::: {.fragment .mt1}
+![](../img/tidydata.png)
+:::
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li qhdmndwt trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Other Data Advice {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Name all variables]{.b .blue} in the first row
+    -   This is called a [header row]{.b .green}
+    
+::: {.fragment .mt1}
+-   [Avoid merged cells]{.b .blue} for data storage
+    -   These are okay for communication
+:::
+
+::: {.fragment .mt1}
+-   [Avoid empty cells]{.b .blue} whenever possible
+    -   Mark [missing data]{.b .green} as `NA`
+:::
+
+::: {.fragment .mt1}
+-   [Avoid formatting-as-data]{.b .blue} for storage
+    -   e.g., non-redundant color-coding
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li dizvjgip trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tidying Example 1 {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Not Tidy
+<table class="table-bad" width="100%">
+  <tbody>
+  <tr>
+    <td>Name</td>
+    <td>Ann</td>
+    <td>Bob</td>
+    <td>Cat</td>
+    <td>Dom</td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td>13</td>
+    <td>10</td>
+    <td>11</td>
+    <td>11</td>
+  </tr>
+  <tr>
+    <td>Weight</td>
+    <td>56.4</td>
+    <td>46.8</td>
+    <td>41.3</td>
+    <td>43.3</td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+❌ Here, each row is a variable and each column is an observation.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Tidy
+<table class="table-good" width="100%">
+  <tbody>
+  <tr>
+    <td>Name</td>
+    <td>Age</td>
+    <td>Weight</td>
+  </tr>
+  <tr>
+    <td>Ann</td>
+    <td>13</td>
+    <td>56.4</td>
+  </tr>
+  <tr>
+    <td>Bob</td>
+    <td>10</td>
+    <td>46.8</td>
+  </tr>
+  <tr>
+    <td>Cat</td>
+    <td>11</td>
+    <td>41.3</td>
+  </tr>
+  <tr>
+    <td>Dom</td>
+    <td>11</td>
+    <td>43.3</td>
+  </tr>
+  </tbody>
+</table>
+::: {.pv4}
+✔️ Here, each column is a variable and each row is an observation.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tidying Example 2 {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Not Tidy
+<table class="table-bad" width="100%">
+  <tbody>
+  <tr>
+    <td>Names:</td>
+    <td>Ann</td>
+    <td>Bob</td>
+    <td>Cat</td>
+    <td>Dom</td>
+  </tr>
+  <tr>
+    <td>Age</td>
+    <td>Weight</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>56.4</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>46.8</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>41.3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>43.3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+❌ Here, we have data that is not rectangular because the Names variable has its own row.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Tidy
+<table class="table-good" width="100%">
+  <tbody>
+  <tr>
+    <td>Name</td>
+    <td>Age</td>
+    <td>Weight</td>
+  </tr>
+  <tr>
+    <td>Ann</td>
+    <td>13</td>
+    <td>56.4</td>
+  </tr>
+  <tr>
+    <td>Bob</td>
+    <td>10</td>
+    <td>46.8</td>
+  </tr>
+  <tr>
+    <td>Cat</td>
+    <td>11</td>
+    <td>41.3</td>
+  </tr>
+  <tr>
+    <td>Dom</td>
+    <td>11</td>
+    <td>43.3</td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.pv4}
+✔️ Here, we have made the data rectangular by moving the Names variable to its own column.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tidying Example 3 {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Not Tidy
+<table class="table-bad table-small" width="100%">
+  <tbody>
+  <tr>
+    <td>country</td>
+    <td>year</td>
+    <td>cases / population</td>
+  </tr>
+  <tr>
+    <td rowspan=2>Afghanistan</td>
+    <td>1999</td>
+    <td>NA / 19987071</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>2666 / 20595360</td>
+  </tr>
+  <tr>
+    <td rowspan=2>Brazil</td>
+    <td>1999</td>
+    <td>37737 / 172006362</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>80488 / 174504898</td>
+  </tr>
+  <tr>
+    <td rowspan=2>China</td>
+    <td>1999</td>
+    <td>212258 / 1272915272</td>
+  </tr>
+  <tr>
+    <td>2000</td>
+    <td>213766 / 1280428583</td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+❌ Here, we have merged cells and two values stored in a single cell.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Tidy
+<table class="table-good table-small" width="100%">
+  <tbody>
+  <tr>
+    <td>country</td>
+    <td>year</td>
+    <td>cases</td>
+    <td>population</td>
+  </tr>
+  <tr>
+    <td>Afghanistan</td>
+    <td>1999</td>
+    <td>NA</td>
+    <td>19987071</td>
+  </tr>
+  <tr>
+    <td>Afghanistan</td>
+    <td>2000</td>
+    <td>2666</td>
+    <td>20595360</td>
+  </tr>
+  <tr>
+    <td>Brazil</td>
+    <td>1999</td>
+    <td>37737</td>
+    <td>172006362</td>
+  </tr>
+  <tr>
+    <td>Brazil</td>
+    <td>2000</td>
+    <td>80488</td>
+    <td>174504898</td>
+  </tr>
+  <tr>
+    <td>China</td>
+    <td>1999</td>
+    <td>212258</td>
+    <td>1272915272</td>
+  </tr>
+  <tr>
+    <td>China</td>
+    <td>2000</td>
+    <td>213766</td>
+    <td>1280428583</td>
+  </tr>
+  </tbody>
+</table>
+::: {.pv4}
+✔️ Here, we have un-merged the countries and separated the cases and populations variables into columns.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+
+## Tidying Example 4 {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Not Tidy
+<table class="table-bad" width="100%">
+  <tbody>
+  <tr>
+    <td>student</td>
+    <td>grade</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>[Amber]{.bg-yellow}</td>
+    <td>91.5</td>
+    <td>A-</td>
+  </tr>
+  <tr>
+    <td>[Bristol]{.bg-teal}</td>
+    <td>86.2</td>
+    <td>B</td>
+  </tr>
+  <tr>
+    <td>[Charlene]{.bg-yellow}</td>
+    <td>94.0</td>
+    <td>A</td>
+  </tr>
+  <tr>
+    <td>Diego</td>
+    <td>89.3</td>
+    <td>B+</td>
+  </tr>
+  <tr>
+    <td colspan=3>Legend: [Psych. Major]{.bg-yellow}, [Psych. Minor]{.bg-teal}</td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+❌ Here, we have a missing variable name and formatting-as-data.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Tidy
+<table class="table-good" width="100%">
+  <tbody>
+  <tr>
+    <td>student</td>
+    <td>psych</td>
+    <td>grade</td>
+    <td>letter</td>
+  </tr>
+  <tr>
+    <td>Amber</td>
+    <td>major</td>
+    <td>91.5</td>
+    <td>A-</td>
+  </tr>
+  <tr>
+    <td>Bristol</td>
+    <td>minor</td>
+    <td>86.2</td>
+    <td>B</td>
+  </tr>
+  <tr>
+    <td>Charlene</td>
+    <td>major</td>
+    <td>94.0</td>
+    <td>A</td>
+  </tr>
+  <tr>
+    <td>Diego</td>
+    <td>NA</td>
+    <td>89.3</td>
+    <td>B+</td>
+  </tr>
+  </tbody>
+</table>
+::: {.pv4}
+✔️ Here, we have added a column for the psych variable, removed the legend, and named the letter variable.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+
+## Tidying Example 5 {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Not Tidy
+<table class="table-bad" width="100%">
+  <tbody>
+  <tr>
+    <td>student</td>
+    <td>grade</td>
+    <td>letter</td>
+  </tr>
+  <tr>
+    <td>Amber</td>
+    <td>91.5</td>
+    <td>A-</td>
+  </tr>
+  <tr>
+    <td>Bristol*</td>
+    <td>94.2</td>
+    <td>A</td>
+  </tr>
+  <tr>
+    <td colspan=3>Class Summary</td>
+  </tr>
+  <tr>
+    <td>As</td>
+    <td>2</td>
+    <td>Yay!</td>
+  </tr>
+  <tr>
+    <td>Bs</td>
+    <td>0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan=3 class="tr">*Grade was revised.</td>
+  </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+❌ Here, we have two types of data in one file and a footnote as data.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Tidy
+<table class="table-good" width="100%">
+  <tbody>
+    <tr>
+      <td>student</td>
+      <td>grade</td>
+      <td>letter</td>
+      <td>revised</td>
+    </tr>
+    <tr>
+      <td>Amber</td>
+      <td>91.5</td>
+      <td>A-</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>Bristol</td>
+      <td>94.2</td>
+      <td>A</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table-good" width="100%" style="margin-top: 1em;">
+  <tbody>
+    <tr>
+      <td>letter</td>
+      <td>count</td>
+      <td>notes</td>
+    </tr>
+    <tr>
+      <td>A</td>
+      <td>2</td>
+      <td>Yay!</td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+::: {.pv4}
+✔️ Here, we have split the data into two separate tables and added the revised and notes variables.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Long vs. Wide Format {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+#### Wide Format
+<table class="table-good" width="100%">
+  <tbody>
+    <tr>
+      <td>date</td>
+      <td>Boeing</td>
+      <td>Amazon</td>
+      <td>Google</td>
+    </tr>
+    <tr>
+      <td>2009-01-01</td>
+      <td>$173.55</td>
+      <td>$174.90</td>
+      <td>$174.34</td>
+    </tr>
+    <tr>
+      <td>2009-01-02</td>
+      <td>$172.61</td>
+      <td>$171.42</td>
+      <td>$170.04</td>
+    </tr>
+  </tbody>
+</table>
+
+::: {.fragment .mt1 .pv4}
+✔️ Here, we have a wide format where each observation is a date.
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: {.fragment}
+#### Long Format
+<table class="table-good" width="100%">
+  <tbody>
+    <tr>
+      <td>date</td>
+      <td>stock</td>
+      <td>price</td>
+    </tr>
+    <tr>
+      <td>2009-01-01</td>
+      <td>Boeing</td>
+      <td>$173.55</td>
+    </tr>
+    <tr>
+      <td>2009-01-01</td>
+      <td>Amazon</td>
+      <td>$174.90</td>
+    </tr>
+    <tr>
+      <td>2009-01-01</td>
+      <td>Google</td>
+      <td>$174.34</td>
+    </tr>
+    <tr>
+      <td>2009-01-02</td>
+      <td>Boeing</td>
+      <td>$172.61</td>
+    </tr>
+    <tr>
+      <td>2009-01-02</td>
+      <td>Amazon</td>
+      <td>$171.42</td>
+    </tr>
+    <tr>
+      <td>2009-01-02</td>
+      <td>Google</td>
+      <td>$170.04</td>
+    </tr>
+  </tbody>
+</table>
+
+::: { .pv4}
+✔️ Here, we have a long format where each observation is the combination of a date and a stock.
+:::
+:::
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tibbles {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   R works particularly well with [tidy data]{.b .green}
+
+::: {.fragment .mt1}
+-   We store tidy data in [data frames]{.b .green} or [tibbles]{.b .blue}
+    -   Tibbles are just fancier data frames<br />
+        (i.e., they have a few extra features)
+:::
+
+::: {.fragment .mt1}
+-   To use tibbles, we need the [tidyverse]{.b .blue} package
+:::
+
+::: {.fragment .mt1}
+-   Tibbles are constructed from one or more vectors
+    -   The vectors must have the [same length]{.b .green}
+    -   They can contain [different types]{.b .green} of data
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li jiievwhv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Vectors {.smaller}
+
+![](../img/vectors.png)
+
+::: {.tc .pv4}
+We start with three separate vector objects that all have the same length.
+
+We set it up so that the $n$-th car in each train corresponds to the same observation.
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tibble {.smaller}
+
+![](../img/tibble.png)
+
+::: {.tc .pv4}
+Then we combine the vectors into a single tibble (or data frame) object.
+
+Now, as the tibble moves around, the variables always stay together.
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Tibbles Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Install and load the tidyverse package
+
+# Extras pane > Packages tab > Install
+
+library(tidyverse)
+
+# ==============================================================================
+
+# LESSON: Create a tibble from vectors
+
+x <- c(10, 20, 30, 40)
+x
+
+y <- x * 2 - 4
+y
+
+my_tibble <- tibble(x, y)
+my_tibble
+
+# ==============================================================================
+
+# USECASE: You can mix different types of vectors in a single tibble
+
+first_names <- c("Adam", "Billy", "Caitlyn", "Debra")
+
+age_years <- c(12, 13, 10, NA)
+
+guests <- tibble(first_names, age_years)
+guests
+
+# ==============================================================================
+
+# TIP: To save time, you can also create the vectors in the tibble call
+
+gradebook <- tibble(
+  grade = c(95, 83, 90, 76),
+  letter = c("a", "b", "a-", "c")
+)
+gradebook
+
+# ==============================================================================
+
+# PITFALL: Don't try to combine tibbles with different lengths
+
+y <- c(1, 2, 3)
+x <- c("a", "b")
+
+tibble(y, x) #error
+
+# ==============================================================================
+
+# LESSON: However, the exception is R will "recycle" a single value
+
+tibble(y, x = "a")
+
+# ==============================================================================
+
+# LESSON: You can "extract" a vector from a tibble using $
+
+mytibble <- tibble(x = c(1, 2, 3, 4, 5), y = "test")
+
+mytibble$x
+
+mytibble$y
+
+# ==============================================================================
+
+# PITFALL: Don't try to extract a vector that doesn't exist
+
+mytibble$z #error
+```
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Importing and Exporting {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Data is usually stored in [data files]{.b .green}
+    -   Importing files into R is called [reading]{.b .blue}
+    -   Exporting files from R is called [writing]{.b .blue}
+
+::: {.fragment .mt1}
+-   A convenient data file type is a CSV
+    -   This stands for [comma-separated values]{.b .green}
+    -   A CSV file is easy to share with other people
+:::
+
+::: {.fragment .mt1}
+-   The [tidyverse]{.b .green} package can read/write CSVs
+    -   Other packages can read/write other types
+        (e.g., *readxl*, *haven*, *rio*, *googlesheets4*)
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li dhkykqke trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+## Read/Write Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Load the tidyverse package (if you haven't yet)
+
+library(tidyverse)
+
+# ==============================================================================
+
+# USECASE: Create a tibble and write it to a file
+
+gradebook <- tibble(
+  id = c(123, 456, 789),
+  grade = c("A", "B", "A")
+)
+gradebook
+
+write_csv(gradebook, file = "gradebook.csv")
+
+# NOTE: You can see the new file in Extras pane > Files tab.
+# You can open the file in another program (e.g., Microsoft Excel).
+# You can also email this file to someone else to share it.
+
+# ==============================================================================
+
+# PITFALL: Don't swap the order of the tibble and the file
+
+write_csv("gradebook.csv", gradebook) # error
+
+# ==============================================================================
+
+# USECASE: Read in a file containing data
+
+old_gradebook <- read_csv("gradebook.csv")
+old_gradebook
+
+# NOTE: read_csv() will examine and guess the data type of each variable.
+# You can tell it the data type of each variable, but that is more advanced.
+
+# ==============================================================================
+
+# PITFALL: Don't use the read.csv() and write.csv() functions
+
+old_gradebook <- read.csv("gradebook.csv") # not a tibble
+old_gradebook
+```
+
+::: footer
+\[1B\] Wrangle I
+:::
+
+<!-- Wrangle II -->
+
+# Wrangle II
+
+## Basic wrangling verbs {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [tidyverse]{.b .blue} provides tools for wrangling tibbles
+    -   These functions are named after *verbs*
+    -   So if you name your objects after *nouns*...
+    -   ...your code becomes easier to read
+
+::: {.fragment .mt1}
+| Noun(noun) ❌        |  Verb(noun)  ✔️  | 
+|:----------------------|:----------------|
+| `blender(fruit)`      | `blend(fruit)`  |
+| `screwdriver(screw)`  | `drive(screw)`  |
+| `boxcutter(box)`      | `cut(box)`      |
+
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## Basic wrangling verbs {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- **Primary Functions** (most used)
+    -   `select()` retains only certain columns
+    -   `mutate()` adds or transforms columns
+    -   `filter()` retains rows based on criteria
+
+::: {.fragment .mt1}
+- **Secondary Functions** (less used)
+    -   `arrange()` sorts rows by their values
+    -   `rename()` changes column titles
+    -   `relocate()` moves columns around
+
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Select* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Load package and inspect example tibble
+
+library(tidyverse) # includes the dplyr package
+starwars
+
+# ==============================================================================
+
+# USECASE: Retain only the specified variables
+
+sw <- select(starwars, name)
+sw
+sw <- select(starwars, name, sex, species)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't forget to save the change with assignment
+
+select(starwars, name, sex, species)
+starwars # still includes all variables
+
+# ==============================================================================
+
+# USECASE: Change the order of variables
+
+sw <- select(starwars, species, name, sex)
+sw
+
+# ==============================================================================
+
+# USECASE: Retain all variables between two variables
+
+sw <- select(starwars, name, hair_color:eye_color)
+sw
+
+# ==============================================================================
+
+# USECASE: Retain all variables except the specified ones
+
+sw <- select(starwars, -sex, -species)
+sw
+sw <- select(starwars, -c(sex, species))
+sw
+sw <- select(starwars, -c(hair_color:starships))
+sw
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Rename* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Change the name of one or more variables
+
+# TEMPLATE: df2 <- rename(df, new_name = old_name)
+
+starwars
+
+sw <- rename(starwars, Character = name)
+sw
+
+sw <- rename(starwars, height_cm = height, mass_kg = mass)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't swap the order and try old_name = new_name
+
+sw <- rename(starwars, name = Character) # error
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Relocate* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Move variables before another variable or position
+
+starwars
+sw <- relocate(starwars, sex, .before = height)
+sw
+
+sw <- relocate(starwars, species, sex, .before = name)
+sw
+
+sw <- relocate(starwars, homeworld, .before = 1)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't forget the period!
+
+sw <- relocate(starwars, sex, before = height) 
+sw # height was accidentally renamed to before
+
+# ==============================================================================
+
+# USECASE: Move variables after another variable or position
+
+sw <- relocate(starwars, sex, .after = height)
+sw
+
+sw <- relocate(starwars, species, sex, .after = name)
+sw
+
+sw <- relocate(starwars, homeworld, .after = 1)
+sw
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Arrange* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Sort observations by a variable
+
+starwars
+
+sw <- arrange(starwars, height)
+sw # sorted by height, ascending
+
+sw <- arrange(starwars, name)
+sw # sorted by name, alphabetically
+
+# ==============================================================================
+
+# USECASE: Sort observations by a variable, in reverse order
+
+sw <- arrange(starwars, desc(height))
+sw # sorted by height, descending
+
+sw <- arrange(starwars, desc(name))
+sw # sorted by name, reverse-alphabetically
+
+# ==============================================================================
+
+# USECASE: Sort observations by multiple variables
+
+sw <- arrange(starwars, hair_color, mass)
+sw # sorted by hair_color, then ties broken by mass
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Filter* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Retain only observations that meet a criterion
+
+sw <- filter(starwars, mass > 100)
+sw # only observations with mass greater than 100
+
+sw <- filter(starwars, mass <= 100)
+sw # only observations with mass less than or equal to 100
+
+sw <- filter(starwars, species == "Human")
+sw # only observations with species equal to Human
+
+sw <- filter(starwars, species != "Human")
+sw # only observations with species not equal to Human
+
+# ==============================================================================
+
+# PITFALL: Don't try to use a single = for testing equality
+
+sw <- filter(starwars, height = 150) # error
+
+sw <- filter(starwars, height == 150) # correct
+sw 
+
+# ==============================================================================
+
+# PITFALL: Don't forget that R is case-sensitive
+
+sw <- filter(starwars, species == "human")
+sw # no observations left (because it should be Human)
+
+# ==============================================================================
+
+# USECASE: Retain only observations that meet complex criteria
+
+sw <- filter(starwars, mass > 100 & height > 200)
+sw # only observations with mass over 100 AND height over 200
+
+sw <- filter(starwars, height < 100 | hair_color == "none")
+sw # only observations with height under 100 OR hair_color equal to none
+
+# ==============================================================================
+
+# PITFALL: Don't forget to complete both conditions
+
+sw <- filter(starwars, mass > 100 & < 200) # error
+
+sw <- filter(starwars, mass > 100 & mass < 200) # correct
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't try to equate a string to a vector
+
+sw <- filter(starwars, species == c("Human", "Droid")) # error
+
+sw <- filter(starwars, species %in% c("Human", "Droid")) # correct
+sw
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Filter* Cheatsheet {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%" .mytable}
+
+| Symbol | Description            | Num | Chr   |
+|--------|------------------------|-----|-------|
+| `<`    | Less than              | Yes | *No*  |
+| `<=`   | Less than or equal to  | Yes | *No*  |
+| `>`    | More than              | Yes | *No*  |
+| `>=`   | More than or equal to  | Yes | *No*  |
+| `==`   | Equal to               | Yes | Yes   |
+| `!=`   | Not equal to           | Yes | Yes   |
+| `%in%` | Found in               | Yes | Yes   |
+| `&`    | Logical And            | Yes | Yes   |
+| `|`    | Logical Or             | Yes | Yes   |
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li esixrdij trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## *Mutate* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Create example tibble
+
+patients <- tibble(
+  id = c("S1", "S2", "S3"),
+  feet = c(6, 5, 5),
+  inches = c(1, 7, 2),
+  pounds = c(176.3, 124.9, 162.6)
+)
+patients
+
+# ==============================================================================
+
+# USECASE: Add one or more variables
+
+p2 <- mutate(patients, sex = c("M", "F", "F"))
+p2
+
+ages <- c(32, 41, 29)
+p2 <- mutate(patients, ages = ages)
+p2
+
+p2 <- mutate(
+  patients, 
+  sex = c("M", "F", "F"), 
+  ages = ages
+)
+p2
+
+# ==============================================================================
+
+# USECASE: Compute variables
+
+p2 <- mutate(patients, height = feet + inches / 12)
+p2
+
+p2 <- mutate(patients, ln_pounds = log(pounds))
+p2
+
+# ==============================================================================
+
+# USECASE: Overwrite variables
+
+patients <- mutate(patients, height = height / 3.281)
+patients
+
+# ==============================================================================
+
+# USECASE: Duplicate variables
+
+p2 <- mutate(patients, weight = pounds)
+p2 # both weight and pounds exist
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## Pipes and Pipelines {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- How can we do [multiple operations]{.b .green} to an object?
+    1. `x <- 10`
+    2. `x2 <- sqrt(x)`
+    3. `x3 <- round(x2)`
+    
+::: {.fragment .mt1}
+- This works but is **cumbersome** and **error-prone**
+:::
+
+::: {.fragment .mt1}
+- A better approach is to use [pipes]{.b .blue} and [pipelines]{.b .green}
+    - `x3 <- 10 |> sqrt() |> round()`
+:::
+
+::: {.fragment .mt1}
+- I like to read `|>` as "and then..."
+    - "Take 10 and then sqrt() and then round()"
+:::
+    
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li mhttdvjl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+## Pipes Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Enable the pipe operator shortcut
+
+# Tools > Global Options... > Code tab > Check "Use Native Pipe Operator"
+
+# Type out |> or press Ctrl+Shift+M (Windows) / Cmd+Shift+M (Mac)
+
+# ==============================================================================
+
+# LESSON: The pipe pushes objects to a function as its first argument
+
+# TEMPLATE: x |> function_name() is the same as function_name(x)
+
+x <- 10
+
+y <- sqrt(x)
+y
+
+y <- x |> sqrt()
+y
+
+# ==============================================================================
+
+# PITFALL: Don't forget to remove the object from the function call
+
+x |> sqrt(x) # wrong
+
+x |> sqrt() # correct
+
+# ==============================================================================
+
+# USECASE: You can still use arguments when piping
+
+z <- round(3.14, digits = 1)
+z
+
+z <- 3.14 |> round(digits = 1)
+z
+
+# ==============================================================================
+
+# USECASE: Pipes are useful with tibbles and wrangling verbs
+
+starwars
+
+sw <- select(starwars, name, species, height)
+sw
+
+sw <- starwars |> select(name, species, height)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't add a pipe without a step after it
+
+sw <- starwars |> select(name, species, height) |> # error
+```
+
+## Pipelines Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: You can chain multiple pipes together to make a pipeline
+
+x <- 10 |> sqrt() |> round()
+x
+
+# ==============================================================================
+
+# TIP: If you want to see the output of a pipeline, you can pipe to print()
+
+x <- 10 |> sqrt() |> round() |> print()
+
+# ==============================================================================
+
+# TIP: To make your pipelines more readable, move each step to a new line
+
+x <- 
+  10 |> 
+  sqrt() |> 
+  round() |>
+  print()
+
+# ==============================================================================
+
+# PITFALL: Don't put the pipe at the beginning of a line, though
+
+x <- 
+  10 
+  |> sqrt()
+  |> round()
+  |> print() # error
+
+# ==============================================================================
+
+# USECASE: Chain together a series of verbs to flexibly wrangle data
+
+tallones <- 
+  starwars |> 
+  select(name, species, height) |> 
+  rename(height_cm = height) |> 
+  mutate(height_ft = height_cm / 30.48) |>  
+  filter(height_ft > 7) |> 
+  arrange(desc(height_ft)) |>  
+  print()
+```
+
+::: footer
+\[1B\] Wrangle II
+:::
+
+# [Practice II](https://pittmethods.github.io/r4ss/Day_1/Day1B_Practice.html){preview-link="false"}

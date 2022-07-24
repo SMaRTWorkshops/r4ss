@@ -1,0 +1,1122 @@
+---
+format: 
+  revealjs:
+    css: ../styles.css
+    slide-number: true
+    show-slide-number: all
+    preview-links: auto
+    self-contained: true
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "R4SS Day 1A"
+    author-meta: "Jeffrey Girard"
+    date-meta: "2022-07-25"
+---
+
+::: {.my-title}
+# [Introduction to R]{.blue} <br />for Social Scientists
+
+::: {.my-grey}
+[Workshop Day 1A | 2022-07-25]{}<br />
+[Jeffrey M. Girard | Pitt Methods]{}
+:::
+
+![](../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
+:::
+
+<!-- Overview -->
+
+# Overview
+
+## Instructor {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="30%"}
+::: {.tc}
+![](../img/Girard_500x500.jpg){.br-100}
+
+**Jeffrey Girard**, PhD<br /> [www.jmgirard.com](https://www.jmgirard.com)<br /> [jmgirard\@ku.edu](mailto:jmgirard@ku.edu)
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="60%"}
+::: {.fragment}
+#### Background
+
+-   [Assistant Professor]{.b .green}, *University of Kansas*
+-   Research Postdoc, *Carnegie Mellon University*
+-   PhD Student, *University of Pittsburgh*
+:::
+::: {.fragment .mt1}
+#### Research Areas
+
+-   Psychological Assessment
+-   Affective/Interpersonal Communication
+-   Applied [Statistics]{.b .green} and Machine Learning
+-   [Data Science]{.b .green} and Software Engineering
+:::
+:::
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## R Rationale {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+1.  Think of your [computer]{.b .blue} as the [engine]{.b .green} of a car
+    -   It provides raw power for computation
+
+::: {.fragment .mt1}
+2.  The [R language]{.b .blue} is like the [controls]{.b .green} for the car
+    -   It lets you apply and direct that power
+:::
+
+::: {.fragment .mt1}
+3.  [RStudio]{.b .blue} is like a fancy [dashboard]{.b .green} for the car
+    -   It adds extra information and convenience
+:::
+
+::: {.fragment .mt1}
+4.  An [R package]{.b .blue} is like an [add-on]{.b .green} for the car
+    -   It adds new features and capabilities
+:::
+:::
+
+::: {.column .tc .pv5 .relative width="40%"}
+{{< li zvoyghpz trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## Workshop Goals {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   This is a beginner-friendly workshop aimed at social scientists with little to no experience in R
+
+::: {.fragment .mt1}
+-   My goal this week is to "[teach you how to drive]{.b .blue}"
+:::
+
+::: {.fragment .mt1}
+-   Through [lectures]{.b .green} and [live coding]{.b .green}, you will learn the fundamentals of programming, data wrangling, visualization, and modeling in R
+:::
+
+::: {.fragment .mt1}
+-   Through hands-on [exercises]{.b .green}, you will gain confidence in your skills and ability to learn
+:::
+
+::: {.fragment .mt1}
+-   I will help you get your "driver's license" but you will need to practice to become a pro
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li avjivnej trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## Workshop Roadmap {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+<table id="roadmap" width="100%">
+  <tr>
+    <th>DAY 1A</th>
+    <th>DAY 2A</th>
+    <th>DAY 3A</th>
+  </tr>
+  <tr>
+    <td>Overview</td>
+    <td>[Program II]{.blue}</td>
+    <td>[Model I]{.red}</td>
+  </tr>
+  <tr>
+    <td>[Program I]{.blue}</td>
+    <td>[Wrangle III]{.green}</td>
+    <td>[Model II]{.red}</td>
+  </tr>
+  <tr>
+    <td>Practice I</td>
+    <td>Practice III</td>
+    <td>Practice V</td>
+  </tr>
+  <tr>
+    <th style="padding-top:1.75rem;">DAY 1B</th>
+    <th>DAY 2B</th>
+    <th>DAY 3B</th>
+  </tr>
+  <tr>
+    <td>[Wrangle I]{.green}</td>
+    <td>[Visualize I]{.light-purple}</td>
+    <td>[Preview]{.red}</td>
+  </tr>
+  <tr>
+    <td>[Wrangle II]{.green}</td>
+    <td>[Visualize II]{.light-purple}</td>
+    <td>Open Q&A</td>
+  </tr>
+  <tr>
+    <td>Practice II</td>
+    <td>Practice IV</td>
+    <td>Consulting</td>
+  </tr>
+</table>
+:::
+
+::: {.column .tc .pv4 width="40%"}
+{{< li xtkehzkm trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## Workshop Etiquette {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+#### [Things to Do]{.green}
+
+-   Behave respectfully and with patience
+-   Ask for help in chat or "raise hand"
+-   Turn your camera on or off as desired
+-   Come and go from workshop as needed
+
+::: {.fragment .mt1}
+#### [Things Not to Do]{.red}
+
+-   Don't disparage yourself or others
+-   Don't stay confused for too long
+-   Don't unmute yourself when not talking
+-   Don't re-sell the workshop materials
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li syzdvjlt trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+<!-- ## Workshop Resources {.smaller} -->
+
+<!-- ::: {.columns .pv4} -->
+<!-- ::: {.column width="60%"} -->
+<!-- #### Workshop Website -->
+
+<!-- -   All materials are on the website -->
+<!-- -   [pittmethods.github.io/r4ss](https://pittmethods.github.io/r4ss) -->
+
+<!-- ::: {.fragment .mt1} -->
+<!-- #### Workshop Slack Channel -->
+
+<!-- -   Slack will provide persistent chat -->
+<!-- -   Join our channel using [this link](https://join.slack.com/t/r4ss/shared_invite/zt-1ca2nn6fl-439Hv~bZxYdaBBDAZHrvBQ){preview-link="false"} -->
+<!-- ::: -->
+
+<!-- ::: {.fragment .mt1} -->
+<!-- #### Workshop Recordings -->
+
+<!-- -   All three days will be video recorded -->
+<!-- -   View them as private YouTube videos -->
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ::: {.column .tc .pv5 width="40%"} -->
+<!-- {{< li qfabemmy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}} -->
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ::: footer -->
+<!-- \[1A\] Overview -->
+<!-- ::: -->
+
+## Installing R {.smaller}
+
+::: {.columns .pv4}
+::: {.column .pr4 width="50%"}
+#### Windows
+
+1.  Open a web browser
+2.  Visit [cloud.r-project.org](https://cloud.r-project.org)
+3.  Click "Download R for Windows"
+4.  Click the "base" subdirectory link
+5.  Click "Download R-4.X.X" (e.g., 4.2.1)
+6.  Run the downloaded .exe file
+7.  Select all the default options
+8.  Complete the installation wizard
+:::
+
+::: {.column width="50%"}
+#### Mac OS
+
+1.  Open a web browser
+2.  Visit [cloud.r-project.org](https://cloud.r-project.org)
+3.  Click "Download R for macOS"
+4.  Click "R-4.X.X.pkg" (e.g., 4.2.1)
+5.  Run the downloaded .pkg file
+6.  Select all the default options
+7.  Complete the installation wizard
+:::
+:::
+
+::: aside
+*Note.* You will need to repeat this process every time a new version of R is released.
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## Installing RStudio {.smaller}
+
+::: {.columns .pv4}
+::: {.column .pr4 width="50%"}
+#### Windows
+
+1.  Open a web browser
+2.  Visit [rstudio.com/download](https://www.rstudio.com/products/rstudio/download/){preview-link="false"}
+3.  Scroll down until you find the table under the "**All Installers**" section
+4.  Find the row for "Windows 10/11"
+5.  Click "RStudio-2022.XX.X-XXX.exe"
+6.  Run the downloaded .exe file
+7.  Select all the default options
+8.  Complete the installation wizard
+:::
+
+::: {.column width="50%"}
+#### Mac OS
+
+1.  Open a web browser
+2.  Visit [rstudio.com/download](https://www.rstudio.com/products/rstudio/download/){preview-link="false"}
+3.  Scroll down until you find the table under the "**All Installers**" section
+4.  Find the row for "macOS 10.15+"
+5.  Click "RStudio-2022.XX.X-XXX.dmg"
+6.  Run the downloaded .dmg file
+7.  Drag the RStudio icon to your Applications folder (if you want)
+:::
+:::
+
+::: aside
+*Note.* You will need to repeat this process every time a new version of RStudio is released.
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## RStudio Window {.smaller}
+
+::: {.pv4}
+![](../img/rstudio_labels.jpg)
+:::
+
+::: aside
+*Note.* You can customize RStudio (e.g., the fonts, color themes, and pane layout) under "Tools \> Global Options".
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## File Management {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Projects]{.b .blue} are [special folders]{.b .green} on your computer
+    -   They contain all files related to a task
+    -   They keep everything together and organized
+
+::: {.fragment .mt1}
+-   Projects make it easy to [find and use your files]{.b .green}
+    -   No need to specify long, annoying file paths
+    -   No need to worry about working directories
+:::
+
+::: {.fragment .mt1}
+-   Projects make it easy to [switch between tasks]{.b .green}
+    -   They will remember exactly where you left off
+    -   You can even open multiple projects at once
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li jzzxeaju trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: {.aside}
+*Note.* Save your project in a cloud service folder (e.g., Box, Dropbox, Google Drive, OneDrive) to backup and sync it.
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+## Projects Live Coding
+
+::: {.instructions}
+    # Create a new Project
+    - Open the "File" menu in RStudio
+    - Select the "New Project..." option
+    - Select the "New Directory" option
+    - Select the "New Project" option
+    - Name the directory "R4SS" (or whatever)
+    - Browse to where to create your Project folder
+
+    # Create a new File
+    - Explore the Files tab in the Extras pane
+    - Create a New Blank File (e.g., a text file) as an example
+    - RStudio will automatically create it in your project folder
+    - Add some text to the example file (e.g., "Hello World")
+    - Close the text file with the "x" icon
+    - Reopen the text file from the Files tab
+
+    # Close and Open Project
+    - Open the "File" menu in RStudio
+    - Select the "Close Project" option
+    - Notice that your work is now gone
+    - Open the "File" menu in RStudio
+    - Select the "Open Project" option
+    - Browse to your project folder
+    - Open the R4SS.Rproj file
+    - Notice that your work is now back!
+:::
+
+::: footer
+\[1A\] Overview
+:::
+
+<!-- Program I -->
+
+# Program I
+
+## R will Grant your Wishes {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   R is like a [well-meaning]{.b .green} but [overly literal]{.b .green} genie
+
+    -   It has the power to grant almost any wish
+    -   But we must phrase our wishes carefully!
+    -   *We will always get what we ask for...*
+    -   *...but not always what we wanted.*
+
+::: {.fragment .mt1}
+-   Mastering the [R language]{.b .blue} means learning...
+
+    -   How to properly phrase commands
+    -   How to decipher error messages
+    -   How to view code from R's perspective
+    -   How to detect and correct small mistakes
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li njhpxsof trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Communicating with R {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   The [Console]{.b .blue} is like a [chat window]{.b .green} with R
+    -   You send a command to R and get a response
+    -   Neither side of the conversation is saved
+
+::: {.fragment .mt1}
+-   A [Script]{.b .blue} is like an [email thread]{.b .green} with R
+    -   You send many commands to R all at once
+    -   Only your side of the conversation is saved
+:::
+
+::: {.fragment .mt1}
+-   [RMarkdown]{.b .blue} is like a [scrapbook]{.b .green} with R
+    -   You can combine code and formatted text
+    -   Both sides of the conversation are saved
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li zpxybbhl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Console Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# Addition
+
+10+3
+10 + 3 # spaces are optional but recommended
+
+
+# Subtraction
+
+10 - 3
+
+
+# Multiplication
+
+10 * 3 # correct
+10 x 3 # error
+
+
+# Division
+
+10 / 3 # correct
+10 \ 3 # error
+
+
+# Exponentiation
+
+10 ^ 2
+
+
+# Order of Operations
+
+10 + 3 * 2
+(10 + 3) * 2
+
+
+# Negative Numbers
+
+10 + -30
+
+
+# Decimals and Fractions
+
+1.234
+(1 / 3)
+
+
+# Leading and Trailing Zeros
+
+09.870
+
+
+# Large Numbers
+
+9876543 # correct
+9,876,543 # error
+9 876 543 # error
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+## RMarkdown Live Coding
+
+::: {.instructions}
+    # Create an RMarkdown Document
+    - Open the "File" menu in RStudio
+    - Select the "New File" option
+    - Select the "R Markdown..." option
+    - Keep the defaults (HTML Document) and hit "Ok"
+    - Open the "File" menu
+    - Select the "Save" option
+    - Note that it defaults to the project folder
+    - Give it a name like "Day 1A" (or whatever)
+    - Note that the file extension is .Rmd
+
+    # Remove the boilerplate content
+    - The top part of the notebook is called the "Header"
+    - Don't delete the header or the notebook won't work
+    - You can change the title but keep it in quotes
+    - Highlight and delete everything below the header
+    
+    # Enter the Visual Editor
+    - Click on the "Visual" button at the top
+    - Check the box for "Knit on Save"
+    - Save by clicking the disk icon
+    - Look at the preview in the "Viewer" tab
+
+    # Add Formatted Text (i.e., Markdown)
+    - Below the header you can add formatted text
+    - Use the visual editor to add formatting easily
+    - Show how to add bold, italics, headers, etc.
+    - Mention that you can add links, figures, and tables too
+
+    # Add R Chunks (i.e., R code)
+    - Click the green "Insert a new code chunk" button (top right)
+    - Show how you can also do this quickly by typing / in Visual editor
+    - Inside the chunk, you can type R commands like a mini console
+    - Try doing some calculations in the chunk and hit the green arrow
+    - The answer appears right below the chunk!
+    - If we save and knit the document, it appears there too
+    - We can share the .html file with others
+    - It will include all the formatted text, code, and R's answers
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Assignment {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   It is often useful to store data in [named objects]{.b .green}
+    -   This makes the data easier to use and re-use
+    -   This makes the code easier to write and read
+
+::: {.fragment .mt1}
+-   Which command is easier to follow?
+    1.  Dial *7 8 5 8 6 4 0 8 4 1*
+    2.  Call *Office Phone*
+:::
+
+::: {.fragment .mt1}
+-   Named objects are created using [assignment]{.b .blue}
+    -   Give a **name** then an **arrow** then the **data**
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li mgtgkkcb trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`office <- 7858640841`
+:::
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Assignment Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# LESSON: Assigning and printing
+
+x <- 2
+x
+
+# ==============================================================================
+
+# USECASE: Using an object in math (a la algebra) 
+
+x * 4
+
+2 * 4
+
+# ==============================================================================
+
+# LESSON: You must use assignment to update an object
+
+x
+
+x + 1
+
+x # still 2
+
+x <- x + 1
+x # updated to 3
+
+# ==============================================================================
+
+# USECASE: We can use the same object multiple times in a line
+
+(10 + x - 1) / x
+
+# ==============================================================================
+
+# USECASE: We can also use an object to create another object
+
+y <- 10 + x
+y
+
+# ==============================================================================
+
+# USECASE: We can also use multiple objects in a line
+
+y / x
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+## Naming {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Object names can [only include]{.b .blue}:
+    -   Letters: `a-Z`
+    -   Numbers: `0-9`
+    -   Underscores: `_`
+    -   Periods: `.`
+
+::: {.fragment .mt1}
+-   Additional Rules:
+    -   Must [start with a letter or period]{.b .blue}
+    -   Cannot contain spaces or dashes
+    -   Cannot contain other symbols
+    -   Names are case-sensitive (`age` ≠ `Age`)
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li efdggetp trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Naming Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# LESSON: Good names are a balancing act
+
+x <- 93 # what is it?
+
+rate <- 93 # too short
+
+heart_rate_in_beats_per_minute <- 93 # too long
+
+heart_rate_bpm <- 93 # just right
+
+# ==============================================================================
+
+# PITFALL: Don't try to include spaces or dashes in names
+
+heart rate <- 93 # error
+
+heart-rate <- 93 # error
+
+# ==============================================================================
+
+# PITFALL: Don't try to include special symbols
+
+age@time2 <- 12 # error
+
+age_time2 <- 12 # correct
+
+# ==============================================================================
+
+# PITFALL: Don't try to put a number or underscore first
+
+heart_rate_1 <- 93 # correct
+
+1_heart_rate <- 93 # error
+
+_heart_rate <- 93 # error
+
+# ==============================================================================
+
+# LESSON: Object names are case-sensitive
+
+heart_rate <- 93
+
+Heart_rate <- 88
+
+heart_rate # still 93
+
+Heart_rate # a new object
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+<!-- Insert quiz and short break here? -->
+
+## Functions {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Recipes]{.b .green} allow chefs to cook up tasty treats
+    -   Recipes call for ingredients
+    -   Recipes involve one or more steps
+    -   Steps transform ingredients into treats
+
+::: {.fragment .mt1}
+-   [Functions]{.b .blue} are like *customizable* recipes
+    -   Functions call for inputs ("arguments")
+    -   Functions involve one or more lines of code
+    -   Code transforms inputs into outputs
+    -   Using functions requires parentheses (usually)
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li vpqdjfdy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`out <- f(in1, in2)`
+:::
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Functions Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+# USECASE: Function can perform a task more easily and readably
+
+# TEMPLATE: output <- function_name(input)
+
+9 ^ (1 / 2)
+
+x <- sqrt(9)
+x
+
+# ==============================================================================
+
+# LESSON: We can also use functions to transform objects
+
+y <- 9
+
+sqrt(y)
+
+# ==============================================================================
+
+# LESSON: We can even use functions to transform the result of calculations
+
+2 / 3
+
+round(2 / 3)
+
+# ==============================================================================
+
+# LESSON: We can customize what a function does using arguments
+
+# TEMPLATE: output <- function_name(argument, argument_name = argument_value)
+
+round(2 / 3, digits = 2)
+
+round(2 / 3, digits = 3)
+
+# ==============================================================================
+
+# LESSON: Some arguments are optional because they have default values
+
+round(2 / 3) # the default value for digits is 0
+
+round(2 / 3, digits = 0)
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+## Vectors {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Vectors]{.b .blue} combine similar objects into a collection
+    -   *I like to imagine a train pulling multiple cars*<br />
+    ![](../img/traincar.png)
+    -   A vector is one object with many sub-objects
+    -   We refer to each sub-object as an [element]{.b .green}
+
+::: {.fragment .mt1}
+-   Some functions [transform each element]{.b .green} in turn
+    -   *Double the amount of cargo in every train car*
+:::
+
+::: {.fragment .mt1}
+-   Some functions [summarize across elements]{.b .green}
+    -   *Calculate the total cargo across all train cars*
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li bqmoqptv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`v <- c(1, 2, 3)`
+:::
+
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Vectors Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# LESSON: We can combine multiple elements into a vector
+
+# TEMPLATE: vector_name <- c(element1, element2, element3)
+
+x <- 4 9 16 25 # error
+
+x <- c(4, 9, 16, 25)
+x
+
+y <- c(2, 3)
+y
+
+# ==============================================================================
+
+# LESSON: We can also combine multiple vectors and elements
+
+c(x, y)
+
+c(x, y, 20)
+
+# ==============================================================================
+
+# USECASE: Math operators will transform each element individually
+
+x + 1
+
+x * 3
+
+x # but again, this won't be saved unless you use assignment
+
+# ==============================================================================
+
+# USECASE: Some functions will also transform each element individually
+
+sqrt(x)
+
+log(x)
+
+# ==============================================================================
+
+# USECASE: Other functions will summarize the vector with a single number
+
+length(x)
+
+sum(x)
+
+mean(x)
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+<!-- Insert quiz and short break here? -->
+
+## Strings {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   When talking to R, we need a way to distinguish
+    -   Object/function names (e.g., the *mean* function)
+    -   Text/character data (e.g., the word *mean*)
+    
+::: {.fragment .mt1}
+-   [Strings]{.b .blue} are R's way of storing text data
+    -   Strings can store any characters (no rules!)
+    -   Strings are created and displayed with [quotes]{.b .green}
+:::
+::: {.fragment .mt1}
+-   R has great tools for working with strings
+    -   Strings can be collected into vectors
+    -   Special functions can transform strings
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li xqnbvely trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`name <- "John Doe"`
+:::
+
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Strings Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Strings are the main way to store character data in R
+ 
+my_color <- red # error
+
+my_color <- "red" # correct
+
+# ==============================================================================
+
+# USECASE: Strings can also store symbols not allowed in object names
+
+dye <- "red#40"
+dye
+
+dyes <- c("red#40", "blue#02")
+dyes
+
+# ==============================================================================
+
+# PITFALL: Many operations you can do to numbers won't work for strings
+
+dyes + 1 # error
+
+mean(dyes) # error
+
+# ==============================================================================
+
+# USECASE: But other operations work for both or even just for strings
+
+length(dyes)
+
+nchar(dyes)
+
+dyes2 <- toupper(dyes)
+dyes2
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+## Packages {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Cookbooks]{.b .green} are a great way to learn to cook
+    -   *They contain lots of recipes and instructions*
+    -   Browse an online **bookstore** for a cookbook
+    -   **Order** it to add it to your personal **bookshelf**
+    -   To use, **pull** the cookbook off the shelf
+
+::: {.fragment .mt1}
+-   [Packages]{.b .blue} are like cookbooks for R
+    -   *They contain helpful functions and datasets*
+    -   Browse an online **repository** for a package
+    -   **Install** it to add it to your personal **library**
+    -   To use, **load** the package from the library
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li tboujdsn trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`library("pkg_name")`
+:::
+:::
+:::
+
+::: footer
+\[1A\] Program I
+:::
+
+## Packages Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: The stringr package adds a function to fix capitalization
+
+students <- c("mary anne", "BENjamin", "Lee")
+
+# ==============================================================================
+
+# PITFALL: But we can't use that function without installing the package
+
+str_to_title(students) # error
+
+# ==============================================================================
+
+# LESSON: Installing a package using RStudio
+
+# - RStudio > Extras pane > Packages tab > Install button
+
+# ==============================================================================
+
+# PITFALL: We also need to load the package before we can use it
+
+str_to_title(students) # error
+
+# ==============================================================================
+
+# LESSON: We load the package using library()
+
+library("stringr")
+str_to_title(students) #finally works!
+
+# ==============================================================================
+
+# LESSON: We can also keep our packages updated using RStudio
+
+# RStudio > Extras pane > Packages tab > Update button
+```
+
+::: footer
+\[1A\] Program I
+:::
+
+# [Practice I](https://pittmethods.github.io/r4ss/Day_1/Day1A_Practice.html){preview-link="false"}

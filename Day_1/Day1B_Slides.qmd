@@ -1,0 +1,12 @@
+---
+title: "Day 1B Slides"
+format:
+  html:
+    css: ../styles.css
+---
+
+<iframe class="slide-deck" src="./r4ss_day1b.html" title="Day 1B Slides">
+</iframe>
+
+*Note.* To view the slideshow in full screen mode, click inside it and press the "f" key on your keyboard.<br />
+You can also use the menu by clicking on the icon at the bottom-left of each slide.

@@ -1,0 +1,43 @@
+---
+title: "Schedule"
+---
+
+![](../img/date_picker_2780E3.svg){.hero}
+
+## Day 1
+
+10:30am – 3:30pm [EDT](https://time.is/EDT) (July 25, 2022)
+
+  -   Overview
+  -   Program I
+  -   Practice I
+  -   Wrangle I
+  -   Wrangle II
+  -   Practice II
+
+Zoom Link: <https://kansas.zoom.us/j/92922770256>
+
+## Day 2
+
+10:30am – 3:30pm [EDT](https://time.is/EDT) (July 26, 2022)
+
+  -   Program II
+  -   Wrangle III
+  -   Practice III
+  -   Visualize I
+  -   Visualize II
+  -   Practice IV
+
+Zoom Link: <https://kansas.zoom.us/j/93578254132>
+    
+## Day 3
+
+10:30am – 3:30pm [EDT](https://time.is/EDT) (July 27, 2022)
+
+  -   Model I
+  -   Model II
+  -   Practice V
+  -   Open Q&A
+  -   Consultation
+
+Zoom Link: <https://kansas.zoom.us/j/91645020176>

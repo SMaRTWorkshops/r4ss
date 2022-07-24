@@ -1,0 +1,209 @@
+/* custom styles */
+
+.hero {
+  width: 67%;
+  max-height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#roadmap {
+  border:2px solid black;
+  table-layout:fixed;
+}
+
+#roadmap td {
+  border-top:0;
+  border-bottom:0;
+  border-left:2px solid black;
+  border-right:2px solid black;
+}
+
+#roadmap th {
+  border-top:0;
+  border-bottom:0;
+  border-left:2px solid black;
+  border-right:2px solid black;
+}
+
+/* Style for pseudo-code block */
+.instructions {
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+}
+
+.instructions pre code {
+  background-color: #F4F4F4;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 6px 9px;
+  overflow: auto;
+  max-height: 550px;
+  min-height: 550px;
+  word-wrap: normal;
+}
+
+/* Style for inline code */
+.reveal p code, .reveal li code, .reveal td code {
+  padding: 2px 9px;
+  background-color: #303030;
+  border-radius: 4px;
+}
+
+/* Style for code chunk */
+.reveal pre.sourceCode code {
+  color: #ccc;
+  background-color: #303030;
+  padding: 6px 9px;
+  min-height: 550px;
+  max-height: 550px;
+  white-space: pre;
+}
+
+.reveal pre.sourceCode {
+  background-color: none;
+}
+
+.vcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+
+.code-copy-button > .bi::before {
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+  content: "";
+  vertical-align: 4rem;
+  background-image: url(data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" h….5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z\"/></svg>);
+  background-size: 2rem 2rem;
+  background-repeat: no-repeat;
+}
+
+.code-copy-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  margin-top: 10px;
+  margin-right: 20px;
+  background-color: transparent;
+}
+
+lord-icon.rc {
+  width: 300px;
+  height: 300px;
+}
+
+.mytable td {
+  border: none !important;
+}
+
+iframe.slide-deck {
+  border: 3px solid #dee2e6;
+  width: 100%;
+  height: 475px;
+}
+
+.my-title h1 {
+  font-size: 1.8em !important;
+  line-height: 1.1em;
+}
+
+.my-grey {
+  padding-top: 0.5em !important;
+  color: #CCCCCC;
+  font-size: 1.0em !important;
+  line-height: 0.5em !important;
+}
+
+.table-bad td {
+  border: 2px solid #F92F60 !important;
+  background-color: #F4F4F4;
+}
+
+.table-good td {
+  border: 2px solid #635994 !important;
+  background-color: #F4F4F4;
+}
+
+.table-small td {
+  font-size: 80%;
+}
+
+.bg-yellow {
+  background-color: #FFFF00;
+}
+
+.bg-teal {
+  background-color: #33FCFF;
+}
+
+/* From Tachyons */
+
+.br-100 {     border-radius: 100%; }
+.ba { border-style: solid; border-width: 1px; }
+.b      { font-weight: bold; }
+.tc  { text-align: center; }
+.tr  { text-align: right; }
+
+.pv4 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.pv5 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.mt1 {  margin-top: .25rem; }
+
+.gray { color: #777777; }
+.silver { color: #999999; }
+.light-silver { color: #AAAAAA; }
+.moon-gray { color: #CCCCCC; }
+.light-gray { color: #EEEEEE; }
+.near-white { color: #F4F4F4; }
+.white { color: #FFFFFF; }
+.dark-red { color: #E7040F; }
+.red { color: #FF4136; }
+.light-red { color: #FF725C; }
+.orange { color: #FF6300; }
+.gold { color: #FFB700; }
+.yellow { color: #FFD700; }
+.light-yellow { color: #FBF1A9; }
+.light-purple { color: #A463F2; }
+.dark-pink { color: #D5008F; }
+.hot-pink { color: #FF41B4; }
+.pink { color: #FF80CC; }
+.light-pink { color: #FFA3D7; }
+.dark-green { color: #137752; }
+.green { color: #19A974; }
+.light-green { color: #9EEBCF; }
+.blue { color: #357EDD; }
+.light-blue { color: #96CCFF; }
+.lightest-blue { color: #CDECFF; }
+.washed-blue { color: #F6FFFE; }
+.washed-green { color: #E8FDF5; }
+.washed-yellow { color: #FFFCEB; }
+.washed-red { color: #FFDFDF; }
+.black { color: #000000; }
+.near-black { color: #111111; }
+.dark-gray { color: #333333; }
+.mid-gray { color: #555555; }
+.gray { color: #777777; }
+.dark-red { color: #E7040F; }
+.red { color: #FF4136; }
+.purple { color: #5E2CA5; }
+.light-purple { color: #A463F2; }
+.dark-pink { color: #D5008F; }
+.dark-green { color: #137752; }
+.navy { color: #001B44; }
+.dark-blue { color: #00449E; }
+.blue { color: #357EDD; }
