@@ -653,7 +653,35 @@ C
 #| error: true
 #| code-line-numbers: false
 
+# SETUP: Load the used packages (if needed) and read in the example dataset
 
+library(tidyverse)
+library(datawizard)
+library(parameters)
+library(performance)
+library(ggeffects)
+
+salaries <- read_csv("salaries.csv")
+salaries
+
+# ==============================================================================
+
+fit <- lm(
+  formula = salary ~ yrs.since.phd,
+  data = salaries
+)
+
+fit
+
+model_parameters(fit)
+
+model_parameters(fit, standardize = "refit")
+
+model_performance(fit)
+
+plot(ggpredict(fit, terms = "yrs.since.phd"))
+
+plot(ggpredict(fit, terms = "yrs.since.phd"), add.data = TRUE)
 ```
 
 ::: footer
@@ -724,45 +752,6 @@ C
 :::
 
 ## Categorical Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-
-```
-
-::: footer
-\[3A\] Model II
-:::
-
-## Centering and Standardizing
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-A
-
-::: {.fragment .mt1}
-B
-:::
-
-::: {.fragment .mt1}
-C
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li rwotyanb trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[3A\] Model II
-:::
-
-## Center/Standardize Live Coding
 
 ```{r}
 #| echo: true
