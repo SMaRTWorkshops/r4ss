@@ -41,19 +41,6 @@ Real data from 112 participants in a "daily diary" study on stress and affect. \
 read_csv("../data/diary.csv")
 ```
 
-### gradebook
-
-Simulated data on the scores of 10 students on 5 tests.
-
-<a href="https://pittmethods.github.io/r4ss/data/gradebook.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
-
-```{r}
-#| echo: false
-#| message: false
-
-read_csv("../data/gradebook.csv")
-```
-
 ### elicitation
 
 Real data about 139 participants' emotions during four emotion elicitation tasks. \[[Source](https://doi.org/10.1016/j.imavis.2014.06.002)\]
@@ -65,6 +52,19 @@ Real data about 139 participants' emotions during four emotion elicitation tasks
 #| message: false
 
 read_csv("../data/elicitation.csv")
+```
+
+### gradebook
+
+Simulated data on the scores of 10 students on 5 tests.
+
+<a href="https://pittmethods.github.io/r4ss/data/gradebook.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/gradebook.csv")
 ```
 
 ### interpersonal
