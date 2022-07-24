@@ -1,0 +1,254 @@
+[
+  {
+    "objectID": "construction.html",
+    "href": "construction.html",
+    "title": "Under Construction",
+    "section": "",
+    "text": "This page is still under construction. Please check back in again in a few days!"
+  },
+  {
+    "objectID": "Day_1/Day1A_Practice.html#question-1.",
+    "href": "Day_1/Day1A_Practice.html#question-1.",
+    "title": "Day 1A Practice",
+    "section": "Question 1.",
+    "text": "Question 1.\nRead what the user wanted to do and look at the command they sent to R. Fix the errors in the commands and calculate the answers.\n\nI want to add 20 and 0.2 and divide that sum by 4.1. But I get an error when I try:[20 + .2] \\ 4.1\nI want to multiply 6 by the sum of 2 and 1,300. But I get an error when I try:6 x (2 + 1,300)\nI want to calculate the square root of the sum of 4 and 5. But I’m getting back a number that is way too large:sqrt(4) + 5\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nChange the brackets [] to parentheses () because parentheses () are the order of operations operator in R. Also, change the backslash \\ to a forward slash / because forward slash / is the division operator in R.\n\n(20 + .2) / 4.1\n#> [1] 4.926829\n\nAnswer (b)\nChange the x to an asterisk * because asterisk * is the multiplication operator in R. Also, remove the comma , from 1,300 because R doesn’t use commas to delimit digits in large numbers.\n\n6 * (2 + 1300)\n#> [1] 7812\n\nAnswer (c)\nMove the + 5 portion inside the parentheses or it will just add 5 to the square root of 4.\n\nsqrt(4 + 5)\n#> [1] 3"
+  },
+  {
+    "objectID": "Day_1/Day1A_Practice.html#question-2.",
+    "href": "Day_1/Day1A_Practice.html#question-2.",
+    "title": "Day 1A Practice",
+    "section": "Question 2.",
+    "text": "Question 2.\nWhich of the following commands do you think will create an error in R? Why?\n\nscore@T1 <- 3.2\nscore_at_T1 <- 3.2\nscore at T1 <- 3.2\n1_score <- 3.2\nScoreAtTime1 <- 3.2\n\nMake your best guesses just by looking at the commands and then check your guesses by running the commands in R.\n\n\n\nClick here for the answer key\n\n\nThe following commands will create an error in R: a (@ is not allowed in an object name), c (spaces are not allowed in an object name), and d (the first character in an object name cannot be a number)."
+  },
+  {
+    "objectID": "Day_1/Day1A_Practice.html#question-3.",
+    "href": "Day_1/Day1A_Practice.html#question-3.",
+    "title": "Day 1A Practice",
+    "section": "Question 3.",
+    "text": "Question 3.\n\nCreate a character vector named flavors that contains the following strings and print it:\n\nCookies & Cream\nAmericone Dream (R)\nBob Marley’s 1 Love\n\nUse a function to calculate the number of strings in flavors.\nUse another function to calculate the number of characters in each string in flavors.\nLet R know how you feel about ice cream by using a function to either make all the characters in flavors uppercase (you LOVE ice cream) or lowercase (you don’t love ice cream).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nflavors <- c(\"Cookies & Cream\", \"Americone Dream (R)\", \"Bob Marley's 1 Love\")\nflavors\n#> [1] \"Cookies & Cream\"     \"Americone Dream (R)\" \"Bob Marley's 1 Love\"\n\nAnswer (b)\n\nlength(flavors)\n#> [1] 3\n\nAnswer (c)\n\nnchar(flavors)\n#> [1] 15 19 19\n\nAnswer (d)\n\ntoupper(flavors)\n#> [1] \"COOKIES & CREAM\"     \"AMERICONE DREAM (R)\" \"BOB MARLEY'S 1 LOVE\"\ntolower(flavors)\n#> [1] \"cookies & cream\"     \"americone dream (r)\" \"bob marley's 1 love\""
+  },
+  {
+    "objectID": "Day_1/Day1A_Practice.html#resources",
+    "href": "Day_1/Day1A_Practice.html#resources",
+    "title": "Day 1A Practice",
+    "section": "Resources",
+    "text": "Resources\n\nR4DS Chapter 8: Read more about projects\nR4DS Chapter 4: Read about basic programming\nR4DS Chapter 14: Read more about strings\nR4DS Chapter 27: Read more about RMarkdown"
+  },
+  {
+    "objectID": "Day_1/Day1A_Practice.html#fun-stuff",
+    "href": "Day_1/Day1A_Practice.html#fun-stuff",
+    "title": "Day 1A Practice",
+    "section": "Fun Stuff",
+    "text": "Fun Stuff\n\nLiteral Genie\nWhat it feels like to talk to R sometimes…\n\n\n\n\n“Who’s” on First?\nA lesson about the importance of strings…"
+  },
+  {
+    "objectID": "Day_1/Day1A_Slides.html",
+    "href": "Day_1/Day1A_Slides.html",
+    "title": "Day 1A Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
+    "objectID": "Day_1/Day1B_Practice.html#question-1.",
+    "href": "Day_1/Day1B_Practice.html#question-1.",
+    "title": "Day 1B Practice",
+    "section": "Question 1.",
+    "text": "Question 1.\nThe following table summarizes the season information for the eight seasons of AMC’s Breaking Bad show. Tidy up this data and save it to a tibble. Decide for yourself how to handle season 5 (should it be a single observation or two?). For the first and last aired dates, just store the year as a number.\n\n\n\n\nClick here for the answer key\n\n\nVersion with one observation for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5)\nepisodes <- c(7, 13, 13, 13, 16)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012)\nlast_air <- c(2008, 2009, 2010, 2011, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nVersion with two separate observations for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5.1, 5.2)\nepisodes <- c(7, 13, 13, 13, 8, 8)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nlast_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad"
+  },
+  {
+    "objectID": "Day_1/Day1B_Practice.html#question-2.",
+    "href": "Day_1/Day1B_Practice.html#question-2.",
+    "title": "Day 1B Practice",
+    "section": "Question 2.",
+    "text": "Question 2.\nLoad the economics tibble (included in {tidyverse}). Then create a pipeline to accomplish the following data wrangling steps:\n\nFirst, in the economics tibble, rename the uempmed variable (the median duration of enemployment, in weeks) to duration and the unemploy variable (the number of unemployed, in thousands) to number.\nThen add a new variable called rate that is calculated by dividing number (from part a) by pop (the total population, in thousands).\nThen drop (i.e., unselect) the pce, pop, and psavert variables from the tibble.\nThen relocate the rate variable to be between the date and duration variables.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy)\n\n\n\n  \n\n\n\nAnswer (b)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop)\n\n\n\n  \n\n\n\nAnswer (c)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert))\n\n\n\n  \n\n\n\nAnswer (d)\n\neconomics |>\n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert)) |> \n  relocate(rate, .after = date)"
+  },
+  {
+    "objectID": "Day_1/Day1B_Practice.html#question-3.",
+    "href": "Day_1/Day1B_Practice.html#question-3.",
+    "title": "Day 1B Practice",
+    "section": "Question 3.",
+    "text": "Question 3.\nDownload the cereal data file from the workshop website. Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Finally, write the result of this pipeline to a CSV file called “jeffs_list.csv” (I expect it to be even more popular than Craig’s list).\n\n\n\nClick here for the answer key\n\n\n\ncereal <- read_csv(\"cereal.csv\") \n\njeffs_list <- \n  cereal |> \n  filter(type == \"cold\" & rating > 70) |> \n  arrange(calories)\n\njeffs_list\n\n\n\n\n\n  \n\n\n\n\nwrite_csv(jeffs_list, \"jeffs_list.csv\")"
+  },
+  {
+    "objectID": "Day_1/Day1B_Practice.html#resources",
+    "href": "Day_1/Day1B_Practice.html#resources",
+    "title": "Day 1B Practice",
+    "section": "Resources",
+    "text": "Resources\n\nBroman & Woo (2018): Read more about tidy data principles\nR4DS Chapter 5 (§5.1–§5.5): Read more about the basic wrangling verbs\nR4DS Chapter 10: Read more about tibbles and data frames\nR4DS Chapter 11: Read more about data reading and writing"
+  },
+  {
+    "objectID": "Day_1/Day1B_Practice.html#fun-stuff",
+    "href": "Day_1/Day1B_Practice.html#fun-stuff",
+    "title": "Day 1B Practice",
+    "section": "Fun Stuff",
+    "text": "Fun Stuff\n\nFundamentals of Tidying\nShe doesn’t like formatting-as-data either…\n\n\n\n\nStunt Rope\nThese are some advanced wrangling verbs…"
+  },
+  {
+    "objectID": "Day_1/Day1B_Slides.html",
+    "href": "Day_1/Day1B_Slides.html",
+    "title": "Day 1B Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
+    "objectID": "Day_2/Day2A_Practice.html#question-1",
+    "href": "Day_2/Day2A_Practice.html#question-1",
+    "title": "Day 2A Practice",
+    "section": "Question 1",
+    "text": "Question 1\n\nTransform the drv variable in the mpg tibble into a factor where “4” is labeled Four Wheel Drive, “r” is labelled Rear Wheel Drive, and “f” is labeled Front Wheel Drive. Save this updated tibble as mpg2.\nTransform the manufacturer and model variables in the mpg2 tibble so that the first letter of each word is capitalized. Save this updated tibble as mpg3.\nCreate a new variable in the mpg3 tibble called name which merges/unites the manufacturer, model, and drv variables into a single string (separated by spaces).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nmpg2 <- \n  mpg |> \n  mutate(\n    drv = factor(\n      drv, \n      levels = c(\"4\", \"r\", \"f\"), \n      labels = c(\"Four Wheel Drive\", \"Rear Wheel Drive\", \"Front Wheel Drive\")\n    )\n  )\nmpg2\n\n\n\n  \n\n\n\nAnswer (b)\n\nmpg3 <- \n  mpg2 |> \n  mutate(\n    manufacturer = str_to_title(manufacturer),\n    model = str_to_title(model)\n  )\nmpg3\n\n\n\n  \n\n\n\nAnswer (c)\n\nmpg3 |> \n  unite(col = \"name\", manufacturer, model, drv, sep = \" \")"
+  },
+  {
+    "objectID": "Day_2/Day2A_Practice.html#question-2",
+    "href": "Day_2/Day2A_Practice.html#question-2",
+    "title": "Day 2A Practice",
+    "section": "Question 2",
+    "text": "Question 2\n\nLoad the txhousing tibble (included in {tidyverse}). This contains the number of homes listed (listings) and the typical home sales price (median) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. Note: For these descriptive purposes, you can ignore missing values.\nRecreate your answer to Question 2a using across().\nModify your answer to Question 2b to generate the same summary statistics but per city this time (still averaging across all months).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\ntxhousing |> \n  summarize(\n    listings = mean(listings, na.rm = TRUE), \n    median = mean(median, na.rm = TRUE)\n  )\n\n\n\n  \n\n\n\nAnswer (b)\n\ntxhousing |> \n  summarize(\n    across(\n      .cols = c(listings, median),\n      .fns = mean, \n      na.rm = TRUE\n    )\n  )\n\n\n\n  \n\n\n\n\n# Or, more compactly:\n\ntxhousing |> summarize(across(c(listings, median), mean, na.rm = TRUE))\n\n\n\n  \n\n\n\nAnswer (c)\n\ntxhousing |> \n  group_by(city) |> \n  summarize(\n    across(\n      .cols = c(listings, median),\n      .fns = mean, \n      na.rm = TRUE\n    )\n  )"
+  },
+  {
+    "objectID": "Day_2/Day2A_Practice.html#question-3",
+    "href": "Day_2/Day2A_Practice.html#question-3",
+    "title": "Day 2A Practice",
+    "section": "Question 3",
+    "text": "Question 3\n\nUse if_else() to add a new variable to the txhousing tibble called crisis which is equal to “pre” if date is less than 2007.5 and “post” otherwise.\nRecreate your answer to Question 3a using case_when().\nBonus: Add a new variable to the txhousing tibble called season which is equal to: “spring” when month is 3, 4, or 5; “summer” when month is 6, 7, or 8; “autumn” when month is 9, 10, or 11; and “winter” when month is 1, 2, or 12.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\ntxhousing |> \n  mutate(\n    crisis = if_else(\n      condition = date < 2007.5,\n      true = \"pre\",\n      false = \"post\"\n    )\n  )\n\n\n\n  \n\n\n\nAnswer (b)\n\ntxhousing |> \n  mutate(\n    crisis = case_when(\n      date < 2007.5 ~ \"pre\",\n      date >= 2007.5 ~ \"post\"\n    )\n  )\n\n\n\n  \n\n\n\nAnswer (c)\n\ntxhousing |> \n  mutate(\n    season = case_when(\n      month %in% c(3, 4, 5) ~ \"spring\",\n      month %in% c(6, 7, 8) ~ \"summer\",\n      month %in% c(9, 10, 11) ~ \"autumn\",\n      month %in% c(12, 1, 2) ~ \"winter\"\n    )\n  )"
+  },
+  {
+    "objectID": "Day_2/Day2A_Practice.html#resources",
+    "href": "Day_2/Day2A_Practice.html#resources",
+    "title": "Day 2A Practice",
+    "section": "Resources",
+    "text": "Resources\n\nR4DS Chapter 5 (§5.6–§5.7): Read more about grouped summaries and mutates\nR4DS Chapter 14: Read more about working with strings in R\nR4DS Chapter 15: Read more about working with factors in R\nR4DS Chapter 12: Read more about reshaping and tidying data in R"
+  },
+  {
+    "objectID": "Day_2/Day2A_Practice.html#fun-stuff",
+    "href": "Day_2/Day2A_Practice.html#fun-stuff",
+    "title": "Day 2A Practice",
+    "section": "Fun Stuff",
+    "text": "Fun Stuff\n\nAdvanced Reshaping\n“We have to be careful with the claydata that Mother NatureMechanical Turk has given us…”\n\n\n\n\nLet’s Enhance\nIf you want to be able to do this, save your images as .pdf or .svg…"
+  },
+  {
+    "objectID": "Day_2/Day2A_Slides.html",
+    "href": "Day_2/Day2A_Slides.html",
+    "title": "Day 2A Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#question-1",
+    "href": "Day_2/Day2B_Practice.html#question-1",
+    "title": "Day 2B Practice",
+    "section": "Question 1",
+    "text": "Question 1\nFor each of the following code snippets, find and fix the error(s).\n\n“The Scatterbrained Scatterplot”\n\n\nggplot(mpg, x = displ, y = hwy) + \n  geom_point()\n\n\n“Not-so-smooth Smoothing”\n\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point()\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_discrete(\"Engine Size\")\n\n\n“A Leaky Pipeline”\n\n\nggplot(economics, aes(x = date, y = unemploy)) |> \n  geom_line() |> \n  geom_point()\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nThe code forgot to put the mappings inside aes().\n\nggplot(mpg, aes(x = displ, y = hwy)) + # fix 1\n  geom_point() \n\n\n\n\nAnswer (b)\nThe code forgot a + and set the x-axis to discrete instead of continuous.\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point() + # fix 1\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_continuous(\"Engine Size\") # fix 2\n#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'\n\n\n\n\nAnswer (c)\nThe code used pipes instead of plus signs to connect ggplot2 commands.\n\nggplot(economics, aes(x = date, y = unemploy)) + # fix 1\n  geom_line() + # fix 2\n  geom_point()"
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#question-2",
+    "href": "Day_2/Day2B_Practice.html#question-2",
+    "title": "Day 2B Practice",
+    "section": "Question 2",
+    "text": "Question 2\n\nInstall and load the {palmerpenguins} package.\nRecreate the following graphic as closely as you can from the penguins tibble in that package (don’t worry about getting the geom settings exactly right).\nClean up the x and y axis titles so that they are more readable (e.g., “Flipper length (mm)” instead of “flipper_length_mm”). Bonus: See if you can figure out how to also rename the legend title.\n\n\n\n\n\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\n# Extra pane > Packages tab > Install button > palmerpenguins > Install\n\nlibrary(palmerpenguins)\n\nAnswer (b)\n\nggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75)\n\n\n\n\nAnswer (c)\n\np <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75) +\n  scale_x_continuous(name = \"Flipper length (mm)\") +\n  scale_y_continuous(name = \"Body mass (g)\") +\n  scale_color_discrete(name = \"Penguin species\") +\n  scale_shape_discrete(name = \"Penguin species\")\np"
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#question-3",
+    "href": "Day_2/Day2B_Practice.html#question-3",
+    "title": "Day 2B Practice",
+    "section": "Question 3",
+    "text": "Question 3\n\nUse your graphic from Question 2(c) a starting graphic object. Apply the “classic” complete theme to it and move the legend to the top. Bonus: Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).\nExport this graphic as an image file to include in a paper. Make it 6.5 inches wide and 4 inches high. Bonus: Open Microsoft Word or Google Docs and insert the image.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\np2 <- \n  p + \n  theme_classic() + \n  theme(\n    legend.position = \"top\",\n    axis.title = element_text(face = \"italic\") # bonus\n  )\np2\n\n\n\n\nAnswer (b)\n\nggsave(\"practice.png\", plot = p2, width = 6.5, height = 4, units = \"in\")"
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#resources",
+    "href": "Day_2/Day2B_Practice.html#resources",
+    "title": "Day 2B Practice",
+    "section": "Resources",
+    "text": "Resources\n\nR4DS Chapter 3: Read an introduction to visualization\nGGP2 Chapter 11: Read more about color in ggplot2\nGGP2 Chapter 8: Read about annotating ggplot2 objects\nGGP2 Chapter 17: Read about faceting in ggplot2"
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#fun-stuff",
+    "href": "Day_2/Day2B_Practice.html#fun-stuff",
+    "title": "Day 2B Practice",
+    "section": "Fun Stuff",
+    "text": "Fun Stuff\n\nHow to Spot a Misleading Graph\nHere are some mistakes to avoid (unless you want to work at a shitty newspaper)…\n\n\n\n\nDon McMillan’s Gratest Charts\nWould these be more or less funny if he had used ggplot2… ?"
+  },
+  {
+    "objectID": "Day_2/Day2B_Slides.html",
+    "href": "Day_2/Day2B_Slides.html",
+    "title": "Day 2B Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
+    "objectID": "Day_3/Day3A_Practice.html",
+    "href": "Day_3/Day3A_Practice.html",
+    "title": "Day 3A Practice",
+    "section": "",
+    "text": "https://easystats.github.io/correlation/articles/types.html"
+  },
+  {
+    "objectID": "Day_3/Day3A_Slides.html",
+    "href": "Day_3/Day3A_Slides.html",
+    "title": "Day 3A Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
+    "objectID": "Details/datasets.html#datasets-to-download",
+    "href": "Details/datasets.html#datasets-to-download",
+    "title": "Datasets",
+    "section": "Datasets to download",
+    "text": "Datasets to download\n\ncereal\nReal data on 77 cereal products from the early 1990s. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ndiary\nReal data from 112 participants in a “daily diary” study on stress and affect. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nelicitation\nReal data about 139 participants’ emotions during four emotion elicitation tasks. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ngradebook\nSimulated data on the scores of 10 students on 5 tests.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ninterpersonal\nReal data about the interpersonal problems of 34 psychotherapy clients. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nsalaries\nReal data about 397 professors during 2008 to 2009. [Source]\nDownload CSV"
+  },
+  {
+    "objectID": "Details/datasets.html#datasets-in-packages",
+    "href": "Details/datasets.html#datasets-in-packages",
+    "title": "Datasets",
+    "section": "Datasets in Packages",
+    "text": "Datasets in Packages\n\neconomics\nReal economic time series data about the US from 1967 to 2015. [Source]\nIncluded in the {ggplot2} package and loaded by {tidyverse}.\n\n\n\n\n  \n\n\n\n\n\nflights\nReal data about all 336,766 flights in and out of New York City in 2013. [Source]\nIncluded in the {nycflights13} package.\n\n\n\n\n  \n\n\n\n\n\nmpg\nReal data about 234 car models from 1999 and 2008. [Source]\nIncluded in the {ggplot2} package and loaded by {tidyverse}.\n\n\n\n\n  \n\n\n\n\n\npenguins\nReal data about 344 penguins observed in Palmer Archipelago. [Source]\nIncluded in the {palmerpenguins} package.\n\n\n\n\n  \n\n\n\n\n\nstarwars\nReal data about 87 characters in the Star Wars franchise. [Source]\nIncluded in the {dplyr} package and loaded by {tidyverse}.\n\n\n\n\n  \n\n\n\n\n\ntxhousing\nReal data about the Texas housing market from 2000 to 2015. [Source]\nIncluded in the {ggplot2} package and loaded by {tidyverse}."
+  },
+  {
+    "objectID": "Details/instructor.html",
+    "href": "Details/instructor.html",
+    "title": "Jeffrey Girard",
+    "section": "",
+    "text": "University of Kansas | Lawrence, KS Quantitative Area Head | 2022 – present E. Wright Assistant Professor | 2020 – present\nCarnegie Mellon University | Pittsburgh, PA Postdoctoral Research Fellow | 2018 – 2020"
+  },
+  {
+    "objectID": "Details/instructor.html#education",
+    "href": "Details/instructor.html#education",
+    "title": "Jeffrey Girard",
+    "section": "Education",
+    "text": "Education\nUniversity of Pittsburgh | Pittsburgh, PA PhD in Clinical Psychology | 2018\nUniversity of Pittsburgh | Pittsburgh, PA MS in Clinical Psychology | 2013\nUniversity of Washington | Seattle, WA BA in Psychology/Philosophy | 2008"
+  },
+  {
+    "objectID": "Details/schedule.html#day-1",
+    "href": "Details/schedule.html#day-1",
+    "title": "Schedule",
+    "section": "Day 1",
+    "text": "Day 1\n10:30am – 3:30pm EDT (July 25, 2022)\n\nOverview\nProgram I\nPractice I\nWrangle I\nWrangle II\nPractice II\n\nZoom Link: https://kansas.zoom.us/j/92922770256"
+  },
+  {
+    "objectID": "Details/schedule.html#day-2",
+    "href": "Details/schedule.html#day-2",
+    "title": "Schedule",
+    "section": "Day 2",
+    "text": "Day 2\n10:30am – 3:30pm EDT (July 26, 2022)\n\nProgram II\nWrangle III\nPractice III\nVisualize I\nVisualize II\nPractice IV\n\nZoom Link: https://kansas.zoom.us/j/93578254132"
+  },
+  {
+    "objectID": "Details/schedule.html#day-3",
+    "href": "Details/schedule.html#day-3",
+    "title": "Schedule",
+    "section": "Day 3",
+    "text": "Day 3\n10:30am – 3:30pm EDT (July 27, 2022)\n\nModel I\nModel II\nPractice V\nOpen Q&A\nConsultation\n\nZoom Link: https://kansas.zoom.us/j/91645020176"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to R for Social Scientists",
+    "section": "",
+    "text": "R is a popular software option for analyzing, wrangling, and visualizing data in the social, behavioral, and medical sciences. It is completely free, runs on all major platforms (i.e., Windows, Mac, and Linux), and offers a rich catalog of tools and techniques that are updated frequently. It is an excellent choice for a first programming language (when taught properly) and provides all the computational tools that most social scientists will ever need.\nThe main hurdle for many social scientists learning R is that it is largely controlled using “syntax” (i.e., computer code) rather than point-and-click menus. This characteristic is actually one of R’s greatest strengths, but can be intimidating to many without a background in computing. This three-day workshop is designed to ease the transition into using R. It aims to provide a solid foundation of conceptual knowledge and applied skills that build the confidence, curiosity, and motivation that will be required to continue learning and using R after the workshop ends.\nThe workshop assumes that attendees have no prior knowledge of or experience with R, but does assume some knowledge of basic statistical tools (e.g., correlation and regression). Thus, it is best suited for students who have already completed an introductory statistics course (perhaps taught using point-and-click software).\nWhile there are many great educational resources for learning R, including some free video courses and textbooks, this workshop will provide a structured, guided, and communal environment that is tailor-built for researchers in the social, behavioral, and medical sciences. Thus, it emphasizes the concepts and skills most needed by such researchers. In particular, it teaches modern data science techniques using tools from the tidyverse ecosystem (e.g., the dplyr, tidyr, and ggplot2 packages) and statistical techniques using tools from the easystats ecosystem (e.g., the parameters, performance, modelbased, and see packages). The beauty of these tools is that they are both beginner-friendly and scalable to solve more complex problems and interface with more advanced techniques.\n\nThese materials may be re-used according to the CC-BY License."
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "R4SS Workshop",
+    "section": "",
+    "text": "=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public: \nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\nIf You Share Adapted Material You produce, the Adapter’s License You apply must not prevent recipients of the Adapted Material from complying with this Public License.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  }
+]
