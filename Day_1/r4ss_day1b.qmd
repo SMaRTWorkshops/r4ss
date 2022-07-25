@@ -30,6 +30,354 @@ format:
 ![](../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
 :::
 
+<!-- Program II -->
+
+## Functions {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Recipes]{.b .green} allow chefs to cook up tasty treats
+    -   Recipes call for ingredients
+    -   Recipes involve one or more steps
+    -   Steps transform ingredients into treats
+
+::: {.fragment .mt1}
+-   [Functions]{.b .blue} are like *customizable* recipes
+    -   Functions call for inputs ("arguments")
+    -   Functions involve one or more lines of code
+    -   Code transforms inputs into outputs
+    -   Using functions requires parentheses (usually)
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li vpqdjfdy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`out <- f(in1, in2)`
+:::
+:::
+:::
+
+::: footer
+\[1B\] Program II
+:::
+
+## Functions Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+
+# USECASE: Function can perform a task more easily and readably
+
+# TEMPLATE: output <- function_name(input)
+
+9 ^ (1 / 2)
+
+x <- sqrt(9)
+x
+
+# ==============================================================================
+
+# LESSON: We can also use functions to transform objects
+
+y <- 9
+
+sqrt(y)
+
+# ==============================================================================
+
+# LESSON: We can even use functions to transform the result of calculations
+
+2 / 3
+
+round(2 / 3)
+
+# ==============================================================================
+
+# LESSON: We can customize what a function does using arguments
+
+# TEMPLATE: output <- function_name(argument, argument_name = argument_value)
+
+round(2 / 3, digits = 2)
+
+round(2 / 3, digits = 3)
+
+# ==============================================================================
+
+# LESSON: Some arguments are optional because they have default values
+
+round(2 / 3) # the default value for digits is 0
+
+round(2 / 3, digits = 0)
+```
+
+::: footer
+\[1B\] Program II
+:::
+
+## Vectors {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Vectors]{.b .blue} combine similar objects into a collection
+    -   *I like to imagine a train pulling multiple cars*<br />
+    ![](../img/traincar.png)
+    -   A vector is one object with many sub-objects
+    -   We refer to each sub-object as an [element]{.b .green}
+
+::: {.fragment .mt1}
+-   Some functions [transform each element]{.b .green} in turn
+    -   *Double the amount of cargo in every train car*
+:::
+
+::: {.fragment .mt1}
+-   Some functions [summarize across elements]{.b .green}
+    -   *Calculate the total cargo across all train cars*
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li bqmoqptv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`v <- c(1, 2, 3)`
+:::
+
+:::
+:::
+
+::: footer
+\[1B\] Program II
+:::
+
+## Vectors Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# LESSON: We can combine multiple elements into a vector
+
+# TEMPLATE: vector_name <- c(element1, element2, element3)
+
+x <- 4 9 16 25 # error
+
+x <- c(4, 9, 16, 25)
+x
+
+y <- c(2, 3)
+y
+
+# ==============================================================================
+
+# LESSON: We can also combine multiple vectors and elements
+
+c(x, y)
+
+c(x, y, 20)
+
+# ==============================================================================
+
+# USECASE: Math operators will transform each element individually
+
+x + 1
+
+x * 3
+
+x # but again, this won't be saved unless you use assignment
+
+# ==============================================================================
+
+# USECASE: Some functions will also transform each element individually
+
+sqrt(x)
+
+log(x)
+
+# ==============================================================================
+
+# USECASE: Other functions will summarize the vector with a single number
+
+length(x)
+
+sum(x)
+
+mean(x)
+```
+
+::: footer
+\[1B\] Program II
+:::
+
+<!-- Insert quiz and short break here? -->
+
+## Strings {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   When talking to R, we need a way to distinguish
+    -   Object/function names (e.g., the *mean* function)
+    -   Text/character data (e.g., the word *mean*)
+    
+::: {.fragment .mt1}
+-   [Strings]{.b .blue} are R's way of storing text data
+    -   Strings can store any characters (no rules!)
+    -   Strings are created and displayed with [quotes]{.b .green}
+:::
+::: {.fragment .mt1}
+-   R has great tools for working with strings
+    -   Strings can be collected into vectors
+    -   Special functions can transform strings
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li xqnbvely trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`name <- "John Doe"`
+:::
+
+:::
+:::
+
+::: footer
+\[1B\] Program II
+:::
+
+## Strings Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Strings are the main way to store character data in R
+ 
+my_color <- red # error
+
+my_color <- "red" # correct
+
+# ==============================================================================
+
+# USECASE: Strings can also store symbols not allowed in object names
+
+dye <- "red#40"
+dye
+
+dyes <- c("red#40", "blue#02")
+dyes
+
+# ==============================================================================
+
+# PITFALL: Many operations you can do to numbers won't work for strings
+
+dyes + 1 # error
+
+mean(dyes) # error
+
+# ==============================================================================
+
+# USECASE: But other operations work for both or even just for strings
+
+length(dyes)
+
+nchar(dyes)
+
+dyes2 <- toupper(dyes)
+dyes2
+```
+
+::: footer
+\[1B\] Program II
+:::
+
+## Packages {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Cookbooks]{.b .green} are a great way to learn to cook
+    -   *They contain lots of recipes and instructions*
+    -   Browse an online **bookstore** for a cookbook
+    -   **Order** it to add it to your personal **bookshelf**
+    -   To use, **pull** the cookbook off the shelf
+
+::: {.fragment .mt1}
+-   [Packages]{.b .blue} are like cookbooks for R
+    -   *They contain helpful functions and datasets*
+    -   Browse an online **repository** for a package
+    -   **Install** it to add it to your personal **library**
+    -   To use, **load** the package from the library
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li tboujdsn trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+
+::: {.fragment}
+`library("pkg_name")`
+:::
+:::
+:::
+
+::: footer
+\[1B\] Program II
+:::
+
+## Packages Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: The stringr package adds a function to fix capitalization
+
+students <- c("mary anne", "BENjamin", "Lee")
+
+# ==============================================================================
+
+# PITFALL: But we can't use that function without installing the package
+
+str_to_title(students) # error
+
+# ==============================================================================
+
+# LESSON: Installing a package using RStudio
+
+# - RStudio > Extras pane > Packages tab > Install button
+
+# ==============================================================================
+
+# PITFALL: We also need to load the package before we can use it
+
+str_to_title(students) # error
+
+# ==============================================================================
+
+# LESSON: We load the package using library()
+
+library("stringr")
+str_to_title(students) #finally works!
+
+# ==============================================================================
+
+# LESSON: We can also keep our packages updated using RStudio
+
+# RStudio > Extras pane > Packages tab > Update button
+```
+
+::: footer
+\[1B\] Program II
+:::
+
 <!-- Wrangle I -->
 
 # Wrangle I
@@ -911,560 +1259,6 @@ old_gradebook
 
 ::: footer
 \[1B\] Wrangle I
-:::
-
-<!-- Wrangle II -->
-
-# Wrangle II
-
-## Basic wrangling verbs {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   [tidyverse]{.b .blue} provides tools for wrangling tibbles
-    -   These functions are named after *verbs*
-    -   So if you name your objects after *nouns*...
-    -   ...your code becomes easier to read
-
-::: {.fragment .mt1}
-| Noun(noun) ❌        |  Verb(noun)  ✔️  | 
-|:----------------------|:----------------|
-| `blender(fruit)`      | `blend(fruit)`  |
-| `screwdriver(screw)`  | `drive(screw)`  |
-| `boxcutter(box)`      | `cut(box)`      |
-
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## Basic wrangling verbs {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-- **Primary Functions** (most used)
-    -   `select()` retains only certain columns
-    -   `mutate()` adds or transforms columns
-    -   `filter()` retains rows based on criteria
-
-::: {.fragment .mt1}
-- **Secondary Functions** (less used)
-    -   `arrange()` sorts rows by their values
-    -   `rename()` changes column titles
-    -   `relocate()` moves columns around
-
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Select* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: Load package and inspect example tibble
-
-library(tidyverse) # includes the dplyr package
-starwars
-
-# ==============================================================================
-
-# USECASE: Retain only the specified variables
-
-sw <- select(starwars, name)
-sw
-sw <- select(starwars, name, sex, species)
-sw
-
-# ==============================================================================
-
-# PITFALL: Don't forget to save the change with assignment
-
-select(starwars, name, sex, species)
-starwars # still includes all variables
-
-# ==============================================================================
-
-# USECASE: Change the order of variables
-
-sw <- select(starwars, species, name, sex)
-sw
-
-# ==============================================================================
-
-# USECASE: Retain all variables between two variables
-
-sw <- select(starwars, name, hair_color:eye_color)
-sw
-
-# ==============================================================================
-
-# USECASE: Retain all variables except the specified ones
-
-sw <- select(starwars, -sex, -species)
-sw
-sw <- select(starwars, -c(sex, species))
-sw
-sw <- select(starwars, -c(hair_color:starships))
-sw
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Rename* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Change the name of one or more variables
-
-# TEMPLATE: df2 <- rename(df, new_name = old_name)
-
-starwars
-
-sw <- rename(starwars, Character = name)
-sw
-
-sw <- rename(starwars, height_cm = height, mass_kg = mass)
-sw
-
-# ==============================================================================
-
-# PITFALL: Don't swap the order and try old_name = new_name
-
-sw <- rename(starwars, name = Character) # error
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Relocate* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Move variables before another variable or position
-
-starwars
-sw <- relocate(starwars, sex, .before = height)
-sw
-
-sw <- relocate(starwars, species, sex, .before = name)
-sw
-
-sw <- relocate(starwars, homeworld, .before = 1)
-sw
-
-# ==============================================================================
-
-# PITFALL: Don't forget the period!
-
-sw <- relocate(starwars, sex, before = height) 
-sw # height was accidentally renamed to before
-
-# ==============================================================================
-
-# USECASE: Move variables after another variable or position
-
-sw <- relocate(starwars, sex, .after = height)
-sw
-
-sw <- relocate(starwars, species, sex, .after = name)
-sw
-
-sw <- relocate(starwars, homeworld, .after = 1)
-sw
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Arrange* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Sort observations by a variable
-
-starwars
-
-sw <- arrange(starwars, height)
-sw # sorted by height, ascending
-
-sw <- arrange(starwars, name)
-sw # sorted by name, alphabetically
-
-# ==============================================================================
-
-# USECASE: Sort observations by a variable, in reverse order
-
-sw <- arrange(starwars, desc(height))
-sw # sorted by height, descending
-
-sw <- arrange(starwars, desc(name))
-sw # sorted by name, reverse-alphabetically
-
-# ==============================================================================
-
-# USECASE: Sort observations by multiple variables
-
-sw <- arrange(starwars, hair_color, mass)
-sw # sorted by hair_color, then ties broken by mass
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Filter* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Retain only observations that meet a criterion
-
-sw <- filter(starwars, mass > 100)
-sw # only observations with mass greater than 100
-
-sw <- filter(starwars, mass <= 100)
-sw # only observations with mass less than or equal to 100
-
-sw <- filter(starwars, species == "Human")
-sw # only observations with species equal to Human
-
-sw <- filter(starwars, species != "Human")
-sw # only observations with species not equal to Human
-
-# ==============================================================================
-
-# PITFALL: Don't try to use a single = for testing equality
-
-sw <- filter(starwars, height = 150) # error
-
-sw <- filter(starwars, height == 150) # correct
-sw 
-
-# ==============================================================================
-
-# PITFALL: Don't forget that R is case-sensitive
-
-sw <- filter(starwars, species == "human")
-sw # no observations left (because it should be Human)
-
-# ==============================================================================
-
-# USECASE: Retain only observations that meet complex criteria
-
-sw <- filter(starwars, mass > 100 & height > 200)
-sw # only observations with mass over 100 AND height over 200
-
-sw <- filter(starwars, height < 100 | hair_color == "none")
-sw # only observations with height under 100 OR hair_color equal to none
-
-# ==============================================================================
-
-# PITFALL: Don't forget to complete both conditions
-
-sw <- filter(starwars, mass > 100 & < 200) # error
-
-sw <- filter(starwars, mass > 100 & mass < 200) # correct
-sw
-
-# ==============================================================================
-
-# PITFALL: Don't try to equate a string to a vector
-
-sw <- filter(starwars, species == c("Human", "Droid")) # error
-
-sw <- filter(starwars, species %in% c("Human", "Droid")) # correct
-sw
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Filter* Cheatsheet {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%" .mytable}
-
-| Symbol | Description            | Num | Chr   |
-|--------|------------------------|-----|-------|
-| `<`    | Less than              | Yes | *No*  |
-| `<=`   | Less than or equal to  | Yes | *No*  |
-| `>`    | More than              | Yes | *No*  |
-| `>=`   | More than or equal to  | Yes | *No*  |
-| `==`   | Equal to               | Yes | Yes   |
-| `!=`   | Not equal to           | Yes | Yes   |
-| `%in%` | Found in               | Yes | Yes   |
-| `&`    | Logical And            | Yes | Yes   |
-| `|`    | Logical Or             | Yes | Yes   |
-
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li esixrdij trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## *Mutate* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: Create example tibble
-
-patients <- tibble(
-  id = c("S1", "S2", "S3"),
-  feet = c(6, 5, 5),
-  inches = c(1, 7, 2),
-  pounds = c(176.3, 124.9, 162.6)
-)
-patients
-
-# ==============================================================================
-
-# USECASE: Add one or more variables
-
-p2 <- mutate(patients, sex = c("M", "F", "F"))
-p2
-
-ages <- c(32, 41, 29)
-p2 <- mutate(patients, ages = ages)
-p2
-
-p2 <- mutate(
-  patients, 
-  sex = c("M", "F", "F"), 
-  ages = ages
-)
-p2
-
-# ==============================================================================
-
-# USECASE: Compute variables
-
-p2 <- mutate(patients, height = feet + inches / 12)
-p2
-
-p2 <- mutate(patients, ln_pounds = log(pounds))
-p2
-
-# ==============================================================================
-
-# USECASE: Overwrite variables
-
-patients <- mutate(patients, height = height / 3.281)
-patients
-
-# ==============================================================================
-
-# USECASE: Duplicate variables
-
-p2 <- mutate(patients, weight = pounds)
-p2 # both weight and pounds exist
-```
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## Pipes and Pipelines {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-- How can we do [multiple operations]{.b .green} to an object?
-    1. `x <- 10`
-    2. `x2 <- sqrt(x)`
-    3. `x3 <- round(x2)`
-    
-::: {.fragment .mt1}
-- This works but is **cumbersome** and **error-prone**
-:::
-
-::: {.fragment .mt1}
-- A better approach is to use [pipes]{.b .blue} and [pipelines]{.b .green}
-    - `x3 <- 10 |> sqrt() |> round()`
-:::
-
-::: {.fragment .mt1}
-- I like to read `|>` as "and then..."
-    - "Take 10 and then sqrt() and then round()"
-:::
-    
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li mhttdvjl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[1B\] Wrangle II
-:::
-
-## Pipes Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: Enable the pipe operator shortcut
-
-# Tools > Global Options... > Code tab > Check "Use Native Pipe Operator"
-
-# Type out |> or press Ctrl+Shift+M (Windows) / Cmd+Shift+M (Mac)
-
-# ==============================================================================
-
-# LESSON: The pipe pushes objects to a function as its first argument
-
-# TEMPLATE: x |> function_name() is the same as function_name(x)
-
-x <- 10
-
-y <- sqrt(x)
-y
-
-y <- x |> sqrt()
-y
-
-# ==============================================================================
-
-# PITFALL: Don't forget to remove the object from the function call
-
-x |> sqrt(x) # wrong
-
-x |> sqrt() # correct
-
-# ==============================================================================
-
-# USECASE: You can still use arguments when piping
-
-z <- round(3.14, digits = 1)
-z
-
-z <- 3.14 |> round(digits = 1)
-z
-
-# ==============================================================================
-
-# USECASE: Pipes are useful with tibbles and wrangling verbs
-
-starwars
-
-sw <- select(starwars, name, species, height)
-sw
-
-sw <- starwars |> select(name, species, height)
-sw
-
-# ==============================================================================
-
-# PITFALL: Don't add a pipe without a step after it
-
-sw <- starwars |> select(name, species, height) |> # error
-```
-
-## Pipelines Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: You can chain multiple pipes together to make a pipeline
-
-x <- 10 |> sqrt() |> round()
-x
-
-# ==============================================================================
-
-# TIP: If you want to see the output of a pipeline, you can pipe to print()
-
-x <- 10 |> sqrt() |> round() |> print()
-
-# ==============================================================================
-
-# TIP: To make your pipelines more readable, move each step to a new line
-
-x <- 
-  10 |> 
-  sqrt() |> 
-  round() |>
-  print()
-
-# ==============================================================================
-
-# PITFALL: Don't put the pipe at the beginning of a line, though
-
-x <- 
-  10 
-  |> sqrt()
-  |> round()
-  |> print() # error
-
-# ==============================================================================
-
-# USECASE: Chain together a series of verbs to flexibly wrangle data
-
-tallones <- 
-  starwars |> 
-  select(name, species, height) |> 
-  rename(height_cm = height) |> 
-  mutate(height_ft = height_cm / 30.48) |>  
-  filter(height_ft > 7) |> 
-  arrange(desc(height_ft)) |>  
-  print()
-```
-
-::: footer
-\[1B\] Wrangle II
 :::
 
 # [Practice II](https://pittmethods.github.io/r4ss/Day_1/Day1B_Practice.html){preview-link="false"}

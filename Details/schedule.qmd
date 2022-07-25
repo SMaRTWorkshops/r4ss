@@ -11,8 +11,8 @@ title: "Schedule"
   -   Overview
   -   Program I
   -   Practice I
+  -   Program II
   -   Wrangle I
-  -   Wrangle II
   -   Practice II
 
 Zoom Link: <https://zoom.us/j/96089728375>
@@ -21,11 +21,11 @@ Zoom Link: <https://zoom.us/j/96089728375>
 
 10:30am – 3:30pm [EDT](https://time.is/EDT) (July 26, 2022)
 
-  -   Program II
-  -   Wrangle III
+  -   Wrangle II
+  -   Program III
   -   Practice III
-  -   Visualize I
-  -   Visualize II
+  -   Wrangle III
+  -   Visualize I/II
   -   Practice IV
 
 Zoom Link: <https://zoom.us/j/96219034379>
@@ -35,9 +35,9 @@ Zoom Link: <https://zoom.us/j/96219034379>
 10:30am – 3:30pm [EDT](https://time.is/EDT) (July 27, 2022)
 
   -   Model I
-  -   Model II
   -   Practice V
-  -   Open Q&A
+  -   Model II
+  -   Practice VI
   -   Consultation
 
 Zoom Link: <https://zoom.us/j/95491160541>

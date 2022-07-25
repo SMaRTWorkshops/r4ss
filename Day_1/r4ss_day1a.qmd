@@ -147,18 +147,18 @@ format:
   </tr>
   <tr>
     <td>Overview</td>
-    <td>[Program II]{.blue}</td>
+    <td>[Wrangle II]{.green}</td>
     <td>[Model I]{.red}</td>
   </tr>
   <tr>
     <td>[Program I]{.blue}</td>
-    <td>[Wrangle III]{.green}</td>
-    <td>[Model II]{.red}</td>
+    <td>[Program III]{.blue}</td>
+    <td>[Practice V]{.red}</td>
   </tr>
   <tr>
     <td>Practice I</td>
     <td>Practice III</td>
-    <td>Practice V</td>
+    <td></td>
   </tr>
   <tr>
     <th style="padding-top:1.75rem;">DAY 1B</th>
@@ -166,14 +166,14 @@ format:
     <th>DAY 3B</th>
   </tr>
   <tr>
-    <td>[Wrangle I]{.green}</td>
-    <td>[Visualize I]{.light-purple}</td>
-    <td>[Preview]{.red}</td>
+    <td>[Program II]{.blue}</td>
+    <td>[Wrangle III]{.green}</td>
+    <td>[Model II]{.red}</td>
   </tr>
   <tr>
-    <td>[Wrangle II]{.green}</td>
-    <td>[Visualize II]{.light-purple}</td>
-    <td>Open Q&A</td>
+    <td>[Wrangle I]{.green}</td>
+    <td>[Visualize I/II]{.light-purple}</td>
+    <td>Practice VI</td>
   </tr>
   <tr>
     <td>Practice II</td>
@@ -221,39 +221,6 @@ format:
 ::: footer
 \[1A\] Overview
 :::
-
-<!-- ## Workshop Resources {.smaller} -->
-
-<!-- ::: {.columns .pv4} -->
-<!-- ::: {.column width="60%"} -->
-<!-- #### Workshop Website -->
-
-<!-- -   All materials are on the website -->
-<!-- -   [pittmethods.github.io/r4ss](https://pittmethods.github.io/r4ss) -->
-
-<!-- ::: {.fragment .mt1} -->
-<!-- #### Workshop Slack Channel -->
-
-<!-- -   Slack will provide persistent chat -->
-<!-- -   Join our channel using [this link](https://join.slack.com/t/r4ss/shared_invite/zt-1ca2nn6fl-439Hv~bZxYdaBBDAZHrvBQ){preview-link="false"} -->
-<!-- ::: -->
-
-<!-- ::: {.fragment .mt1} -->
-<!-- #### Workshop Recordings -->
-
-<!-- -   All three days will be video recorded -->
-<!-- -   View them as private YouTube videos -->
-<!-- ::: -->
-<!-- ::: -->
-
-<!-- ::: {.column .tc .pv5 width="40%"} -->
-<!-- {{< li qfabemmy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}} -->
-<!-- ::: -->
-<!-- ::: -->
-
-<!-- ::: footer -->
-<!-- \[1A\] Overview -->
-<!-- ::: -->
 
 ## Installing R {.smaller}
 
@@ -765,354 +732,6 @@ Heart_rate <- 88
 heart_rate # still 93
 
 Heart_rate # a new object
-```
-
-::: footer
-\[1A\] Program I
-:::
-
-<!-- Insert quiz and short break here? -->
-
-## Functions {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   [Recipes]{.b .green} allow chefs to cook up tasty treats
-    -   Recipes call for ingredients
-    -   Recipes involve one or more steps
-    -   Steps transform ingredients into treats
-
-::: {.fragment .mt1}
--   [Functions]{.b .blue} are like *customizable* recipes
-    -   Functions call for inputs ("arguments")
-    -   Functions involve one or more lines of code
-    -   Code transforms inputs into outputs
-    -   Using functions requires parentheses (usually)
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li vpqdjfdy trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-
-::: {.fragment}
-`out <- f(in1, in2)`
-:::
-:::
-:::
-
-::: footer
-\[1A\] Program I
-:::
-
-## Functions Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| code-line-numbers: false
-
-# USECASE: Function can perform a task more easily and readably
-
-# TEMPLATE: output <- function_name(input)
-
-9 ^ (1 / 2)
-
-x <- sqrt(9)
-x
-
-# ==============================================================================
-
-# LESSON: We can also use functions to transform objects
-
-y <- 9
-
-sqrt(y)
-
-# ==============================================================================
-
-# LESSON: We can even use functions to transform the result of calculations
-
-2 / 3
-
-round(2 / 3)
-
-# ==============================================================================
-
-# LESSON: We can customize what a function does using arguments
-
-# TEMPLATE: output <- function_name(argument, argument_name = argument_value)
-
-round(2 / 3, digits = 2)
-
-round(2 / 3, digits = 3)
-
-# ==============================================================================
-
-# LESSON: Some arguments are optional because they have default values
-
-round(2 / 3) # the default value for digits is 0
-
-round(2 / 3, digits = 0)
-```
-
-::: footer
-\[1A\] Program I
-:::
-
-## Vectors {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   [Vectors]{.b .blue} combine similar objects into a collection
-    -   *I like to imagine a train pulling multiple cars*<br />
-    ![](../img/traincar.png)
-    -   A vector is one object with many sub-objects
-    -   We refer to each sub-object as an [element]{.b .green}
-
-::: {.fragment .mt1}
--   Some functions [transform each element]{.b .green} in turn
-    -   *Double the amount of cargo in every train car*
-:::
-
-::: {.fragment .mt1}
--   Some functions [summarize across elements]{.b .green}
-    -   *Calculate the total cargo across all train cars*
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li bqmoqptv trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-
-::: {.fragment}
-`v <- c(1, 2, 3)`
-:::
-
-:::
-:::
-
-::: footer
-\[1A\] Program I
-:::
-
-## Vectors Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# LESSON: We can combine multiple elements into a vector
-
-# TEMPLATE: vector_name <- c(element1, element2, element3)
-
-x <- 4 9 16 25 # error
-
-x <- c(4, 9, 16, 25)
-x
-
-y <- c(2, 3)
-y
-
-# ==============================================================================
-
-# LESSON: We can also combine multiple vectors and elements
-
-c(x, y)
-
-c(x, y, 20)
-
-# ==============================================================================
-
-# USECASE: Math operators will transform each element individually
-
-x + 1
-
-x * 3
-
-x # but again, this won't be saved unless you use assignment
-
-# ==============================================================================
-
-# USECASE: Some functions will also transform each element individually
-
-sqrt(x)
-
-log(x)
-
-# ==============================================================================
-
-# USECASE: Other functions will summarize the vector with a single number
-
-length(x)
-
-sum(x)
-
-mean(x)
-```
-
-::: footer
-\[1A\] Program I
-:::
-
-<!-- Insert quiz and short break here? -->
-
-## Strings {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   When talking to R, we need a way to distinguish
-    -   Object/function names (e.g., the *mean* function)
-    -   Text/character data (e.g., the word *mean*)
-    
-::: {.fragment .mt1}
--   [Strings]{.b .blue} are R's way of storing text data
-    -   Strings can store any characters (no rules!)
-    -   Strings are created and displayed with [quotes]{.b .green}
-:::
-::: {.fragment .mt1}
--   R has great tools for working with strings
-    -   Strings can be collected into vectors
-    -   Special functions can transform strings
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li xqnbvely trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-
-::: {.fragment}
-`name <- "John Doe"`
-:::
-
-:::
-:::
-
-::: footer
-\[1A\] Program I
-:::
-
-## Strings Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Strings are the main way to store character data in R
- 
-my_color <- red # error
-
-my_color <- "red" # correct
-
-# ==============================================================================
-
-# USECASE: Strings can also store symbols not allowed in object names
-
-dye <- "red#40"
-dye
-
-dyes <- c("red#40", "blue#02")
-dyes
-
-# ==============================================================================
-
-# PITFALL: Many operations you can do to numbers won't work for strings
-
-dyes + 1 # error
-
-mean(dyes) # error
-
-# ==============================================================================
-
-# USECASE: But other operations work for both or even just for strings
-
-length(dyes)
-
-nchar(dyes)
-
-dyes2 <- toupper(dyes)
-dyes2
-```
-
-::: footer
-\[1A\] Program I
-:::
-
-## Packages {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   [Cookbooks]{.b .green} are a great way to learn to cook
-    -   *They contain lots of recipes and instructions*
-    -   Browse an online **bookstore** for a cookbook
-    -   **Order** it to add it to your personal **bookshelf**
-    -   To use, **pull** the cookbook off the shelf
-
-::: {.fragment .mt1}
--   [Packages]{.b .blue} are like cookbooks for R
-    -   *They contain helpful functions and datasets*
-    -   Browse an online **repository** for a package
-    -   **Install** it to add it to your personal **library**
-    -   To use, **load** the package from the library
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li tboujdsn trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-
-::: {.fragment}
-`library("pkg_name")`
-:::
-:::
-:::
-
-::: footer
-\[1A\] Program I
-:::
-
-## Packages Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: The stringr package adds a function to fix capitalization
-
-students <- c("mary anne", "BENjamin", "Lee")
-
-# ==============================================================================
-
-# PITFALL: But we can't use that function without installing the package
-
-str_to_title(students) # error
-
-# ==============================================================================
-
-# LESSON: Installing a package using RStudio
-
-# - RStudio > Extras pane > Packages tab > Install button
-
-# ==============================================================================
-
-# PITFALL: We also need to load the package before we can use it
-
-str_to_title(students) # error
-
-# ==============================================================================
-
-# LESSON: We load the package using library()
-
-library("stringr")
-str_to_title(students) #finally works!
-
-# ==============================================================================
-
-# LESSON: We can also keep our packages updated using RStudio
-
-# RStudio > Extras pane > Packages tab > Update button
 ```
 
 ::: footer

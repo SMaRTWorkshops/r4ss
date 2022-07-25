@@ -31,6 +31,380 @@ format:
 ![](../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
 :::
 
+<!-- Wrangle III -->
+
+# Wrangle III
+
+## Summarize {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Although we store data about many observations...
+-   ...we often want to [summarize across]{.b .blue} observations
+    -   This is like [folding]{.b .green} the tibble down to [one row]{.b .green}
+
+::: {.fragment .mt1}
+-   We've seen functions that summarize vectors
+    -   `length()`, `sum()`, `min()`, `max()`
+    -   `mean()`, `median()`, `sd()`, `var()`
+:::
+
+::: {.fragment .mt1}
+-   `summarize()` lets us use them on tibbles
+    -   It works very similarly to `mutate()`
+    -   It always creates a tibble as output
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li uhmqrsgl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2B\] Wrangle III
+:::
+
+## Summarize Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+sales <- 
+  tibble(
+    customer = c(1, 2, 3, 1, 3),
+    store = c("A", "A", "A", "B", "B"),
+    items = c(25, 20, 16, 10, 5),
+    spent = c(685, 590, 392, 185, 123)
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: Summarize the typical sales
+
+my_summary <- 
+  sales |> 
+  summarize(
+    avg_items = mean(items),
+    avg_spent = mean(spent)
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# PITFALL: Don't use summary() instead of summarize()
+
+my_summary <- 
+  sales |> 
+  summary(
+    avg_items = mean(items),
+    avg_spent = mean(spent)
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: Use more than one summary function
+
+my_summary <- 
+  sales |> 
+  summarize(
+    total_items = sum(items),
+    total_spent = sum(spent),
+    avg_items = mean(items),
+    avg_spent = mean(spent)
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: Use counting functions
+
+my_counts <- 
+  sales |> 
+  summarize(
+    n_sales = n(),
+    n_customers = n_distinct(customer),
+    n_stores = n_distinct(store)
+  ) |> 
+  print()
+```
+
+::: footer
+\[2A\] Wrangle III
+:::
+
+## Group Summarize {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- We can also summarize a tibble [by group]{.b .blue}
+    -   This is like [folding]{.b .green} the tibble multiple times
+    -   Specifically, we fold down to [one row per group]{.b .green}
+
+::: {.fragment .mt1}
+-   The syntax for summarize is identical
+    -   The only difference is to the tibble
+    -   We first pass it through `group_by()`
+    -   Pipelines make this very easy
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li pmwtbpap trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2B\] Wrangle III
+:::
+
+## Group Summarize Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+sales <- 
+  tibble(
+    customer = c(1, 2, 3, 1, 3),
+    store = c("A", "A", "A", "B", "B"),
+    items = c(25, 20, 16, 10, 5),
+    spent = c(685, 590, 392, 185, 123)
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: We pass a tibble through group_by to group it
+
+sales
+
+sales |> group_by(store) # note the display says "grouped"
+
+# ==============================================================================
+
+# USECASE: We can then summarize and get stats per group
+
+sales |> 
+  group_by(store) |> 
+  summarize(
+    customers = n_distinct(customer),
+    items_sold = sum(items),
+    total_sales = sum(spent),
+    avg_items = mean(items),
+    avg_spent = mean(spent)
+  )
+
+# ==============================================================================
+
+# SETUP: Let's get a larger, more realistic dataset
+
+# Extra pane > Packages tab > Install > nycflights13
+
+library("nycflights13")
+
+flights
+
+# ==============================================================================
+
+# USECASE: Find the carrier with the lowest average delays
+
+flights |> 
+  group_by(carrier) |> 
+  summarize(m_delay = mean(dep_delay, na.rm = TRUE)) |> 
+  arrange(m_delay)
+
+# ==============================================================================
+
+# LESSON: We can also group by multiple variables
+
+# USECASE: Let's find the day of the year with the most flights
+
+flights |> 
+  group_by(month, day) |> 
+  summarize(n_flights = n()) |> 
+  arrange(desc(n_flights))
+
+# ==============================================================================
+
+# PITFALL: Note how this differs from grouping by just day
+
+flights |> 
+  group_by(day)|> 
+  summarize(n_flights = n()) |> 
+  arrange(desc(n_flights))
+```
+
+::: footer
+\[2B\] Wrangle III
+:::
+
+
+
+## Pivot Longer and Wider {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Both long and wide formats can be tidy
+    -   Long formats are better for MLM
+    -   Wide formats are better for SEM
+
+::: {.fragment .mt1}
+-   It can be useful to quickly [reshape a tibble]{.b .blue}
+    -   `pivot_longer()`: wide → long
+    -   `pivot_wider()`: long → wide
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li xacejjis trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+## Pivot Longer Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+gradebook <- 
+  read_csv("gradebook.csv") |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: We can pivot to long format by creating name and value variables
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = c(test1, test2, test3, test4, test5), 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# TIP: Use selection helpers to select columns quickly
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = test1:test5, 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: Automatically remove the name prefix
+
+gradebook2 <- 
+  gradebook|> 
+  pivot_longer(
+    cols = starts_with("test"), 
+    names_to = "test", 
+    values_to = "grade",
+    names_prefix = "test"
+  ) |> 
+  print()
+```
+
+::: footer
+\[2B\] Wrangle III
+:::
+
+## Pivot Wider Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+diary <- read_csv("diary.csv") |> print()
+
+# ==============================================================================
+
+# USECASE: Reshape this long format to a wider format
+
+diary_scale <- 
+  diary |> 
+  pivot_wider(
+    names_from = "scale",
+    values_from = "score"
+  ) |> 
+  print()
+
+diary_day <- 
+  diary |>  
+  pivot_wider(
+    names_from = "day",
+    values_from = "score"
+  ) |> 
+  print()
+
+# NOTE: There are thus multiple possible wide formats (for different uses)
+
+# ==============================================================================
+
+# LESSON: We can add a prefix to each name to avoid numeric names
+
+diary_data
+
+diary_day <- 
+  diary |> 
+  pivot_wider(
+    names_from = "day",
+    values_from = "score",
+    names_prefix = "day_"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: We can also pivot on multiple columns at once
+
+diary_double <- 
+  diary |> 
+  pivot_wider(
+    names_from = c("scale", "day"),
+    values_from = "score"
+  ) |> 
+  print()
+```
+
+::: footer
+\[2B\] Wrangle III
+:::
+
 <!-- Visualize I -->
 
 # Visualize I
@@ -751,190 +1125,6 @@ ggplot(mpg, aes(x = displ, y = hwy, shape = drv, color = drv)) +
 
 ::: footer
 \[2B\] Visualize I
-:::
-
-<!-- Visualize II -->
-
-# Visualize II
-
-## Describe this Graphic 1 {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-```{r dtg1}
-#| echo: false
-#| message: false
-#| fig-height: 8
-
-starwars |> 
-  filter(mass < 200) |> 
-  ggplot(aes(x = height, y = mass)) + 
-  geom_point(size = 3) +
-  geom_smooth(size = 2) +
-  theme_grey(base_size = 32)
-```
-:::
-
-::: {.column width="40%"}
-**Data**
-
-- `starwars` \{tidyverse\}
-
-**Aesthetics/Scales**
-
-::: {.fragment}
-- `height` to X (continuous)
-- `mass` to Y (continuous)
-:::
-
-**Geoms**
-
-::: {.fragment}
-- Point (dots)
-- Smooth (local)
-:::
-
-:::
-:::
-
-::: footer
-\[2B\] Visualize II
-:::
-
-## Describe this Graphic 2 {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-```{r dtg2}
-#| echo: false
-#| message: false
-#| fig-height: 8
-
-mpg |> 
-  ggplot(aes(x = displ, y = hwy, color = drv)) + 
-  geom_point(size = 3) +
-  geom_smooth(method = "lm", size = 2) +
-  theme_grey(base_size = 32)
-```
-:::
-
-::: {.column width="40%"}
-**Data**
-
-- `mpg` \{tidyverse\}
-
-**Aesthetics/Scales**
-
-::: {.fragment}
-- `displ` to X (continuous)
-- `hwy` to Y (continuous)
-- `drv` to color (discrete)
-:::
-
-**Geoms**
-
-::: {.fragment}
-- Point (dots)
-- Smooth (linear)
-:::
-
-:::
-:::
-
-::: footer
-\[2B\] Visualize II
-:::
-
-## Describe this Graphic 3 {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-```{r dtg3}
-#| echo: false
-#| message: false
-#| fig-height: 8
-
-mpg |> 
-  ggplot(aes(x = hwy, y = class)) + 
-  geom_boxplot(fill = "lightblue", size = 1, outlier.size = 3) +
-  geom_vline(xintercept = 20, color = "red", size = 2) +
-  theme_grey(base_size = 32)
-```
-:::
-
-::: {.column width="40%"}
-**Data**
-
-- `mpg` \{tidyverse\}
-
-**Aesthetics/Scales**
-
-::: {.fragment}
-- `hwy` to X (continuous)
-- `class` to Y (discrete)
-:::
-
-**Geoms**
-
-::: {.fragment}
-- Boxplot (fill = lightblue)
-- VLine (xintercept = 20)
-:::
-
-:::
-:::
-
-::: footer
-\[2B\] Visualize II
-:::
-
-## Describe this Graphic 4 {.smaller}
-
-::: {.columns}
-::: {.column width="60%"}
-
-```{r dtg4}
-#| echo: false
-#| message: false
-#| fig-height: 8
-
-library(nycflights13)
-
-flights |> 
-  ggplot(aes(x = origin, color = origin)) + 
-  geom_bar(fill = "white", size = 2) +
-  theme_grey(base_size = 32) +
-  theme(legend.position = "none")
-```
-:::
-
-::: {.column width="40%"}
-**Data**
-
-- `flights` \{nycflights13\}
-
-**Aesthetics/Scales**
-
-::: {.fragment}
-- `origin` to X (discrete)
-- `origin` to color (discrete)
-- `count` to Y (stat from geom)
-:::
-
-**Geoms**
-
-::: {.fragment}
-- Bar (fill = white)
-:::
-
-:::
-:::
-
-::: footer
-\[2B\] Visualize II
 :::
 
 ## Themes {.smaller}

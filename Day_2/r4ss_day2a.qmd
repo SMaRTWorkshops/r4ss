@@ -30,41 +30,66 @@ format:
 ![](../img/proud_coder_357EDD.svg){.absolute bottom=0 right=0 width=400}
 :::
 
-<!-- Program II -->
+<!-- Wrangle II -->
 
-# Program II
+# Wrangle II
 
-## Missing Values {.smaller}
+## Basic wrangling verbs {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
--   Sometimes your data will have [missing values]{.b .blue}
-    -   Perhaps these were [never collected]{.b .green}
-    -   Perhaps the values were [lost/corrupted]{.b .green}
-    -   Perhaps the participant [didn't respond]{.b .green}
+-   [tidyverse]{.b .blue} provides tools for wrangling tibbles
+    -   These functions are named after *verbs*
+    -   So if you name your objects after *nouns*...
+    -   ...your code becomes easier to read
 
 ::: {.fragment .mt1}
--   We need to tell R which values are missing
-    -   To do so, we set those values to `NA`
-    -   Functions from **tidyverse** make this easy
-:::
+| Noun(noun) ❌        |  Verb(noun)  ✔️  | 
+|:----------------------|:----------------|
+| `blender(fruit)`      | `blend(fruit)`  |
+| `screwdriver(screw)`  | `drive(screw)`  |
+| `boxcutter(box)`      | `cut(box)`      |
 
-::: {.fragment .mt1}
--   Missingness is often ["contagious"]{.b .green} in R<br />
-    e.g., a vector with `NA` has an unknown mean
 :::
 :::
 
 ::: {.column .tc .pv5 width="40%"}
-{{< li rwotyanb trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
+{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
 :::
 :::
 
 ::: footer
-\[2A\] Program II
+\[1B\] Wrangle II
 :::
 
-## Missing Values Live Coding
+## Basic wrangling verbs {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- **Primary Functions** (most used)
+    -   `select()` retains only certain columns
+    -   `mutate()` adds or transforms columns
+    -   `filter()` retains rows based on criteria
+
+::: {.fragment .mt1}
+- **Secondary Functions** (less used)
+    -   `arrange()` sorts rows by their values
+    -   `rename()` changes column titles
+    -   `relocate()` moves columns around
+
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Select* Live Coding
 
 ```{r}
 #| echo: true
@@ -72,74 +97,499 @@ format:
 #| error: true
 #| code-line-numbers: false
 
-# SETUP: We will need tidyverse for the read and mutate functions
+# SETUP: Load package and inspect example tibble
 
-library(tidyverse)
-
-# ==============================================================================
-
-# PITFALL: Number codes for missingness will mess up calculations in R
-
-heights <- c(149, 158, -999) # here we use -999 to represent a missing value
-
-range(heights)
-
-mean(heights)
-
-log(heights) # our missing value is no longer -999
+library(tidyverse) # includes the dplyr package
+starwars
 
 # ==============================================================================
 
-# USECASE: Use NA for missingness instead
+# USECASE: Retain only the specified variables
 
-heights2 <- c(149, 158, NA)
-heights2
-
-log(heights2) # the NA stayed an NA (due to contagiousness)
-
-# ==============================================================================
-
-# LESSON: Use na.rm = TRUE to do a summary function ignoring the NAs
-
-mean(heights2) # the mean is an NA (due to contagiousness)
-
-mean(heights2, na.rm = TRUE)
-
-range(heights2, na.rm = TRUE)
+sw <- select(starwars, name)
+sw
+sw <- select(starwars, name, sex, species)
+sw
 
 # ==============================================================================
 
-# USECASE: Dealing with missing values in tibbles
+# PITFALL: Don't forget to save the change with assignment
 
-cereal <- read_csv("cereal.csv")
-
-cereal$rating
-
-range(cereal$rating)
+select(starwars, name, sex, species)
+starwars # still includes all variables
 
 # ==============================================================================
 
-# LESSON: Use na_if() to convert specific values to NA while mutating
+# USECASE: Change the order of variables
 
-cereal2 <- mutate(cereal, rating = na_if(rating, -999))
-
-cereal2$rating
-
-range(cereal2$rating, na.rm = TRUE)
+sw <- select(starwars, species, name, sex)
+sw
 
 # ==============================================================================
 
-# LESSON: Use read_csv(na) to convert specific values to NA while reading
+# USECASE: Retain all variables between two variables
 
-cereal3 <- read_csv("cereal.csv", na = "-999")
+sw <- select(starwars, name, hair_color:eye_color)
+sw
 
-cereal3$rating
+# ==============================================================================
 
-range(cereal3$rating, na.rm = TRUE)
+# USECASE: Retain all variables except the specified ones
+
+sw <- select(starwars, -sex, -species)
+sw
+sw <- select(starwars, -c(sex, species))
+sw
+sw <- select(starwars, -c(hair_color:starships))
+sw
 ```
 
 ::: footer
-\[2A\] Program II
+\[2A\] Wrangle II
+:::
+
+## *Rename* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Change the name of one or more variables
+
+# TEMPLATE: df2 <- rename(df, new_name = old_name)
+
+starwars
+
+sw <- rename(starwars, Character = name)
+sw
+
+sw <- rename(starwars, height_cm = height, mass_kg = mass)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't swap the order and try old_name = new_name
+
+sw <- rename(starwars, name = Character) # error
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Relocate* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Move variables before another variable or position
+
+starwars
+sw <- relocate(starwars, sex, .before = height)
+sw
+
+sw <- relocate(starwars, species, sex, .before = name)
+sw
+
+sw <- relocate(starwars, homeworld, .before = 1)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't forget the period!
+
+sw <- relocate(starwars, sex, before = height) 
+sw # height was accidentally renamed to before
+
+# ==============================================================================
+
+# USECASE: Move variables after another variable or position
+
+sw <- relocate(starwars, sex, .after = height)
+sw
+
+sw <- relocate(starwars, species, sex, .after = name)
+sw
+
+sw <- relocate(starwars, homeworld, .after = 1)
+sw
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Arrange* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Sort observations by a variable
+
+starwars
+
+sw <- arrange(starwars, height)
+sw # sorted by height, ascending
+
+sw <- arrange(starwars, name)
+sw # sorted by name, alphabetically
+
+# ==============================================================================
+
+# USECASE: Sort observations by a variable, in reverse order
+
+sw <- arrange(starwars, desc(height))
+sw # sorted by height, descending
+
+sw <- arrange(starwars, desc(name))
+sw # sorted by name, reverse-alphabetically
+
+# ==============================================================================
+
+# USECASE: Sort observations by multiple variables
+
+sw <- arrange(starwars, hair_color, mass)
+sw # sorted by hair_color, then ties broken by mass
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Filter* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: Retain only observations that meet a criterion
+
+sw <- filter(starwars, mass > 100)
+sw # only observations with mass greater than 100
+
+sw <- filter(starwars, mass <= 100)
+sw # only observations with mass less than or equal to 100
+
+sw <- filter(starwars, species == "Human")
+sw # only observations with species equal to Human
+
+sw <- filter(starwars, species != "Human")
+sw # only observations with species not equal to Human
+
+# ==============================================================================
+
+# PITFALL: Don't try to use a single = for testing equality
+
+sw <- filter(starwars, height = 150) # error
+
+sw <- filter(starwars, height == 150) # correct
+sw 
+
+# ==============================================================================
+
+# PITFALL: Don't forget that R is case-sensitive
+
+sw <- filter(starwars, species == "human")
+sw # no observations left (because it should be Human)
+
+# ==============================================================================
+
+# USECASE: Retain only observations that meet complex criteria
+
+sw <- filter(starwars, mass > 100 & height > 200)
+sw # only observations with mass over 100 AND height over 200
+
+sw <- filter(starwars, height < 100 | hair_color == "none")
+sw # only observations with height under 100 OR hair_color equal to none
+
+# ==============================================================================
+
+# PITFALL: Don't forget to complete both conditions
+
+sw <- filter(starwars, mass > 100 & < 200) # error
+
+sw <- filter(starwars, mass > 100 & mass < 200) # correct
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't try to equate a string to a vector
+
+sw <- filter(starwars, species == c("Human", "Droid")) # error
+
+sw <- filter(starwars, species %in% c("Human", "Droid")) # correct
+sw
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Filter* Cheatsheet {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%" .mytable}
+
+| Symbol | Description            | Num | Chr   |
+|--------|------------------------|-----|-------|
+| `<`    | Less than              | Yes | *No*  |
+| `<=`   | Less than or equal to  | Yes | *No*  |
+| `>`    | More than              | Yes | *No*  |
+| `>=`   | More than or equal to  | Yes | *No*  |
+| `==`   | Equal to               | Yes | Yes   |
+| `!=`   | Not equal to           | Yes | Yes   |
+| `%in%` | Found in               | Yes | Yes   |
+| `&`    | Logical And            | Yes | Yes   |
+| `|`    | Logical Or             | Yes | Yes   |
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li esixrdij trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Mutate* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Create example tibble
+
+patients <- tibble(
+  id = c("S1", "S2", "S3"),
+  feet = c(6, 5, 5),
+  inches = c(1, 7, 2),
+  pounds = c(176.3, 124.9, 162.6)
+)
+patients
+
+# ==============================================================================
+
+# USECASE: Add one or more variables
+
+p2 <- mutate(patients, sex = c("M", "F", "F"))
+p2
+
+ages <- c(32, 41, 29)
+p2 <- mutate(patients, ages = ages)
+p2
+
+p2 <- mutate(
+  patients, 
+  sex = c("M", "F", "F"), 
+  ages = ages
+)
+p2
+
+# ==============================================================================
+
+# USECASE: Compute variables
+
+p2 <- mutate(patients, height = feet + inches / 12)
+p2
+
+p2 <- mutate(patients, ln_pounds = log(pounds))
+p2
+
+# ==============================================================================
+
+# USECASE: Overwrite variables
+
+patients <- mutate(patients, height = height / 3.281)
+patients
+
+# ==============================================================================
+
+# USECASE: Duplicate variables
+
+p2 <- mutate(patients, weight = pounds)
+p2 # both weight and pounds exist
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+<!-- Program III -->
+
+# Program III
+
+## Pipes and Pipelines {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+- How can we do [multiple operations]{.b .green} to an object?
+    1. `x <- 10`
+    2. `x2 <- sqrt(x)`
+    3. `x3 <- round(x2)`
+    
+::: {.fragment .mt1}
+- This works but is **cumbersome** and **error-prone**
+:::
+
+::: {.fragment .mt1}
+- A better approach is to use [pipes]{.b .blue} and [pipelines]{.b .green}
+    - `x3 <- 10 |> sqrt() |> round()`
+:::
+
+::: {.fragment .mt1}
+- I like to read `|>` as "and then..."
+    - "Take 10 and then sqrt() and then round()"
+:::
+    
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li mhttdvjl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2A\] Program III
+:::
+
+## Pipes Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Enable the pipe operator shortcut
+
+# Tools > Global Options... > Code tab > Check "Use Native Pipe Operator"
+
+# Type out |> or press Ctrl+Shift+M (Windows) / Cmd+Shift+M (Mac)
+
+# ==============================================================================
+
+# LESSON: The pipe pushes objects to a function as its first argument
+
+# TEMPLATE: x |> function_name() is the same as function_name(x)
+
+x <- 10
+
+y <- sqrt(x)
+y
+
+y <- x |> sqrt()
+y
+
+# ==============================================================================
+
+# PITFALL: Don't forget to remove the object from the function call
+
+x |> sqrt(x) # wrong
+
+x |> sqrt() # correct
+
+# ==============================================================================
+
+# USECASE: You can still use arguments when piping
+
+z <- round(3.14, digits = 1)
+z
+
+z <- 3.14 |> round(digits = 1)
+z
+
+# ==============================================================================
+
+# USECASE: Pipes are useful with tibbles and wrangling verbs
+
+starwars
+
+sw <- select(starwars, name, species, height)
+sw
+
+sw <- starwars |> select(name, species, height)
+sw
+
+# ==============================================================================
+
+# PITFALL: Don't add a pipe without a step after it
+
+sw <- starwars |> select(name, species, height) |> # error
+```
+
+::: footer
+\[2A\] Program III
+:::
+
+## Pipelines Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# USECASE: You can chain multiple pipes together to make a pipeline
+
+x <- 10 |> sqrt() |> round()
+x
+
+# ==============================================================================
+
+# TIP: If you want to see the output of a pipeline, you can pipe to print()
+
+x <- 10 |> sqrt() |> round() |> print()
+
+# ==============================================================================
+
+# TIP: To make your pipelines more readable, move each step to a new line
+
+x <- 
+  10 |> 
+  sqrt() |> 
+  round() |>
+  print()
+
+# ==============================================================================
+
+# PITFALL: Don't put the pipe at the beginning of a line, though
+
+x <- 
+  10 
+  |> sqrt()
+  |> round()
+  |> print() # error
+
+# ==============================================================================
+
+# USECASE: Chain together a series of verbs to flexibly wrangle data
+
+tallones <- 
+  starwars |> 
+  select(name, species, height) |> 
+  rename(height_cm = height) |> 
+  mutate(height_ft = height_cm / 30.48) |>  
+  filter(height_ft > 7) |> 
+  arrange(desc(height_ft)) |>  
+  print()
+```
+
+::: footer
+\[2A\] Program III
 :::
 
 ## Factors {.smaller}
@@ -169,7 +619,7 @@ range(cereal3$rating, na.rm = TRUE)
 :::
 
 ::: footer
-\[2A\] Program II
+\[2A\] Program III
 :::
 
 ## Factors Live Coding
@@ -251,238 +701,40 @@ table(cereal2$type)
 ```
 
 ::: footer
-\[2A\] Program II
+\[2A\] Program III
 :::
 
-## String Manipulation {.smaller}
+## Missing Values {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
--   It can be helpful to [transform strings]{.b .blue}
-    -   Sometimes your [data]{.b .green} is text-based
-    -   Text also appears in [tables]{.b .green} and [figures]{.b .green}...
-    -   So we may want to customize it quickly
+-   Sometimes your data will have [missing values]{.b .blue}
+    -   Perhaps these were [never collected]{.b .green}
+    -   Perhaps the values were [lost/corrupted]{.b .green}
+    -   Perhaps the participant [didn't respond]{.b .green}
 
 ::: {.fragment .mt1}
--   Tidyverse contains tools for this
-    -   The functions all begin with `str_`
-    -   We will only discuss the basics
-    -   Learn more at [stringr.tidyverse.org](https://stringr.tidyverse.org/)
+-   We need to tell R which values are missing
+    -   To do so, we set those values to `NA`
+    -   Functions from **tidyverse** make this easy
 :::
-
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li puvaffet trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[2A\] Program II
-:::
-
-## String Manipulation Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse for almost all of these functions
-
-library(tidyverse)
-
-# ==============================================================================
-
-# USECASE: Re-capitalize strings
-
-x <- c("R4SS: Introduction to R for Social Scientists")
-
-str_to_lower(x)
-
-str_to_upper(x)
-
-str_to_sentence(x)
-
-str_to_title(x)
-
-# ==============================================================================
-
-# USECASE: Extract subsets of strings
-
-x <- c("Apple", "Banana", "Pear")
-
-str_sub(x, start = 1, end = 3)
-
-str_sub(x, start = -3, end = -1)
-
-str_sub(x, start = 2, end = -2)
-
-str_sub(x, start = 1, end = 5) # can go beyond the end
-
-# ==============================================================================
-
-# USECASE: Remove whitespace from strings
-
-x <- "  Sometimes strings have   too   much white space "
-x
-
-str_trim(x) # remove white space at the start and end
-
-str_squish(x) # trim and then collapse inner white space
-
-# ==============================================================================
-
-# USECASE: Remove and replace patterns in strings
-
-x <- "Scientists very often utilize very fancy words, 
-      even when they could utilize simpler ones."
-
-str_remove(x, pattern = "very ") # removes first pattern match only
-
-str_remove_all(x, pattern = "very ") # removes all pattern matches
-
-str_replace(x, pattern = "utilize", replacement = "use")
-
-str_replace_all(x, pattern = "utilize", replacement = "use")
-
-# NOTE: More complex patterns can be found using regular expressions (regex)
-
-# ==============================================================================
-
-# USECASE: Create a string manipulation pipeline
-
-x_clean <- 
-  x |> 
-  str_remove_all("very ") |> 
-  str_replace_all("utilize", "use") |> 
-  print()
-```
-
-::: footer
-\[2A\] Program II
-:::
-
-## If Else {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   A [locked door]{.b .green} behaves [conditionally]{.b .blue}
-    -   If you have the key, then open up...
-    -   Otherwise, stay closed...
 
 ::: {.fragment .mt1}
--   Sometimes we want [code]{.b .blue} to behave conditionally
-    -   *Filter* retains observations conditionally<br />
-        (e.g., if it meets a condition, it gets to stay)
-    -   Let's learn to [transform]{.b .green} variables conditionally
-    -   We can use `if_else()` for simple examples
-:::
-
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li efoxgafi trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[2A\] Program II
-:::
-
-## If Else Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse for almost all of these functions
-
-library(tidyverse)
-
-# ==============================================================================
-
-# USECASE: Determining whether someone can vote in the US
-
-age <- 12
-
-age_group <- 
-  if_else(
-    condition = age >= 18,
-    true = "adult",
-    false = "child"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# TIP: Because argument names are optional, we can shorten this (if we want)
-
-age_group <- if_else(age >= 18, "adult", "child") |> print()
-
-# ==============================================================================
-
-# LESSON: This function is particularly useful applied to vectors
-
-ages <- c(13, 18, 14, 19, 22, 16)
-
-age_groups <- if_else(ages >= 18, "adult", "child") |> print()
-
-# ==============================================================================
-
-# USECASE: We can therefore use it during data wrangling
-
-cereal <- read_csv("cereal.csv", na = "-999")
-
-cereal2 <- mutate(cereal, popular = if_else(rating > 50, "yes", "no"))
-cereal2
-
-cereal3 <- 
-  cereal |>
-  mutate(
-    diabetes = if_else(
-      condition = sugars == 0, 
-      true = "sugar-free", 
-      false = "contains sugar"
-    )
-  ) |> 
-  print()
-```
-
-::: footer
-\[2A\] Program II
-:::
-
-## Case When {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   An [elevator]{.b .green} also behaves [conditionally]{.b .blue}
-    -   If you press a button, then it goes to that floor
-    -   There are usually more than just two buttons
-    -   In this analogy (but not in real life), the elevator only responds to the [first]{.b .green} button pressed
-
-::: {.fragment .mt1}
--   Sometimes we want [code]{.b .blue} to behave this way
-    -   `case_when()` expands upon `if_else()`
-    -   It can have [multiple conditions]{.b .blue} (floor buttons)
-    -   The first condition met "wins" (picks the floor)
+-   Missingness is often ["contagious"]{.b .green} in R<br />
+    e.g., a vector with `NA` has an unknown mean
 :::
 :::
 
 ::: {.column .tc .pv5 width="40%"}
-{{< li nwyovgla trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+{{< li rwotyanb trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
 :::
 :::
 
 ::: footer
-\[2A\] Program II
+\[2A\] Program III
 :::
 
-## Case When Live Coding
+## Missing Values Live Coding
 
 ```{r}
 #| echo: true
@@ -490,713 +742,74 @@ cereal3 <-
 #| error: true
 #| code-line-numbers: false
 
-# SETUP: We will need tidyverse for almost all of these functions
+# SETUP: We will need tidyverse for the read and mutate functions
 
 library(tidyverse)
 
 # ==============================================================================
 
-# USECASE: Determine what types of movies your kids can watch
+# PITFALL: Number codes for missingness will mess up calculations in R
 
-ages <- c(11, 13, 18)
+heights <- c(149, 158, -999) # here we use -999 to represent a missing value
 
-movies_allowed <- 
-  case_when(
-    ages >= 17 ~ "R",
-    ages >= 13 ~ "PG-13",
-    ages < 13 ~ "PG"
-  ) |> 
-  print()
+range(heights)
+
+mean(heights)
+
+log(heights) # our missing value is no longer -999
 
 # ==============================================================================
 
-# PITFALL: Don't put the least restrictive condition first
+# USECASE: Use NA for missingness instead
 
-age <- 18
+heights2 <- c(149, 158, NA)
+heights2
 
-movies_allowed2 <- 
-  case_when(
-    age < 13 ~ "PG",
-    age >= 13 ~ "PG-13",
-    age >= 17 ~ "R"
-  ) |> 
-  print() # age >= 13, so PG-13 wins before checking if age >= 17
+log(heights2) # the NA stayed an NA (due to contagiousness)
 
 # ==============================================================================
 
-# USECASE: Use case_when to re-code variables during data wrangling
+# LESSON: Use na.rm = TRUE to do a summary function ignoring the NAs
 
-starwars
+mean(heights2) # the mean is an NA (due to contagiousness)
 
-sw <- 
-  starwars |> 
-  mutate(
-    species3 = case_when(
-      species == "Human" ~ "Human",
-      species == "Droid" ~ "Droid",
-      species != "Human" & species != "Droid" ~ "Alien"
-    )
-  ) |> 
-  select(name, species3) |> 
-  print()
+mean(heights2, na.rm = TRUE)
+
+range(heights2, na.rm = TRUE)
 
 # ==============================================================================
 
-# TIP: The next version of case_when() will add the .default argument
-# This is where the elevator will drop you off if you hit no buttons
+# USECASE: Dealing with missing values in tibbles
 
-sw <- 
-  starwars |> 
-  mutate(
-    species3 = case_when(
-      species == "Human" ~ "Human",
-      species == "Droid" ~ "Droid",
-      .default = "Alien"
-    )
-  ) |> 
-  select(name, species3) |> 
-  print()
+cereal <- read_csv("cereal.csv")
 
-# NOTE: The above code won't work now, but it should in a few weeks/months
-# For now, you can use TRUE ~ "Alien" and it works but is harder to explain
+cereal$rating
+
+range(cereal$rating)
+
+# ==============================================================================
+
+# LESSON: Use na_if() to convert specific values to NA while mutating
+
+cereal2 <- mutate(cereal, rating = na_if(rating, -999))
+
+cereal2$rating
+
+range(cereal2$rating, na.rm = TRUE)
+
+# ==============================================================================
+
+# LESSON: Use read_csv(na) to convert specific values to NA while reading
+
+cereal3 <- read_csv("cereal.csv", na = "-999")
+
+cereal3$rating
+
+range(cereal3$rating, na.rm = TRUE)
 ```
 
 ::: footer
-\[2A\] Program II
-:::
-
-<!-- Wrangle III -->
-
-# Wrangle III
-
-## Summarize {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   Although we store data about many observations...
--   ...we often want to [summarize across]{.b .blue} observations
-    -   This is like [folding]{.b .green} the tibble down to [one row]{.b .green}
-
-::: {.fragment .mt1}
--   We've seen functions that summarize vectors
-    -   `length()`, `sum()`, `min()`, `max()`
-    -   `mean()`, `median()`, `sd()`, `var()`
-:::
-
-::: {.fragment .mt1}
--   `summarize()` lets us use them on tibbles
-    -   It works very similarly to `mutate()`
-    -   It always creates a tibble as output
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li uhmqrsgl trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Summarize Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset
-
-library(tidyverse)
-
-sales <- 
-  tibble(
-    customer = c(1, 2, 3, 1, 3),
-    store = c("A", "A", "A", "B", "B"),
-    items = c(25, 20, 16, 10, 5),
-    spent = c(685, 590, 392, 185, 123)
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: Summarize the typical sales
-
-my_summary <- 
-  sales |> 
-  summarize(
-    avg_items = mean(items),
-    avg_spent = mean(spent)
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# PITFALL: Don't use summary() instead of summarize()
-
-my_summary <- 
-  sales |> 
-  summary(
-    avg_items = mean(items),
-    avg_spent = mean(spent)
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: Use more than one summary function
-
-my_summary <- 
-  sales |> 
-  summarize(
-    total_items = sum(items),
-    total_spent = sum(spent),
-    avg_items = mean(items),
-    avg_spent = mean(spent)
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: Use counting functions
-
-my_counts <- 
-  sales |> 
-  summarize(
-    n_sales = n(),
-    n_customers = n_distinct(customer),
-    n_stores = n_distinct(store)
-  ) |> 
-  print()
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Group Summarize {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-- We can also summarize a tibble [by group]{.b .blue}
-    -   This is like [folding]{.b .green} the tibble multiple times
-    -   Specifically, we fold down to [one row per group]{.b .green}
-
-::: {.fragment .mt1}
--   The syntax for summarize is identical
-    -   The only difference is to the tibble
-    -   We first pass it through `group_by()`
-    -   Pipelines make this very easy
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li pmwtbpap trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Group Summarize Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset
-
-library(tidyverse)
-
-sales <- 
-  tibble(
-    customer = c(1, 2, 3, 1, 3),
-    store = c("A", "A", "A", "B", "B"),
-    items = c(25, 20, 16, 10, 5),
-    spent = c(685, 590, 392, 185, 123)
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# LESSON: We pass a tibble through group_by to group it
-
-sales
-
-sales |> group_by(store) # note the display says "grouped"
-
-# ==============================================================================
-
-# USECASE: We can then summarize and get stats per group
-
-sales |> 
-  group_by(store) |> 
-  summarize(
-    customers = n_distinct(customer),
-    items_sold = sum(items),
-    total_sales = sum(spent),
-    avg_items = mean(items),
-    avg_spent = mean(spent)
-  )
-
-# ==============================================================================
-
-# SETUP: Let's get a larger, more realistic dataset
-
-# Extra pane > Packages tab > Install > nycflights13
-
-library("nycflights13")
-
-flights
-
-# ==============================================================================
-
-# USECASE: Find the carrier with the lowest average delays
-
-flights |> 
-  group_by(carrier) |> 
-  summarize(m_delay = mean(dep_delay, na.rm = TRUE)) |> 
-  arrange(m_delay)
-
-# ==============================================================================
-
-# LESSON: We can also group by multiple variables
-
-# USECASE: Let's find the day of the year with the most flights
-
-flights |> 
-  group_by(month, day) |> 
-  summarize(n_flights = n()) |> 
-  arrange(desc(n_flights))
-
-# ==============================================================================
-
-# PITFALL: Note how this differs from grouping by just day
-
-flights |> 
-  group_by(day)|> 
-  summarize(n_flights = n()) |> 
-  arrange(desc(n_flights))
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Across {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   We can use `across()` to [repeat an operation]{.b .blue} across multiple variables in a tibble
-    -   This makes our code [shorter]{.b .green}
-    -   It is [faster]{.b .green} to read and write
-    -   It is also [less error-prone]{.b .green}
-
-::: {.fragment .mt1}
--   So we can repeat a function in order to...
-    -   ...`mutate()` multiple variables
-    -   ...`summarize()` multiple variables
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li iectdupg trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-## Across Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset
-
-library(tidyverse)
-
-starwars
-
-# ==============================================================================
-
-# USECASE: Applying the same mutation to multiple variables is a pain
-
-sw <- 
-  starwars |> 
-  mutate(
-    hair_color = factor(hair_color),
-    skin_color = factor(skin_color),
-    eye_color = factor(eye_color)
-  ) |> 
-  print() # before
-
-sw <- 
-  starwars |> 
-  mutate(
-    across(
-      .cols = c(hair_color, skin_color, eye_color), 
-      .fns = factor
-    )
-  ) |> 
-  print() #after
-
-# ==============================================================================
-
-# PITFALL: Don't forget to wrap the .cols part in c()
-
-sw <- 
-  starwars |> 
-  mutate(
-    across(
-      .cols = mass, birth_year, 
-      .fns = round,
-      digits = 1
-    )
-  ) |> 
-  print() # error
-
-# ==============================================================================
-
-# LESSON: To pass arguments to the inner function, add them inside across()
-
-sw <- 
-  starwars |> 
-  mutate(
-    across(
-      .cols = c(mass, birth_year), 
-      .fns = round,
-      digits = 1
-    )
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: You can also apply the same summary functions across variables
-
-sw <- 
-  starwars |> 
-  summarize(
-    height = mean(height, na.rm = TRUE),
-    mass = mean(mass, na.rm = TRUE),
-    birth_year = mean(birth_year, na.rm = TRUE)
-  ) |> 
-  print()
-
-sw <- 
-  starwars |> 
-  summarize(
-    across(
-      .cols = c(height, mass, birth_year), 
-      .fns = mean, 
-      na.rm = TRUE
-    )
-  ) |> 
-  print()
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Separate and Unite {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   Tidy data needs one value per cell
-
-::: {.fragment .mt1}
--   So we may need to [separate]{.b .blue} cells
-    -   *e.g., What was the model of my first car?*
-    -   `"Nissan Altima 2003"` ⬎
-    -   `"Nissan"` `"Altima"` `"2003"`
-:::
-
-::: {.fragment .mt1}
--   But some tasks require us to [unite]{.b .blue} cells
-    -   *e.g., What address should I mail to?*
-    -   `123` `"Main Street"` ⬎
-    -   `"123 Main Street"`
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li dsfanfaz trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Separate Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset
-
-library(tidyverse)
-
-# Create some example data
-dat <- 
-  tibble(
-    id = c("A_001_01", "A_002_01", "B_001_01", "B_002_01", "C_001_01", "C_002_01"),
-    duration = c("01:16", "01:21", "01:49", "00:34", "00:32", "00:54")
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: Separate a column into multiple columns
-
-dat2 <- 
-  dat |> 
-  separate(
-    col = duration, 
-    into = c("min", "sec"), 
-    sep = ":"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: This also works with more than two "into" columns
-
-dat2 <- 
-  dat |>  
-  separate(
-    col = id, 
-    into = c("group", "subject", "time"), 
-    sep = "_"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# TIP: To automatically convert strings into numbers, use convert
-
-dat2 <- 
-  dat |> 
-  separate(
-    col = id, 
-    into = c("group", "subject", "time"), 
-    sep = "_", 
-    convert = TRUE
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# PITFALL: Don't forget to close the "into" vector's parentheses
-
-dat2 <- 
-  dat|> 
-  separate(col = duration, into = c("min", "sec", sep = ":")) #error
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Unite Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset
-
-library(tidyverse)
-
-dat2 <- 
-  dat|> 
-  separate(col = id, into = c("group", "subject", "time"), sep = "x") |> 
-  separate(col = duration, into = c("min", "sec"), sep = ":") |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: Unite multiple columns into one string
-
-dat3 <- 
-  dat2 |> 
-  unite(col = "newid", group, subject, time, sep = "-") |> 
-  unite(col = "duration", min, sec, sep = ":") |> 
-  print()
-
-# ==============================================================================
-
-# LESSON: Retain the columns being united with remove = FALSE
-
-dat3 <- 
-  dat2 |> 
-  unite(col = "newid", group:time, sep = "", remove = FALSE) |> 
-  print()
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Pivot Longer and Wider {.smaller}
-
-::: {.columns .pv4}
-::: {.column width="60%"}
--   Both long and wide formats can be tidy
-    -   Long formats are better for MLM
-    -   Wide formats are better for SEM
-
-::: {.fragment .mt1}
--   It can be useful to quickly [reshape a tibble]{.b .blue}
-    -   `pivot_longer()`: wide → long
-    -   `pivot_wider()`: long → wide
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li xacejjis trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-## Pivot Longer Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset (from workshop website)
-
-library(tidyverse)
-
-gradebook <- 
-  read_csv("gradebook.csv") |> 
-  print()
-
-# ==============================================================================
-
-# USECASE: We can pivot to long format by creating name and value variables
-
-gradebook2 <- 
-  gradebook |> 
-  pivot_longer(
-    cols = c(test1, test2, test3, test4, test5), 
-    names_to = "test", 
-    values_to = "grade"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# TIP: Use selection helpers to select columns quickly
-
-gradebook2 <- 
-  gradebook |> 
-  pivot_longer(
-    cols = test1:test5, 
-    names_to = "test", 
-    values_to = "grade"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# LESSON: Automatically remove the name prefix
-
-gradebook2 <- 
-  gradebook|> 
-  pivot_longer(
-    cols = starts_with("test"), 
-    names_to = "test", 
-    values_to = "grade",
-    names_prefix = "test"
-  ) |> 
-  print()
-```
-
-::: footer
-\[2A\] Wrangle III
-:::
-
-## Pivot Wider Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: We will need tidyverse and an example dataset (from workshop website)
-
-library(tidyverse)
-
-diary <- read_csv("diary.csv") |> print()
-
-# ==============================================================================
-
-# USECASE: Reshape this long format to a wider format
-
-diary_scale <- 
-  diary |> 
-  pivot_wider(
-    names_from = "scale",
-    values_from = "score"
-  ) |> 
-  print()
-
-diary_day <- 
-  diary |>  
-  pivot_wider(
-    names_from = "day",
-    values_from = "score"
-  ) |> 
-  print()
-
-# NOTE: There are thus multiple possible wide formats (for different uses)
-
-# ==============================================================================
-
-# LESSON: We can add a prefix to each name to avoid numeric names
-
-diary_data
-
-diary_day <- 
-  diary |> 
-  pivot_wider(
-    names_from = "day",
-    values_from = "score",
-    names_prefix = "day_"
-  ) |> 
-  print()
-
-# ==============================================================================
-
-# LESSON: We can also pivot on multiple columns at once
-
-diary_double <- 
-  diary |> 
-  pivot_wider(
-    names_from = c("scale", "day"),
-    values_from = "score"
-  ) |> 
-  print()
-```
-
-::: footer
-\[2A\] Wrangle III
+\[2A\] Program III
 :::
 
 <!-- Practice III -->
