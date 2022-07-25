@@ -44,7 +44,7 @@ format:
 :::
 
 ::: footer
-Extra Slides
+Program X
 :::
 
 ## String Manipulation Live Coding
@@ -127,8 +127,8 @@ x_clean <-
 ```
 
 ::: footer
-Extra Slides
-:::I=
+Program X
+:::
 
 ## If Else {.smaller}
 
@@ -154,7 +154,7 @@ Extra Slides
 :::
 
 ::: footer
-Extra Slides
+Program X
 :::
 
 ## If Else Live Coding
@@ -219,7 +219,7 @@ cereal3 <-
 ```
 
 ::: footer
-Extra Slides
+Program X
 :::
 
 ## Case When {.smaller}
@@ -245,7 +245,7 @@ Extra Slides
 :::
 
 ::: footer
-Extra Slides
+Program X
 :::
 
 ## Case When Live Coding
@@ -328,10 +328,163 @@ sw <-
 ```
 
 ::: footer
-Extra Slides
+Program X
 :::
 
 # Wrangle X
+
+## Pivot Longer and Wider {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Both long and wide formats can be tidy
+    -   Long formats are better for MLM
+    -   Wide formats are better for SEM
+
+::: {.fragment .mt1}
+-   It can be useful to quickly [reshape a tibble]{.b .blue}
+    -   `pivot_longer()`: wide → long
+    -   `pivot_wider()`: long → wide
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li xacejjis trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Wrangle X
+:::
+
+## Pivot Longer Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+gradebook <- 
+  read_csv("gradebook.csv") |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: We can pivot to long format by creating name and value variables
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = c(test1, test2, test3, test4, test5), 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# TIP: Use selection helpers to select columns quickly
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = test1:test5, 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: Automatically remove the name prefix
+
+gradebook2 <- 
+  gradebook|> 
+  pivot_longer(
+    cols = starts_with("test"), 
+    names_to = "test", 
+    values_to = "grade",
+    names_prefix = "test"
+  ) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
+
+## Pivot Wider Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+diary <- read_csv("diary.csv") |> print()
+
+# ==============================================================================
+
+# USECASE: Reshape this long format to a wider format
+
+diary_scale <- 
+  diary |> 
+  pivot_wider(
+    names_from = "scale",
+    values_from = "score"
+  ) |> 
+  print()
+
+diary_day <- 
+  diary |>  
+  pivot_wider(
+    names_from = "day",
+    values_from = "score"
+  ) |> 
+  print()
+
+# NOTE: There are thus multiple possible wide formats (for different uses)
+
+# ==============================================================================
+
+# LESSON: We can add a prefix to each name to avoid numeric names
+
+diary_data
+
+diary_day <- 
+  diary |> 
+  pivot_wider(
+    names_from = "day",
+    values_from = "score",
+    names_prefix = "day_"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: We can also pivot on multiple columns at once
+
+diary_double <- 
+  diary |> 
+  pivot_wider(
+    names_from = c("scale", "day"),
+    values_from = "score"
+  ) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
 
 ## Across {.smaller}
 
@@ -352,6 +505,10 @@ Extra Slides
 ::: {.column .tc .pv5 width="40%"}
 {{< li iectdupg trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
 :::
+:::
+
+::: footer
+Wrangle X
 :::
 
 ## Across Live Coding
@@ -447,7 +604,7 @@ sw <-
 ```
 
 ::: footer
-Extra Slides
+Wrangle X
 :::
 
 ## Separate and Unite {.smaller}
@@ -477,7 +634,7 @@ Extra Slides
 :::
 
 ::: footer
-Extra Slides
+Wrangle X
 :::
 
 ## Separate Live Coding
@@ -550,7 +707,7 @@ dat2 <-
 ```
 
 ::: footer
-Extra Slides
+Wrangle X
 :::
 
 ## Unite Live Coding
@@ -592,10 +749,208 @@ dat3 <-
 ```
 
 ::: footer
-Extra Slides
+Wrangle X
 :::
 
 # Visualize X
+
+## Distribution Geoms {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Variable distributions]{.b .blue} are critical in data analysis
+    -   What are the most and least [common values]{.b .green}?
+    -   What are the [extrema]{.b .green} (min and max values)?
+    -   Are there any [outliers]{.b .green} or impossible values?
+    -   How much [spread]{.b .green} is there in the variable?
+    -   What [shape]{.b .green} does the distribution take?
+
+::: {.fragment .mt1}
+-   Visualization is a quick way to [assess]{.b .green} this
+    -   They can also [communicate]{.b .green} it to others
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li wovwohsm trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Distribution Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Creating histograms
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(bins = 20)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating density plots
+
+ggplot(mpg, aes(x = hwy)) + geom_density()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_density(color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating box plots
+
+ggplot(mpg, aes(x = hwy)) + geom_boxplot()
+
+ggplot(mpg, aes(x = hwy, y = class)) + 
+  geom_boxplot(varwidth = TRUE)
+
+# ==============================================================================
+
+# USECASE: Creating bar plots to count categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_bar()
+
+# ==============================================================================
+
+# PITFALL: Don't try to create histograms for categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_histogram() #error
+```
+
+::: footer
+Visualize X
+:::
+
+## Other Aesthetics {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   For blocky elements like bars...
+    -   `color` controls the outline color
+    -   `fill` controls the internal color
+    -   `size` controls the line thickness
+
+::: {.fragment .mt1}
+-   Some mappings will induce [grouping]{.b .green}
+    -   You'll get separate geoms per group
+:::
+
+::: {.fragment .mt1}
+-   It can be helpful to use [redundant]{.b .green} mapping
+    -   Map one variable to multiple aesthetics
+    -   Then if one "fails" the other may work
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li ntdjhzbp trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Other Aesthetics Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Mapping the shape aesthetic to a categorical variable
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) +
+  geom_point(size = 3)
+
+# ==============================================================================
+
+# PITFALL: Don't try to map shape to a continuous variable
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = hwy)) + 
+  geom_point() #error
+
+# NOTE: This doesn't work because there are way more numbers than shapes
+
+# ==============================================================================
+
+# LESSON: Color vs. Fill and Size for Blocks
+
+ggplot(mpg, aes(y = class)) + 
+  geom_bar()
+
+ggplot(mpg, aes(y = class)) + 
+  geom_bar(color = "darkred", fill = "lightblue", size = 1)
+
+# ==============================================================================
+
+# LESSON: Some aesthetics cause grouping when mapped to a categorical variable
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") # single smooth
+
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") # three smooths
+
+# ==============================================================================
+
+# USECASE: Mapping to the fill aesthetic and setting the alpha property
+
+ggplot(mpg, aes(x = hwy, fill = drv)) + 
+  geom_density()
+
+ggplot(mpg, aes(x = hwy, fill = drv)) + 
+  geom_density(alpha = 0.3)
+
+# ==============================================================================
+
+# TIP: If you map the same variable to multiple aesthetics, you get redundancy
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv, color = drv)) +
+  geom_point(size = 3) # if color fails, shape still works
+```
+
+::: footer
+Visualize X
+:::
 
 ## Describe this Graphic 1 {.smaller}
 
@@ -641,7 +996,7 @@ starwars |>
 :::
 
 ::: footer
-Extra Slides
+Visualize X
 :::
 
 ## Describe this Graphic 2 {.smaller}
@@ -686,7 +1041,7 @@ mpg |>
 :::
 
 ::: footer
-Extra Slides
+Visualize X
 :::
 
 ## Describe this Graphic 3 {.smaller}
@@ -730,7 +1085,7 @@ mpg |>
 :::
 
 ::: footer
-Extra Slides
+Visualize X
 :::
 
 ## Describe this Graphic 4 {.smaller}
@@ -776,5 +1131,5 @@ flights |>
 :::
 
 ::: footer
-Extra Slides
+Visualize X
 :::

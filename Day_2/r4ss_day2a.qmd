@@ -62,26 +62,31 @@ format:
 \[1B\] Wrangle II
 :::
 
-## Basic wrangling verbs {.smaller}
+## Column-focused verbs {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-- **Primary Functions** (most used)
-    -   `select()` retains only certain columns
-    -   `mutate()` adds or transforms columns
-    -   `filter()` retains rows based on criteria
+-   [Select]{.b .blue} retains only certain columns/variables
+    -   [`select(TBL, VAR_KEEP, -VAR_DROP)`]{.f3}
 
 ::: {.fragment .mt1}
-- **Secondary Functions** (less used)
-    -   `arrange()` sorts rows by their values
-    -   `rename()` changes column titles
-    -   `relocate()` moves columns around
+-   [Mutate]{.b .blue} adds or transforms columns/variables
+    -   [`mutate(TBL, NEW_VAR = OLD_VAR / 1000)`]{.f3}
+:::
 
+::: {.fragment .mt1}
+-   [Rename]{.b .green} changes the names of columns/variables
+    -   [`rename(TBL, NEW_NAME = OLD_NAME)`]{.f3}
+:::
+
+::: {.fragment .mt1}
+-   [Relocate]{.b .green} changes the order of columns/variables
+    -   [`relocate(TBL, VAR_MOVE, .after = OTHER_VAR)`]{.f3}
 :::
 :::
 
 ::: {.column .tc .pv5 width="40%"}
-{{< li sbiheqdr trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+{{< li ifxlrnhk trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
 :::
 :::
 
@@ -120,13 +125,6 @@ starwars # still includes all variables
 
 # ==============================================================================
 
-# USECASE: Change the order of variables
-
-sw <- select(starwars, species, name, sex)
-sw
-
-# ==============================================================================
-
 # USECASE: Retain all variables between two variables
 
 sw <- select(starwars, name, hair_color:eye_color)
@@ -148,7 +146,72 @@ sw
 \[2A\] Wrangle II
 :::
 
-## *Rename* Live Coding
+## *Mutate* Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: Create example tibble
+
+patients <- tibble(
+  id = c("S1", "S2", "S3"),
+  feet = c(6, 5, 5),
+  inches = c(1, 7, 2),
+  pounds = c(176.3, 124.9, 162.6)
+)
+patients
+
+# ==============================================================================
+
+# USECASE: Add one or more variables
+
+p2 <- mutate(patients, sex = c("M", "F", "F"))
+p2
+
+ages <- c(32, 41, 29)
+p2 <- mutate(patients, ages = ages)
+p2
+
+p2 <- mutate(
+  patients, 
+  sex = c("M", "F", "F"), 
+  ages = ages
+)
+p2
+
+# ==============================================================================
+
+# USECASE: Compute variables
+
+p2 <- mutate(patients, height = feet + inches / 12)
+p2
+
+p2 <- mutate(patients, ln_pounds = log(pounds))
+p2
+
+# ==============================================================================
+
+# USECASE: Overwrite variables
+
+patients <- mutate(patients, height = height / 3.281)
+patients
+
+# ==============================================================================
+
+# USECASE: Duplicate variables
+
+p2 <- mutate(patients, weight = pounds)
+p2 # both weight and pounds exist
+```
+
+::: footer
+\[2A\] Wrangle II
+:::
+
+## *Rename* / *Relocate* Live Coding
 
 ```{r}
 #| echo: true
@@ -157,8 +220,6 @@ sw
 #| code-line-numbers: false
 
 # USECASE: Change the name of one or more variables
-
-# TEMPLATE: df2 <- rename(df, new_name = old_name)
 
 starwars
 
@@ -173,30 +234,17 @@ sw
 # PITFALL: Don't swap the order and try old_name = new_name
 
 sw <- rename(starwars, name = Character) # error
-```
 
-::: footer
-\[2A\] Wrangle II
-:::
+# ==============================================================================
 
-## *Relocate* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# USECASE: Move variables before another variable or position
+# USECASE: Move variables before or after another variable
 
 starwars
-sw <- relocate(starwars, sex, .before = height)
+
+sw <- relocate(starwars, species, sex, .before = height)
 sw
 
-sw <- relocate(starwars, species, sex, .before = name)
-sw
-
-sw <- relocate(starwars, homeworld, .before = 1)
+sw <- relocate(starwars, species, sex, .after = name)
 sw
 
 # ==============================================================================
@@ -206,23 +254,39 @@ sw
 sw <- relocate(starwars, sex, before = height) 
 sw # height was accidentally renamed to before
 
-# ==============================================================================
-
-# USECASE: Move variables after another variable or position
-
-sw <- relocate(starwars, sex, .after = height)
-sw
-
-sw <- relocate(starwars, species, sex, .after = name)
-sw
-
-sw <- relocate(starwars, homeworld, .after = 1)
-sw
 ```
 
 ::: footer
 \[2A\] Wrangle II
 :::
+
+## Row-focused verbs {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Arrange]{.b .blue} sorts rows based on their values
+    -   [`arrange(TBL, VAR_SORT_UP)`]{.f3}
+    -   [`arrange(TBL, desc(VAR_SORT_DOWN))`]{.f3}
+    -   [`arrange(TBL, VAR_SORT_1ST, VAR_SORT_2ND)`]{.f3}
+
+::: {.fragment .mt1}
+-   [Filter]{.b .blue} retains certain rows based on criteria
+    -   [`filter(TBL, DBL_CRIT > 0)`]{.f3}
+    -   [`filter(TBL, STR_CRIT == "A")`]{.f3}
+    -   [`filter(TBL, CRIT1, CRIT2)`]{.f3}
+:::
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li dlprbpnx trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[2A\] Wrangle II
+:::
+
 
 ## *Arrange* Live Coding
 
@@ -358,71 +422,6 @@ sw
 {{< li esixrdij trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
 :::
 :::
-
-::: footer
-\[2A\] Wrangle II
-:::
-
-## *Mutate* Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-# SETUP: Create example tibble
-
-patients <- tibble(
-  id = c("S1", "S2", "S3"),
-  feet = c(6, 5, 5),
-  inches = c(1, 7, 2),
-  pounds = c(176.3, 124.9, 162.6)
-)
-patients
-
-# ==============================================================================
-
-# USECASE: Add one or more variables
-
-p2 <- mutate(patients, sex = c("M", "F", "F"))
-p2
-
-ages <- c(32, 41, 29)
-p2 <- mutate(patients, ages = ages)
-p2
-
-p2 <- mutate(
-  patients, 
-  sex = c("M", "F", "F"), 
-  ages = ages
-)
-p2
-
-# ==============================================================================
-
-# USECASE: Compute variables
-
-p2 <- mutate(patients, height = feet + inches / 12)
-p2
-
-p2 <- mutate(patients, ln_pounds = log(pounds))
-p2
-
-# ==============================================================================
-
-# USECASE: Overwrite variables
-
-patients <- mutate(patients, height = height / 3.281)
-patients
-
-# ==============================================================================
-
-# USECASE: Duplicate variables
-
-p2 <- mutate(patients, weight = pounds)
-p2 # both weight and pounds exist
-```
 
 ::: footer
 \[2A\] Wrangle II
