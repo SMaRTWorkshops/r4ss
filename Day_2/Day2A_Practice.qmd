@@ -185,3 +185,9 @@ mpg3 |>
 These are some advanced wrangling verbs...
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/flcFl8z_hF4?start=99" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Pipeline
+
+The official theme song of pipelines everywhere...
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/56SAxtf-RTg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

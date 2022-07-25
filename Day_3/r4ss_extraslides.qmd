@@ -1,0 +1,1135 @@
+---
+format: 
+  revealjs:
+    css: ../styles.css
+    slide-number: true
+    show-slide-number: all
+    preview-links: auto
+    self-contained: true
+    progress: true
+    history: true
+    hash-type: number
+    theme: default
+    code-block-background: true
+    highlight-style: zenburn
+    code-link: false
+    code-copy: true
+    pagetitle: "R4SS Extra Slides"
+    author-meta: "Jeffrey Girard"
+---
+
+# Program X
+
+## String Manipulation {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   It can be helpful to [transform strings]{.b .blue}
+    -   Sometimes your [data]{.b .green} is text-based
+    -   Text also appears in [tables]{.b .green} and [figures]{.b .green}...
+    -   So we may want to customize it quickly
+
+::: {.fragment .mt1}
+-   Tidyverse contains tools for this
+    -   The functions all begin with `str_`
+    -   We will only discuss the basics
+    -   Learn more at [stringr.tidyverse.org](https://stringr.tidyverse.org/)
+:::
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li puvaffet trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Program X
+:::
+
+## String Manipulation Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse for almost all of these functions
+
+library(tidyverse)
+
+# ==============================================================================
+
+# USECASE: Re-capitalize strings
+
+x <- c("R4SS: Introduction to R for Social Scientists")
+
+str_to_lower(x)
+
+str_to_upper(x)
+
+str_to_sentence(x)
+
+str_to_title(x)
+
+# ==============================================================================
+
+# USECASE: Extract subsets of strings
+
+x <- c("Apple", "Banana", "Pear")
+
+str_sub(x, start = 1, end = 3)
+
+str_sub(x, start = -3, end = -1)
+
+str_sub(x, start = 2, end = -2)
+
+str_sub(x, start = 1, end = 5) # can go beyond the end
+
+# ==============================================================================
+
+# USECASE: Remove whitespace from strings
+
+x <- "  Sometimes strings have   too   much white space "
+x
+
+str_trim(x) # remove white space at the start and end
+
+str_squish(x) # trim and then collapse inner white space
+
+# ==============================================================================
+
+# USECASE: Remove and replace patterns in strings
+
+x <- "Scientists very often utilize very fancy words,
+      even when they could utilize simpler ones."
+
+str_remove(x, pattern = "very ") # removes first pattern match only
+
+str_remove_all(x, pattern = "very ") # removes all pattern matches
+
+str_replace(x, pattern = "utilize", replacement = "use")
+
+str_replace_all(x, pattern = "utilize", replacement = "use")
+
+# NOTE: More complex patterns can be found using regular expressions (regex)
+
+# ==============================================================================
+
+# USECASE: Create a string manipulation pipeline
+
+x_clean <-
+  x |>
+  str_remove_all("very ") |>
+  str_replace_all("utilize", "use") |>
+  print()
+```
+
+::: footer
+Program X
+:::
+
+## If Else {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   A [locked door]{.b .green} behaves [conditionally]{.b .blue}
+    -   If you have the key, then open up...
+    -   Otherwise, stay closed...
+
+::: {.fragment .mt1}
+-   Sometimes we want [code]{.b .blue} to behave conditionally
+    -   *Filter* retains observations conditionally<br />
+        (e.g., if it meets a condition, it gets to stay)
+    -   Let's learn to [transform]{.b .green} variables conditionally
+    -   We can use `if_else()` for simple examples
+:::
+
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li efoxgafi trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Program X
+:::
+
+## If Else Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse for almost all of these functions
+
+library(tidyverse)
+
+# ==============================================================================
+
+# USECASE: Determining whether someone can vote in the US
+
+age <- 12
+
+age_group <-
+  if_else(
+    condition = age >= 18,
+    true = "adult",
+    false = "child"
+  ) |>
+  print()
+
+# ==============================================================================
+
+# TIP: Because argument names are optional, we can shorten this (if we want)
+
+age_group <- if_else(age >= 18, "adult", "child") |> print()
+
+# ==============================================================================
+
+# LESSON: This function is particularly useful applied to vectors
+
+ages <- c(13, 18, 14, 19, 22, 16)
+
+age_groups <- if_else(ages >= 18, "adult", "child") |> print()
+
+# ==============================================================================
+
+# USECASE: We can therefore use it during data wrangling
+
+cereal <- read_csv("cereal.csv", na = "-999")
+
+cereal2 <- mutate(cereal, popular = if_else(rating > 50, "yes", "no"))
+cereal2
+
+cereal3 <-
+  cereal |>
+  mutate(
+    diabetes = if_else(
+      condition = sugars == 0,
+      true = "sugar-free",
+      false = "contains sugar"
+    )
+  ) |>
+  print()
+```
+
+::: footer
+Program X
+:::
+
+## Case When {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   An [elevator]{.b .green} also behaves [conditionally]{.b .blue}
+    -   If you press a button, then it goes to that floor
+    -   There are usually more than just two buttons
+    -   In this analogy (but not in real life), the elevator only responds to the [first]{.b .green} button pressed
+
+::: {.fragment .mt1}
+-   Sometimes we want [code]{.b .blue} to behave this way
+    -   `case_when()` expands upon `if_else()`
+    -   It can have [multiple conditions]{.b .blue} (floor buttons)
+    -   The first condition met "wins" (picks the floor)
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li nwyovgla trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Program X
+:::
+
+## Case When Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse for almost all of these functions
+
+library(tidyverse)
+
+# ==============================================================================
+
+# USECASE: Determine what types of movies your kids can watch
+
+ages <- c(11, 13, 18)
+
+movies_allowed <-
+  case_when(
+    ages >= 17 ~ "R",
+    ages >= 13 ~ "PG-13",
+    ages < 13 ~ "PG"
+  ) |>
+  print()
+
+# ==============================================================================
+
+# PITFALL: Don't put the least restrictive condition first
+
+age <- 18
+
+movies_allowed2 <-
+  case_when(
+    age < 13 ~ "PG",
+    age >= 13 ~ "PG-13",
+    age >= 17 ~ "R"
+  ) |>
+  print() # age >= 13, so PG-13 wins before checking if age >= 17
+
+# ==============================================================================
+
+# USECASE: Use case_when to re-code variables during data wrangling
+
+starwars
+
+sw <-
+  starwars |>
+  mutate(
+    species3 = case_when(
+      species == "Human" ~ "Human",
+      species == "Droid" ~ "Droid",
+      species != "Human" & species != "Droid" ~ "Alien"
+    )
+  ) |>
+  select(name, species3) |>
+  print()
+
+# ==============================================================================
+
+# TIP: The next version of case_when() will add the .default argument
+# This is where the elevator will drop you off if you hit no buttons
+
+sw <-
+  starwars |>
+  mutate(
+    species3 = case_when(
+      species == "Human" ~ "Human",
+      species == "Droid" ~ "Droid",
+      .default = "Alien"
+    )
+  ) |>
+  select(name, species3) |>
+  print()
+
+# NOTE: The above code won't work now, but it should in a few weeks/months
+# For now, you can use TRUE ~ "Alien" and it works but is harder to explain
+```
+
+::: footer
+Program X
+:::
+
+# Wrangle X
+
+## Pivot Longer and Wider {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Both long and wide formats can be tidy
+    -   Long formats are better for MLM
+    -   Wide formats are better for SEM
+
+::: {.fragment .mt1}
+-   It can be useful to quickly [reshape a tibble]{.b .blue}
+    -   `pivot_longer()`: wide → long
+    -   `pivot_wider()`: long → wide
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li xacejjis trigger=loop delay=3000 speed=0.5 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Wrangle X
+:::
+
+## Pivot Longer Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+gradebook <- 
+  read_csv("gradebook.csv") |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: We can pivot to long format by creating name and value variables
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = c(test1, test2, test3, test4, test5), 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# TIP: Use selection helpers to select columns quickly
+
+gradebook2 <- 
+  gradebook |> 
+  pivot_longer(
+    cols = test1:test5, 
+    names_to = "test", 
+    values_to = "grade"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: Automatically remove the name prefix
+
+gradebook2 <- 
+  gradebook|> 
+  pivot_longer(
+    cols = starts_with("test"), 
+    names_to = "test", 
+    values_to = "grade",
+    names_prefix = "test"
+  ) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
+
+## Pivot Wider Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset (from workshop website)
+
+library(tidyverse)
+
+diary <- read_csv("diary.csv") |> print()
+
+# ==============================================================================
+
+# USECASE: Reshape this long format to a wider format
+
+diary_scale <- 
+  diary |> 
+  pivot_wider(
+    names_from = "scale",
+    values_from = "score"
+  ) |> 
+  print()
+
+diary_day <- 
+  diary |>  
+  pivot_wider(
+    names_from = "day",
+    values_from = "score"
+  ) |> 
+  print()
+
+# NOTE: There are thus multiple possible wide formats (for different uses)
+
+# ==============================================================================
+
+# LESSON: We can add a prefix to each name to avoid numeric names
+
+diary_data
+
+diary_day <- 
+  diary |> 
+  pivot_wider(
+    names_from = "day",
+    values_from = "score",
+    names_prefix = "day_"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: We can also pivot on multiple columns at once
+
+diary_double <- 
+  diary |> 
+  pivot_wider(
+    names_from = c("scale", "day"),
+    values_from = "score"
+  ) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
+
+## Across {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   We can use `across()` to [repeat an operation]{.b .blue} across multiple variables in a tibble
+    -   This makes our code [shorter]{.b .green}
+    -   It is [faster]{.b .green} to read and write
+    -   It is also [less error-prone]{.b .green}
+
+::: {.fragment .mt1}
+-   So we can repeat a function in order to...
+    -   ...`mutate()` multiple variables
+    -   ...`summarize()` multiple variables
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li iectdupg trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Wrangle X
+:::
+
+## Across Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+starwars
+
+# ==============================================================================
+
+# USECASE: Applying the same mutation to multiple variables is a pain
+
+sw <- 
+  starwars |> 
+  mutate(
+    hair_color = factor(hair_color),
+    skin_color = factor(skin_color),
+    eye_color = factor(eye_color)
+  ) |> 
+  print() # before
+
+sw <- 
+  starwars |> 
+  mutate(
+    across(
+      .cols = c(hair_color, skin_color, eye_color), 
+      .fns = factor
+    )
+  ) |> 
+  print() #after
+
+# ==============================================================================
+
+# PITFALL: Don't forget to wrap the .cols part in c()
+
+sw <- 
+  starwars |> 
+  mutate(
+    across(
+      .cols = mass, birth_year, 
+      .fns = round,
+      digits = 1
+    )
+  ) |> 
+  print() # error
+
+# ==============================================================================
+
+# LESSON: To pass arguments to the inner function, add them inside across()
+
+sw <- 
+  starwars |> 
+  mutate(
+    across(
+      .cols = c(mass, birth_year), 
+      .fns = round,
+      digits = 1
+    )
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: You can also apply the same summary functions across variables
+
+sw <- 
+  starwars |> 
+  summarize(
+    height = mean(height, na.rm = TRUE),
+    mass = mean(mass, na.rm = TRUE),
+    birth_year = mean(birth_year, na.rm = TRUE)
+  ) |> 
+  print()
+
+sw <- 
+  starwars |> 
+  summarize(
+    across(
+      .cols = c(height, mass, birth_year), 
+      .fns = mean, 
+      na.rm = TRUE
+    )
+  ) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
+
+## Separate and Unite {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   Tidy data needs one value per cell
+
+::: {.fragment .mt1}
+-   So we may need to [separate]{.b .blue} cells
+    -   *e.g., What was the model of my first car?*
+    -   `"Nissan Altima 2003"` ⬎
+    -   `"Nissan"` `"Altima"` `"2003"`
+:::
+
+::: {.fragment .mt1}
+-   But some tasks require us to [unite]{.b .blue} cells
+    -   *e.g., What address should I mail to?*
+    -   `123` `"Main Street"` ⬎
+    -   `"123 Main Street"`
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li dsfanfaz trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Wrangle X
+:::
+
+## Separate Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+# Create some example data
+dat <- 
+  tibble(
+    id = c("A_001_01", "A_002_01", "B_001_01", "B_002_01", "C_001_01", "C_002_01"),
+    duration = c("01:16", "01:21", "01:49", "00:34", "00:32", "00:54")
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: Separate a column into multiple columns
+
+dat2 <- 
+  dat |> 
+  separate(
+    col = duration, 
+    into = c("min", "sec"), 
+    sep = ":"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: This also works with more than two "into" columns
+
+dat2 <- 
+  dat |>  
+  separate(
+    col = id, 
+    into = c("group", "subject", "time"), 
+    sep = "_"
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# TIP: To automatically convert strings into numbers, use convert
+
+dat2 <- 
+  dat |> 
+  separate(
+    col = id, 
+    into = c("group", "subject", "time"), 
+    sep = "_", 
+    convert = TRUE
+  ) |> 
+  print()
+
+# ==============================================================================
+
+# PITFALL: Don't forget to close the "into" vector's parentheses
+
+dat2 <- 
+  dat|> 
+  separate(col = duration, into = c("min", "sec", sep = ":")) #error
+```
+
+::: footer
+Wrangle X
+:::
+
+## Unite Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+dat2 <- 
+  dat|> 
+  separate(col = id, into = c("group", "subject", "time"), sep = "x") |> 
+  separate(col = duration, into = c("min", "sec"), sep = ":") |> 
+  print()
+
+# ==============================================================================
+
+# USECASE: Unite multiple columns into one string
+
+dat3 <- 
+  dat2 |> 
+  unite(col = "newid", group, subject, time, sep = "-") |> 
+  unite(col = "duration", min, sec, sep = ":") |> 
+  print()
+
+# ==============================================================================
+
+# LESSON: Retain the columns being united with remove = FALSE
+
+dat3 <- 
+  dat2 |> 
+  unite(col = "newid", group:time, sep = "", remove = FALSE) |> 
+  print()
+```
+
+::: footer
+Wrangle X
+:::
+
+# Visualize X
+
+## Distribution Geoms {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Variable distributions]{.b .blue} are critical in data analysis
+    -   What are the most and least [common values]{.b .green}?
+    -   What are the [extrema]{.b .green} (min and max values)?
+    -   Are there any [outliers]{.b .green} or impossible values?
+    -   How much [spread]{.b .green} is there in the variable?
+    -   What [shape]{.b .green} does the distribution take?
+
+::: {.fragment .mt1}
+-   Visualization is a quick way to [assess]{.b .green} this
+    -   They can also [communicate]{.b .green} it to others
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li wovwohsm trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Distribution Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Creating histograms
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(bins = 20)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating density plots
+
+ggplot(mpg, aes(x = hwy)) + geom_density()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_density(color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating box plots
+
+ggplot(mpg, aes(x = hwy)) + geom_boxplot()
+
+ggplot(mpg, aes(x = hwy, y = class)) + 
+  geom_boxplot(varwidth = TRUE)
+
+# ==============================================================================
+
+# USECASE: Creating bar plots to count categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_bar()
+
+# ==============================================================================
+
+# PITFALL: Don't try to create histograms for categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_histogram() #error
+```
+
+::: footer
+Visualize X
+:::
+
+## Other Aesthetics {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   For blocky elements like bars...
+    -   `color` controls the outline color
+    -   `fill` controls the internal color
+    -   `size` controls the line thickness
+
+::: {.fragment .mt1}
+-   Some mappings will induce [grouping]{.b .green}
+    -   You'll get separate geoms per group
+:::
+
+::: {.fragment .mt1}
+-   It can be helpful to use [redundant]{.b .green} mapping
+    -   Map one variable to multiple aesthetics
+    -   Then if one "fails" the other may work
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li ntdjhzbp trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Other Aesthetics Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Mapping the shape aesthetic to a categorical variable
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) +
+  geom_point(size = 3)
+
+# ==============================================================================
+
+# PITFALL: Don't try to map shape to a continuous variable
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = hwy)) + 
+  geom_point() #error
+
+# NOTE: This doesn't work because there are way more numbers than shapes
+
+# ==============================================================================
+
+# LESSON: Color vs. Fill and Size for Blocks
+
+ggplot(mpg, aes(y = class)) + 
+  geom_bar()
+
+ggplot(mpg, aes(y = class)) + 
+  geom_bar(color = "darkred", fill = "lightblue", size = 1)
+
+# ==============================================================================
+
+# LESSON: Some aesthetics cause grouping when mapped to a categorical variable
+
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") # single smooth
+
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") # three smooths
+
+# ==============================================================================
+
+# USECASE: Mapping to the fill aesthetic and setting the alpha property
+
+ggplot(mpg, aes(x = hwy, fill = drv)) + 
+  geom_density()
+
+ggplot(mpg, aes(x = hwy, fill = drv)) + 
+  geom_density(alpha = 0.3)
+
+# ==============================================================================
+
+# TIP: If you map the same variable to multiple aesthetics, you get redundancy
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv, color = drv)) +
+  geom_point(size = 3) # if color fails, shape still works
+```
+
+::: footer
+Visualize X
+:::
+
+## Describe this Graphic 1 {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+```{r dtg1}
+#| echo: false
+#| message: false
+#| fig-height: 8
+
+library(tidyverse)
+
+starwars |> 
+  filter(mass < 200) |> 
+  ggplot(aes(x = height, y = mass)) + 
+  geom_point(size = 3) +
+  geom_smooth(size = 2) +
+  theme_grey(base_size = 32)
+```
+:::
+
+::: {.column width="40%"}
+**Data**
+
+- `starwars` \{tidyverse\}
+
+**Aesthetics/Scales**
+
+::: {.fragment}
+- `height` to X (continuous)
+- `mass` to Y (continuous)
+:::
+
+**Geoms**
+
+::: {.fragment}
+- Point (dots)
+- Smooth (local)
+:::
+
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Describe this Graphic 2 {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+```{r dtg2}
+#| echo: false
+#| message: false
+#| fig-height: 8
+
+mpg |> 
+  ggplot(aes(x = displ, y = hwy, color = drv)) + 
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", size = 2) +
+  theme_grey(base_size = 32)
+```
+:::
+
+::: {.column width="40%"}
+**Data**
+
+- `mpg` \{tidyverse\}
+
+**Aesthetics/Scales**
+
+::: {.fragment}
+- `displ` to X (continuous)
+- `hwy` to Y (continuous)
+- `drv` to color (discrete)
+:::
+
+**Geoms**
+
+::: {.fragment}
+- Point (dots)
+- Smooth (linear)
+:::
+
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Describe this Graphic 3 {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+```{r dtg3}
+#| echo: false
+#| message: false
+#| fig-height: 8
+
+mpg |> 
+  ggplot(aes(x = hwy, y = class)) + 
+  geom_boxplot(fill = "lightblue", size = 1, outlier.size = 3) +
+  geom_vline(xintercept = 20, color = "red", size = 2) +
+  theme_grey(base_size = 32)
+```
+:::
+
+::: {.column width="40%"}
+**Data**
+
+- `mpg` \{tidyverse\}
+
+**Aesthetics/Scales**
+
+::: {.fragment}
+- `hwy` to X (continuous)
+- `class` to Y (discrete)
+:::
+
+**Geoms**
+
+::: {.fragment}
+- Boxplot (fill = lightblue)
+- VLine (xintercept = 20)
+:::
+
+:::
+:::
+
+::: footer
+Visualize X
+:::
+
+## Describe this Graphic 4 {.smaller}
+
+::: {.columns}
+::: {.column width="60%"}
+
+```{r dtg4}
+#| echo: false
+#| message: false
+#| fig-height: 8
+
+library(nycflights13)
+
+flights |> 
+  ggplot(aes(x = origin, color = origin)) + 
+  geom_bar(fill = "white", size = 2) +
+  theme_grey(base_size = 32) +
+  theme(legend.position = "none")
+```
+:::
+
+::: {.column width="40%"}
+**Data**
+
+- `flights` \{nycflights13\}
+
+**Aesthetics/Scales**
+
+::: {.fragment}
+- `origin` to X (discrete)
+- `origin` to color (discrete)
+- `count` to Y (stat from geom)
+:::
+
+**Geoms**
+
+::: {.fragment}
+- Bar (fill = white)
+:::
+
+:::
+:::
+
+::: footer
+Visualize X
+:::

@@ -46,6 +46,8 @@ website:
             href: construction.qmd #Day_3/Day3A_Slides.qmd
           - text: "Day 3A Practice"
             href: construction.qmd #Day_3/Day3A_Practice.qmd
+          - text: "Extra Slides"
+            href: Day_3/Extra_Slides.qmd
       - icon: github
         href: https://www.github.com/pittmethods/r4ss
   search: false
