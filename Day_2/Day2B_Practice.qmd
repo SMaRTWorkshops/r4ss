@@ -16,6 +16,47 @@ library(tidyverse)
 
 ## Question 1
 
+a) Load the `txhousing` tibble (included in \{tidyverse\}). This contains the number of homes listed (`listings`) and the typical home sales price (`median`) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. *Note:* For these descriptive purposes, you can ignore missing values.
+
+b) Modify your answer to Question 1a to generate the same summary statistics but *per city* this time (still averaging across all months).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+
+txhousing |> 
+  summarize(
+    listings = mean(listings, na.rm = TRUE), 
+    median = mean(median, na.rm = TRUE)
+  )
+
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+txhousing |> 
+  group_by(city) |> 
+  summarize(
+    listings = mean(listings, na.rm = TRUE), 
+    median = mean(median, na.rm = TRUE)
+  )
+```
+
+</blockquote></details></p>
+
+## Question 2
+
 For each of the following code snippets, find and fix the error(s).
 
 a) "The Scatterbrained Scatterplot"
@@ -98,7 +139,7 @@ ggplot(economics, aes(x = date, y = unemploy)) + # fix 1
 
 </blockquote></details></p>
 
-## Question 2
+## Question 3
 
 a) Install and load the \{palmerpenguins\} package.
 
@@ -162,11 +203,27 @@ p <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
 p
 ```
 
+Or, use this shortcut:
+
+```{r}
+p <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,
+                     color = species, shape = species)) +
+  geom_point(size = 3, alpha = 0.75) +
+  labs(
+    x = "Flipper length (mm)",
+    y = "Body mass (g)",
+    color = "Penguin species",
+    shape_ = "Penguin species"
+  )
+p
+```
+
+
 </blockquote></details></p>
 
-## Question 3
+## Question 4
 
-a) Use your graphic from Question 2(c) a starting graphic object. Apply the "classic" complete theme to it and move the legend to the top. *Bonus:* Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).
+a) Use your graphic from Question 3(c) a starting graphic object. Apply the "classic" complete theme to it and move the legend to the top. *Bonus:* Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).
 
 b) Export this graphic as an image file to include in a paper. Make it 6.5 inches wide and 4 inches high. *Bonus:* Open Microsoft Word or Google Docs and insert the image.
 
@@ -213,22 +270,18 @@ ggsave("practice.png", plot = p2, width = 6.5, height = 4, units = "in")
 
 - [GGP2 Chapter 11](https://ggplot2-book.org/scale-colour.html): Read more about color in ggplot2
 
+- [GGP2 Chapter 18](https://ggplot2-book.org/polishing.html): Read more about themes in ggplot2
+
 ## Fun Stuff
-
-### Advanced Reshaping
-
-"We have to be careful with the <del>clay</del>[data]{.blue} that <del>Mother Nature</del>[Mechanical Turk]{.blue} has given us..."
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K_OLh6ZTyhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Don McMillan's Greatest Charts
-
-Would these be more or less funny if he had used ggplot2... ?
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LYE3GtXqDV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Let's Enhance
 
 If you want to be able to do this, save your images as `.pdf` or `.svg`...
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LhF_56SxrGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Don McMillan's Greatest Charts
+
+Would these be more or less funny if he had used ggplot2... ?
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LYE3GtXqDV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

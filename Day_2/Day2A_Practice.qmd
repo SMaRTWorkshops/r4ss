@@ -14,7 +14,7 @@ format:
 library(tidyverse)
 ```
 
-## Question 3.
+## Question 1.
 
 Load the `economics` tibble (included in \{tidyverse\}). Then create a pipeline to accomplish the following data wrangling steps:
 
@@ -64,7 +64,7 @@ economics |>
 </blockquote>
 </details></p>
 
-## Question 3.
+## Question 2.
 
 Download the [cereal](https://pittmethods.github.io/r4ss/data/cereal.csv) data file from the [workshop website](../Details/datasets.qmd). Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Finally, write the result of this pipeline to a CSV file called "jeffs_list.csv" (I expect it to be even more popular than Craig's list).
 
@@ -109,7 +109,7 @@ write_csv(jeffs_list, "jeffs_list.csv")
 </blockquote>
 </details></p>
 
-## Question 1
+## Question 3
 
 a) Transform the `drv` variable in the `mpg` tibble into a factor where "4" is labeled Four Wheel Drive, "r" is labelled Rear Wheel Drive, and "f" is labeled Front Wheel Drive. Save this updated tibble as `mpg2`.
 
@@ -168,144 +168,15 @@ mpg3 |>
 
 </blockquote></details></p>
 
-## Question 2
-
-a) Load the `txhousing` tibble (included in \{tidyverse\}). This contains the number of homes listed (`listings`) and the typical home sales price (`median`) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. *Note:* For these descriptive purposes, you can ignore missing values.
-
-b) Recreate your answer to Question 2a using `across()`.
-
-c) Modify your answer to Question 2b to generate the same summary statistics but *per city* this time (still averaging across all months).
-
-<p><details>
-<summary>Click here for the answer key</summary>
-<blockquote>
-
-**Answer (a)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-txhousing |> 
-  summarize(
-    listings = mean(listings, na.rm = TRUE), 
-    median = mean(median, na.rm = TRUE)
-  )
-
-```
-
-**Answer (b)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-#| warning: false
-
-txhousing |> 
-  summarize(
-    across(
-      .cols = c(listings, median),
-      .fns = mean, 
-      na.rm = TRUE
-    )
-  )
-```
-
-```{r}
-# Or, more compactly:
-
-txhousing |> summarize(across(c(listings, median), mean, na.rm = TRUE))
-```
-
-**Answer (c)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-#| warning: false
-
-txhousing |> 
-  group_by(city) |> 
-  summarize(
-    across(
-      .cols = c(listings, median),
-      .fns = mean, 
-      na.rm = TRUE
-    )
-  )
-```
-
-</blockquote></details></p>
-
-## Question 3
-
-a) Use `if_else()` to add a new variable to the `txhousing` tibble called `crisis` which is equal to "pre" if `date` is less than 2007.5 and "post" otherwise.
-
-b) Recreate your answer to Question 3a using `case_when()`.
-
-c) *Bonus:* Add a new variable to the `txhousing` tibble called `season` which is equal to: "spring" when `month` is 3, 4, or 5; "summer" when `month` is 6, 7, or 8; "autumn" when `month` is 9, 10, or 11; and "winter" when `month` is 1, 2, or 12.
-
-<p><details>
-<summary>Click here for the answer key</summary>
-<blockquote>
-
-**Answer (a)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-txhousing |> 
-  mutate(
-    crisis = if_else(
-      condition = date < 2007.5,
-      true = "pre",
-      false = "post"
-    )
-  )
-```
-
-**Answer (b)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-#| warning: false
-
-txhousing |> 
-  mutate(
-    crisis = case_when(
-      date < 2007.5 ~ "pre",
-      date >= 2007.5 ~ "post"
-    )
-  )
-```
-
-**Answer (c)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-#| warning: false
-
-txhousing |> 
-  mutate(
-    season = case_when(
-      month %in% c(3, 4, 5) ~ "spring",
-      month %in% c(6, 7, 8) ~ "summer",
-      month %in% c(9, 10, 11) ~ "autumn",
-      month %in% c(12, 1, 2) ~ "winter"
-    )
-  )
-```
-
-</blockquote></details></p>
-
 ## Resources
 
 -   [R4DS Chapter 5](https://r4ds.had.co.nz/transform.html) (§5.1–§5.5): Read more about the basic wrangling verbs 
 
-- [R4DS Chapter 15](https://r4ds.had.co.nz/factors.html): Read more about working with factors in R
+-   [R4DS Chapter 18](https://r4ds.had.co.nz/pipes.html): Read more about pipes and pipelines^[Note that this chapter talks about `%>%` being the pipe operator, which might confuse you at first since I am teaching `|>` as the pipe. Basically, `|>` is newer and requires no packages to be installed; it often called the "native pipe" as in it is built into R natively.]
+
+-   [R4DS Chapter 15](https://r4ds.had.co.nz/factors.html): Read more about working with factors in R
+
+-   [Schafer \& Graham (2002)](https://doi.org/10/dsvqnz): Read more about missing data analysis^[Note that ignoring missing values can lead to estimation bias and reduced power when performing statistical inference. Read this paper to learn more about better approaches, which can be done in R (e.g., using the \{mice\} package for [multiple imputation](https://stefvanbuuren.name/fimd/) or the \{lavaan\} package for [full information maximum likelihood](https://lavaan.ugent.be/tutorial/est.html)).]
 
 ## Fun Stuff
 

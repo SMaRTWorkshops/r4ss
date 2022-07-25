@@ -21,13 +21,6 @@
     "text": "Question 2.\nWhich of the following commands do you think will create an error in R? Why?\n\nscore@T1 <- 3.2\nscore_at_T1 <- 3.2\nscore at T1 <- 3.2\n1_score <- 3.2\nScoreAtTime1 <- 3.2\n\nMake your best guesses just by looking at the commands and then check your guesses by running the commands in R.\n\n\n\nClick here for the answer key\n\n\nThe following commands will create an error in R: a (@ is not allowed in an object name), c (spaces are not allowed in an object name), and d (the first character in an object name cannot be a number)."
   },
   {
-    "objectID": "Day_1/Day1A_Practice.html#question-3.",
-    "href": "Day_1/Day1A_Practice.html#question-3.",
-    "title": "Day 1A Practice",
-    "section": "Question 3.",
-    "text": "Question 3.\n\nCreate a character vector named flavors that contains the following strings and print it:\n\nCookies & Cream\nAmericone Dream (R)\nBob Marley’s 1 Love\n\nUse a function to calculate the number of strings in flavors.\nUse another function to calculate the number of characters in each string in flavors.\nLet R know how you feel about ice cream by using a function to either make all the characters in flavors uppercase (you LOVE ice cream) or lowercase (you don’t love ice cream).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nflavors <- c(\"Cookies & Cream\", \"Americone Dream (R)\", \"Bob Marley's 1 Love\")\nflavors\n#> [1] \"Cookies & Cream\"     \"Americone Dream (R)\" \"Bob Marley's 1 Love\"\n\nAnswer (b)\n\nlength(flavors)\n#> [1] 3\n\nAnswer (c)\n\nnchar(flavors)\n#> [1] 15 19 19\n\nAnswer (d)\n\ntoupper(flavors)\n#> [1] \"COOKIES & CREAM\"     \"AMERICONE DREAM (R)\" \"BOB MARLEY'S 1 LOVE\"\ntolower(flavors)\n#> [1] \"cookies & cream\"     \"americone dream (r)\" \"bob marley's 1 love\""
-  },
-  {
     "objectID": "Day_1/Day1A_Practice.html#resources",
     "href": "Day_1/Day1A_Practice.html#resources",
     "title": "Day 1A Practice",
@@ -63,13 +56,6 @@
     "text": "Question 2.\nThe following table summarizes the season information for the eight seasons of AMC’s Breaking Bad show.\n\nTidy up this data and save it to a tibble. Decide for yourself how to handle season 5 (should it be a single observation or two?). For the first and last aired dates, just store the year as a number.\nSave the tibble you created to a CSV file named “breaking_bad.csv”.\n\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nVersion with one observation for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5)\nepisodes <- c(7, 13, 13, 13, 16)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012)\nlast_air <- c(2008, 2009, 2010, 2011, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nVersion with two separate observations for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5.1, 5.2)\nepisodes <- c(7, 13, 13, 13, 8, 8)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nlast_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nAnswer (b)\n\nwrite_csv(breaking_bad, \"breaking_bad.csv\")"
   },
   {
-    "objectID": "Day_1/Day1B_Practice.html#question-3.",
-    "href": "Day_1/Day1B_Practice.html#question-3.",
-    "title": "Day 1B Practice",
-    "section": "Question 3.",
-    "text": "Question 3.\nDownload the cereal data file from the workshop website. Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Finally, write the result of this pipeline to a CSV file called “jeffs_list.csv” (I expect it to be even more popular than Craig’s list).\n\n\n\nClick here for the answer key\n\n\n\ncereal <- read_csv(\"cereal.csv\") \n\njeffs_list <- \n  cereal |> \n  filter(type == \"cold\" & rating > 70) |> \n  arrange(calories)\n\njeffs_list\n\n\n\n\n\n  \n\n\n\n\nwrite_csv(jeffs_list, \"jeffs_list.csv\")"
-  },
-  {
     "objectID": "Day_1/Day1B_Practice.html#resources",
     "href": "Day_1/Day1B_Practice.html#resources",
     "title": "Day 1B Practice",
@@ -91,39 +77,39 @@
     "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
   },
   {
-    "objectID": "Day_2/Day2A_Practice.html#question-1",
-    "href": "Day_2/Day2A_Practice.html#question-1",
+    "objectID": "Day_2/Day2A_Practice.html#question-1.",
+    "href": "Day_2/Day2A_Practice.html#question-1.",
     "title": "Day 2A Practice",
-    "section": "Question 1",
-    "text": "Question 1\n\nTransform the drv variable in the mpg tibble into a factor where “4” is labeled Four Wheel Drive, “r” is labelled Rear Wheel Drive, and “f” is labeled Front Wheel Drive. Save this updated tibble as mpg2.\nTransform the manufacturer and model variables in the mpg2 tibble so that the first letter of each word is capitalized. Save this updated tibble as mpg3.\nCreate a new variable in the mpg3 tibble called name which merges/unites the manufacturer, model, and drv variables into a single string (separated by spaces).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nmpg2 <- \n  mpg |> \n  mutate(\n    drv = factor(\n      drv, \n      levels = c(\"4\", \"r\", \"f\"), \n      labels = c(\"Four Wheel Drive\", \"Rear Wheel Drive\", \"Front Wheel Drive\")\n    )\n  )\nmpg2\n\n\n\n  \n\n\n\nAnswer (b)\n\nmpg3 <- \n  mpg2 |> \n  mutate(\n    manufacturer = str_to_title(manufacturer),\n    model = str_to_title(model)\n  )\nmpg3\n\n\n\n  \n\n\n\nAnswer (c)\n\nmpg3 |> \n  unite(col = \"name\", manufacturer, model, drv, sep = \" \")"
+    "section": "Question 1.",
+    "text": "Question 1.\nLoad the economics tibble (included in {tidyverse}). Then create a pipeline to accomplish the following data wrangling steps:\n\nFirst, in the economics tibble, rename the uempmed variable (the median duration of enemployment, in weeks) to duration and the unemploy variable (the number of unemployed, in thousands) to number.\nThen add a new variable called rate that is calculated by dividing number (from part a) by pop (the total population, in thousands).\nThen drop (i.e., unselect) the pce, pop, and psavert variables from the tibble.\nThen relocate the rate variable to be between the date and duration variables.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy)\n\n\n\n  \n\n\n\nAnswer (b)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop)\n\n\n\n  \n\n\n\nAnswer (c)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert))\n\n\n\n  \n\n\n\nAnswer (d)\n\neconomics |>\n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert)) |> \n  relocate(rate, .after = date)"
   },
   {
-    "objectID": "Day_2/Day2A_Practice.html#question-2",
-    "href": "Day_2/Day2A_Practice.html#question-2",
+    "objectID": "Day_2/Day2A_Practice.html#question-2.",
+    "href": "Day_2/Day2A_Practice.html#question-2.",
     "title": "Day 2A Practice",
-    "section": "Question 2",
-    "text": "Question 2\n\nLoad the txhousing tibble (included in {tidyverse}). This contains the number of homes listed (listings) and the typical home sales price (median) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. Note: For these descriptive purposes, you can ignore missing values.\nRecreate your answer to Question 2a using across().\nModify your answer to Question 2b to generate the same summary statistics but per city this time (still averaging across all months).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\ntxhousing |> \n  summarize(\n    listings = mean(listings, na.rm = TRUE), \n    median = mean(median, na.rm = TRUE)\n  )\n\n\n\n  \n\n\n\nAnswer (b)\n\ntxhousing |> \n  summarize(\n    across(\n      .cols = c(listings, median),\n      .fns = mean, \n      na.rm = TRUE\n    )\n  )\n\n\n\n  \n\n\n\n\n# Or, more compactly:\n\ntxhousing |> summarize(across(c(listings, median), mean, na.rm = TRUE))\n\n\n\n  \n\n\n\nAnswer (c)\n\ntxhousing |> \n  group_by(city) |> \n  summarize(\n    across(\n      .cols = c(listings, median),\n      .fns = mean, \n      na.rm = TRUE\n    )\n  )"
+    "section": "Question 2.",
+    "text": "Question 2.\nDownload the cereal data file from the workshop website. Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Finally, write the result of this pipeline to a CSV file called “jeffs_list.csv” (I expect it to be even more popular than Craig’s list).\n\n\n\nClick here for the answer key\n\n\n\ncereal <- read_csv(\"cereal.csv\") \n\njeffs_list <- \n  cereal |> \n  filter(type == \"cold\" & rating > 70) |> \n  arrange(calories)\n\njeffs_list\n\n\n\n\n\n  \n\n\n\n\nwrite_csv(jeffs_list, \"jeffs_list.csv\")"
   },
   {
     "objectID": "Day_2/Day2A_Practice.html#question-3",
     "href": "Day_2/Day2A_Practice.html#question-3",
     "title": "Day 2A Practice",
     "section": "Question 3",
-    "text": "Question 3\n\nUse if_else() to add a new variable to the txhousing tibble called crisis which is equal to “pre” if date is less than 2007.5 and “post” otherwise.\nRecreate your answer to Question 3a using case_when().\nBonus: Add a new variable to the txhousing tibble called season which is equal to: “spring” when month is 3, 4, or 5; “summer” when month is 6, 7, or 8; “autumn” when month is 9, 10, or 11; and “winter” when month is 1, 2, or 12.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\ntxhousing |> \n  mutate(\n    crisis = if_else(\n      condition = date < 2007.5,\n      true = \"pre\",\n      false = \"post\"\n    )\n  )\n\n\n\n  \n\n\n\nAnswer (b)\n\ntxhousing |> \n  mutate(\n    crisis = case_when(\n      date < 2007.5 ~ \"pre\",\n      date >= 2007.5 ~ \"post\"\n    )\n  )\n\n\n\n  \n\n\n\nAnswer (c)\n\ntxhousing |> \n  mutate(\n    season = case_when(\n      month %in% c(3, 4, 5) ~ \"spring\",\n      month %in% c(6, 7, 8) ~ \"summer\",\n      month %in% c(9, 10, 11) ~ \"autumn\",\n      month %in% c(12, 1, 2) ~ \"winter\"\n    )\n  )"
+    "text": "Question 3\n\nTransform the drv variable in the mpg tibble into a factor where “4” is labeled Four Wheel Drive, “r” is labelled Rear Wheel Drive, and “f” is labeled Front Wheel Drive. Save this updated tibble as mpg2.\nTransform the manufacturer and model variables in the mpg2 tibble so that the first letter of each word is capitalized. Save this updated tibble as mpg3.\nCreate a new variable in the mpg3 tibble called name which merges/unites the manufacturer, model, and drv variables into a single string (separated by spaces).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nmpg2 <- \n  mpg |> \n  mutate(\n    drv = factor(\n      drv, \n      levels = c(\"4\", \"r\", \"f\"), \n      labels = c(\"Four Wheel Drive\", \"Rear Wheel Drive\", \"Front Wheel Drive\")\n    )\n  )\nmpg2\n\n\n\n  \n\n\n\nAnswer (b)\n\nmpg3 <- \n  mpg2 |> \n  mutate(\n    manufacturer = str_to_title(manufacturer),\n    model = str_to_title(model)\n  )\nmpg3\n\n\n\n  \n\n\n\nAnswer (c)\n\nmpg3 |> \n  unite(col = \"name\", manufacturer, model, drv, sep = \" \")"
   },
   {
     "objectID": "Day_2/Day2A_Practice.html#resources",
     "href": "Day_2/Day2A_Practice.html#resources",
     "title": "Day 2A Practice",
     "section": "Resources",
-    "text": "Resources\n\nR4DS Chapter 5 (§5.6–§5.7): Read more about grouped summaries and mutates\nR4DS Chapter 14: Read more about working with strings in R\nR4DS Chapter 15: Read more about working with factors in R\nR4DS Chapter 12: Read more about reshaping and tidying data in R"
+    "text": "Resources\n\nR4DS Chapter 5 (§5.1–§5.5): Read more about the basic wrangling verbs\nR4DS Chapter 18: Read more about pipes and pipelines1\nR4DS Chapter 15: Read more about working with factors in R\nSchafer & Graham (2002): Read more about missing data analysis2"
   },
   {
     "objectID": "Day_2/Day2A_Practice.html#fun-stuff",
     "href": "Day_2/Day2A_Practice.html#fun-stuff",
     "title": "Day 2A Practice",
     "section": "Fun Stuff",
-    "text": "Fun Stuff\n\nAdvanced Reshaping\n“We have to be careful with the claydata that Mother NatureMechanical Turk has given us…”\n\n\n\n\nLet’s Enhance\nIf you want to be able to do this, save your images as .pdf or .svg…"
+    "text": "Fun Stuff\n\nStunt Rope\nThese are some advanced wrangling verbs…"
   },
   {
     "objectID": "Day_2/Day2A_Slides.html",
@@ -137,35 +123,42 @@
     "href": "Day_2/Day2B_Practice.html#question-1",
     "title": "Day 2B Practice",
     "section": "Question 1",
-    "text": "Question 1\nFor each of the following code snippets, find and fix the error(s).\n\n“The Scatterbrained Scatterplot”\n\n\nggplot(mpg, x = displ, y = hwy) + \n  geom_point()\n\n\n“Not-so-smooth Smoothing”\n\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point()\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_discrete(\"Engine Size\")\n\n\n“A Leaky Pipeline”\n\n\nggplot(economics, aes(x = date, y = unemploy)) |> \n  geom_line() |> \n  geom_point()\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nThe code forgot to put the mappings inside aes().\n\nggplot(mpg, aes(x = displ, y = hwy)) + # fix 1\n  geom_point() \n\n\n\n\nAnswer (b)\nThe code forgot a + and set the x-axis to discrete instead of continuous.\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point() + # fix 1\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_continuous(\"Engine Size\") # fix 2\n#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'\n\n\n\n\nAnswer (c)\nThe code used pipes instead of plus signs to connect ggplot2 commands.\n\nggplot(economics, aes(x = date, y = unemploy)) + # fix 1\n  geom_line() + # fix 2\n  geom_point()"
+    "text": "Question 1\n\nLoad the txhousing tibble (included in {tidyverse}). This contains the number of homes listed (listings) and the typical home sales price (median) in multiple Texas cities and months. Create a summary tibble that contains the average number of listings and the average typical home sales price across all cities and months. Note: For these descriptive purposes, you can ignore missing values.\nModify your answer to Question 1a to generate the same summary statistics but per city this time (still averaging across all months).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\ntxhousing |> \n  summarize(\n    listings = mean(listings, na.rm = TRUE), \n    median = mean(median, na.rm = TRUE)\n  )\n\n\n\n  \n\n\n\nAnswer (b)\n\ntxhousing |> \n  group_by(city) |> \n  summarize(\n    listings = mean(listings, na.rm = TRUE), \n    median = mean(median, na.rm = TRUE)\n  )"
   },
   {
     "objectID": "Day_2/Day2B_Practice.html#question-2",
     "href": "Day_2/Day2B_Practice.html#question-2",
     "title": "Day 2B Practice",
     "section": "Question 2",
-    "text": "Question 2\n\nInstall and load the {palmerpenguins} package.\nRecreate the following graphic as closely as you can from the penguins tibble in that package (don’t worry about getting the geom settings exactly right).\nClean up the x and y axis titles so that they are more readable (e.g., “Flipper length (mm)” instead of “flipper_length_mm”). Bonus: See if you can figure out how to also rename the legend title.\n\n\n\n\n\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\n# Extra pane > Packages tab > Install button > palmerpenguins > Install\n\nlibrary(palmerpenguins)\n\nAnswer (b)\n\nggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75)\n\n\n\n\nAnswer (c)\n\np <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75) +\n  scale_x_continuous(name = \"Flipper length (mm)\") +\n  scale_y_continuous(name = \"Body mass (g)\") +\n  scale_color_discrete(name = \"Penguin species\") +\n  scale_shape_discrete(name = \"Penguin species\")\np"
+    "text": "Question 2\nFor each of the following code snippets, find and fix the error(s).\n\n“The Scatterbrained Scatterplot”\n\n\nggplot(mpg, x = displ, y = hwy) + \n  geom_point()\n\n\n“Not-so-smooth Smoothing”\n\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point()\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_discrete(\"Engine Size\")\n\n\n“A Leaky Pipeline”\n\n\nggplot(economics, aes(x = date, y = unemploy)) |> \n  geom_line() |> \n  geom_point()\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nThe code forgot to put the mappings inside aes().\n\nggplot(mpg, aes(x = displ, y = hwy)) + # fix 1\n  geom_point() \n\n\n\n\nAnswer (b)\nThe code forgot a + and set the x-axis to discrete instead of continuous.\n\nggplot(mpg, aes(x = displ, y = hwy)) + \n  geom_point() + # fix 1\n  geom_smooth() +\n  scale_y_continuous(\"Highway MPG\") +\n  scale_x_continuous(\"Engine Size\") # fix 2\n#> `geom_smooth()` using method = 'loess' and formula 'y ~ x'\n\n\n\n\nAnswer (c)\nThe code used pipes instead of plus signs to connect ggplot2 commands.\n\nggplot(economics, aes(x = date, y = unemploy)) + # fix 1\n  geom_line() + # fix 2\n  geom_point()"
   },
   {
     "objectID": "Day_2/Day2B_Practice.html#question-3",
     "href": "Day_2/Day2B_Practice.html#question-3",
     "title": "Day 2B Practice",
     "section": "Question 3",
-    "text": "Question 3\n\nUse your graphic from Question 2(c) a starting graphic object. Apply the “classic” complete theme to it and move the legend to the top. Bonus: Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).\nExport this graphic as an image file to include in a paper. Make it 6.5 inches wide and 4 inches high. Bonus: Open Microsoft Word or Google Docs and insert the image.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\np2 <- \n  p + \n  theme_classic() + \n  theme(\n    legend.position = \"top\",\n    axis.title = element_text(face = \"italic\") # bonus\n  )\np2\n\n\n\n\nAnswer (b)\n\nggsave(\"practice.png\", plot = p2, width = 6.5, height = 4, units = \"in\")"
+    "text": "Question 3\n\nInstall and load the {palmerpenguins} package.\nRecreate the following graphic as closely as you can from the penguins tibble in that package (don’t worry about getting the geom settings exactly right).\nClean up the x and y axis titles so that they are more readable (e.g., “Flipper length (mm)” instead of “flipper_length_mm”). Bonus: See if you can figure out how to also rename the legend title.\n\n\n\n\n\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\n# Extra pane > Packages tab > Install button > palmerpenguins > Install\n\nlibrary(palmerpenguins)\n\nAnswer (b)\n\nggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75)\n\n\n\n\nAnswer (c)\n\np <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75) +\n  scale_x_continuous(name = \"Flipper length (mm)\") +\n  scale_y_continuous(name = \"Body mass (g)\") +\n  scale_color_discrete(name = \"Penguin species\") +\n  scale_shape_discrete(name = \"Penguin species\")\np\n\n\n\n\nOr, use this shortcut:\n\np <- ggplot(penguins, aes(x = flipper_length_mm, y = bill_length_mm,\n                     color = species, shape = species)) +\n  geom_point(size = 3, alpha = 0.75) +\n  labs(\n    x = \"Flipper length (mm)\",\n    y = \"Body mass (g)\",\n    color = \"Penguin species\",\n    shape_ = \"Penguin species\"\n  )\np\n\nWarning: Removed 2 rows containing missing values (geom_point)."
+  },
+  {
+    "objectID": "Day_2/Day2B_Practice.html#question-4",
+    "href": "Day_2/Day2B_Practice.html#question-4",
+    "title": "Day 2B Practice",
+    "section": "Question 4",
+    "text": "Question 4\n\nUse your graphic from Question 3(c) a starting graphic object. Apply the “classic” complete theme to it and move the legend to the top. Bonus: Also make the axis titles italic (you may need to check a cheatsheet or do some searching to find the right element).\nExport this graphic as an image file to include in a paper. Make it 6.5 inches wide and 4 inches high. Bonus: Open Microsoft Word or Google Docs and insert the image.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\np2 <- \n  p + \n  theme_classic() + \n  theme(\n    legend.position = \"top\",\n    axis.title = element_text(face = \"italic\") # bonus\n  )\np2\n\n\n\n\nAnswer (b)\n\nggsave(\"practice.png\", plot = p2, width = 6.5, height = 4, units = \"in\")"
   },
   {
     "objectID": "Day_2/Day2B_Practice.html#resources",
     "href": "Day_2/Day2B_Practice.html#resources",
     "title": "Day 2B Practice",
     "section": "Resources",
-    "text": "Resources\n\nR4DS Chapter 3: Read an introduction to visualization\nGGP2 Chapter 11: Read more about color in ggplot2\nGGP2 Chapter 8: Read about annotating ggplot2 objects\nGGP2 Chapter 17: Read about faceting in ggplot2"
+    "text": "Resources\n\nR4DS Chapter 5 (§5.6–§5.7): Read more about grouped summaries and mutates\nR4DS Chapter 12: Read more about reshaping and tidying data in R\nR4DS Chapter 3: Read an introduction to visualization\nGGP2 Chapter 11: Read more about color in ggplot2\nGGP2 Chapter 18: Read more about themes in ggplot2"
   },
   {
     "objectID": "Day_2/Day2B_Practice.html#fun-stuff",
     "href": "Day_2/Day2B_Practice.html#fun-stuff",
     "title": "Day 2B Practice",
     "section": "Fun Stuff",
-    "text": "Fun Stuff\n\nHow to Spot a Misleading Graph\nHere are some mistakes to avoid (unless you want to work at a shitty newspaper)…\n\n\n\n\nDon McMillan’s Gratest Charts\nWould these be more or less funny if he had used ggplot2… ?"
+    "text": "Fun Stuff\n\nLet’s Enhance\nIf you want to be able to do this, save your images as .pdf or .svg…\n\n\n\n\nDon McMillan’s Greatest Charts\nWould these be more or less funny if he had used ggplot2… ?"
   },
   {
     "objectID": "Day_2/Day2B_Slides.html",
