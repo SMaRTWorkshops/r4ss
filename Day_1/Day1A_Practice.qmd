@@ -11,7 +11,6 @@ Read what the user wanted to do and look at the command they sent to R. Fix the 
 
 a)  I want to add 20 and 0.2 and divide that sum by 4.1. But I get an error when I try:<br />`[20 + .2] \ 4.1`
 b)  I want to multiply 6 by the sum of 2 and 1,300. But I get an error when I try:<br />`6 x (2 + 1,300)`
-c)  I want to calculate the square root of the sum of 4 and 5. But I'm getting back a number that is way too large:<br />`sqrt(4) + 5`
 
 <p><details>
 <summary>Click here for the answer key</summary>
@@ -39,17 +38,6 @@ Change the `x` to an asterisk `*` because asterisk `*` is the multiplication ope
 6 * (2 + 1300)
 ```
 
-**Answer (c)**
-
-Move the `+ 5` portion inside the parentheses or it will just add 5 to the square root of 4.
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-sqrt(4 + 5)
-```
-
 </blockquote></details></p>
 
 ## Question 2.
@@ -71,64 +59,11 @@ Make your best guesses just by looking at the commands and then check your guess
 
 </details></p>
 
-## Question 3.
-
-a) Create a character vector named `flavors` that contains the following strings and print it: 
-    - Cookies & Cream
-    - Americone Dream (R)
-    - Bob Marley's 1 Love
-b) Use a function to calculate the number of strings in `flavors`.
-c) Use another function to calculate the number of characters in each string in `flavors`.
-d) Let R know how you feel about ice cream by using a function to either make all the characters in `flavors` uppercase (you LOVE ice cream) or lowercase (you don't love ice cream).
-
-<p><details>
-<summary>Click here for the answer key</summary>
-<blockquote>
-
-**Answer (a)**
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-flavors <- c("Cookies & Cream", "Americone Dream (R)", "Bob Marley's 1 Love")
-flavors
-```
-
-**Answer (b)**
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-length(flavors)
-```
-
-**Answer (c)**
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-nchar(flavors)
-```
-
-**Answer (d)**
-```{r}
-#| comment: "#>"
-#| collapse: true
-
-toupper(flavors)
-tolower(flavors)
-```
-
-</blockquote>
-</details></p>
-
 ## Resources
 
 - [R4DS Chapter 8](https://r4ds.had.co.nz/workflow-projects.html): Read more about projects
 
 - [R4DS Chapter 4](https://r4ds.had.co.nz/workflow-basics.html): Read about basic programming
-
-- [R4DS Chapter 14](https://r4ds.had.co.nz/strings.html): Read more about strings
 
 - [R4DS Chapter 27](https://r4ds.had.co.nz/r-markdown.html): Read more about RMarkdown
 
@@ -139,9 +74,3 @@ tolower(flavors)
 What it feels like to talk to R sometimes...
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/58l7ZqoU0a0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### "Who's" on First?
-
-A lesson about the importance of strings...
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/2ZksQd2fC6Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

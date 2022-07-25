@@ -32,6 +32,8 @@ format:
 
 <!-- Program II -->
 
+# Program II
+
 ## Functions {.smaller}
 
 ::: {.columns .pv4}

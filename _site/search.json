@@ -11,7 +11,7 @@
     "href": "Day_1/Day1A_Practice.html#question-1.",
     "title": "Day 1A Practice",
     "section": "Question 1.",
-    "text": "Question 1.\nRead what the user wanted to do and look at the command they sent to R. Fix the errors in the commands and calculate the answers.\n\nI want to add 20 and 0.2 and divide that sum by 4.1. But I get an error when I try:[20 + .2] \\ 4.1\nI want to multiply 6 by the sum of 2 and 1,300. But I get an error when I try:6 x (2 + 1,300)\nI want to calculate the square root of the sum of 4 and 5. But I’m getting back a number that is way too large:sqrt(4) + 5\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nChange the brackets [] to parentheses () because parentheses () are the order of operations operator in R. Also, change the backslash \\ to a forward slash / because forward slash / is the division operator in R.\n\n(20 + .2) / 4.1\n#> [1] 4.926829\n\nAnswer (b)\nChange the x to an asterisk * because asterisk * is the multiplication operator in R. Also, remove the comma , from 1,300 because R doesn’t use commas to delimit digits in large numbers.\n\n6 * (2 + 1300)\n#> [1] 7812\n\nAnswer (c)\nMove the + 5 portion inside the parentheses or it will just add 5 to the square root of 4.\n\nsqrt(4 + 5)\n#> [1] 3"
+    "text": "Question 1.\nRead what the user wanted to do and look at the command they sent to R. Fix the errors in the commands and calculate the answers.\n\nI want to add 20 and 0.2 and divide that sum by 4.1. But I get an error when I try:[20 + .2] \\ 4.1\nI want to multiply 6 by the sum of 2 and 1,300. But I get an error when I try:6 x (2 + 1,300)\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nChange the brackets [] to parentheses () because parentheses () are the order of operations operator in R. Also, change the backslash \\ to a forward slash / because forward slash / is the division operator in R.\n\n(20 + .2) / 4.1\n#> [1] 4.926829\n\nAnswer (b)\nChange the x to an asterisk * because asterisk * is the multiplication operator in R. Also, remove the comma , from 1,300 because R doesn’t use commas to delimit digits in large numbers.\n\n6 * (2 + 1300)\n#> [1] 7812"
   },
   {
     "objectID": "Day_1/Day1A_Practice.html#question-2.",
@@ -32,14 +32,14 @@
     "href": "Day_1/Day1A_Practice.html#resources",
     "title": "Day 1A Practice",
     "section": "Resources",
-    "text": "Resources\n\nR4DS Chapter 8: Read more about projects\nR4DS Chapter 4: Read about basic programming\nR4DS Chapter 14: Read more about strings\nR4DS Chapter 27: Read more about RMarkdown"
+    "text": "Resources\n\nR4DS Chapter 8: Read more about projects\nR4DS Chapter 4: Read about basic programming\nR4DS Chapter 27: Read more about RMarkdown"
   },
   {
     "objectID": "Day_1/Day1A_Practice.html#fun-stuff",
     "href": "Day_1/Day1A_Practice.html#fun-stuff",
     "title": "Day 1A Practice",
     "section": "Fun Stuff",
-    "text": "Fun Stuff\n\nLiteral Genie\nWhat it feels like to talk to R sometimes…\n\n\n\n\n“Who’s” on First?\nA lesson about the importance of strings…"
+    "text": "Fun Stuff\n\nLiteral Genie\nWhat it feels like to talk to R sometimes…"
   },
   {
     "objectID": "Day_1/Day1A_Slides.html",
@@ -53,14 +53,14 @@
     "href": "Day_1/Day1B_Practice.html#question-1.",
     "title": "Day 1B Practice",
     "section": "Question 1.",
-    "text": "Question 1.\nThe following table summarizes the season information for the eight seasons of AMC’s Breaking Bad show. Tidy up this data and save it to a tibble. Decide for yourself how to handle season 5 (should it be a single observation or two?). For the first and last aired dates, just store the year as a number.\n\n\n\n\nClick here for the answer key\n\n\nVersion with one observation for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5)\nepisodes <- c(7, 13, 13, 13, 16)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012)\nlast_air <- c(2008, 2009, 2010, 2011, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nVersion with two separate observations for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5.1, 5.2)\nepisodes <- c(7, 13, 13, 13, 8, 8)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nlast_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad"
+    "text": "Question 1.\n\nCreate a character vector named flavors that contains the following strings and print it:\n\nCookies & Cream\nAmericone Dream (R)\nBob Marley’s 1 Love\n\nUse a function to calculate the number of strings in flavors.\nUse another function to calculate the number of characters in each string in flavors.\nLet R know how you feel about ice cream by using a function to either make all the characters in flavors uppercase (you LOVE ice cream) or lowercase (you don’t love ice cream).\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nflavors <- c(\"Cookies & Cream\", \"Americone Dream (R)\", \"Bob Marley's 1 Love\")\nflavors\n#> [1] \"Cookies & Cream\"     \"Americone Dream (R)\" \"Bob Marley's 1 Love\"\n\nAnswer (b)\n\nlength(flavors)\n#> [1] 3\n\nAnswer (c)\n\nnchar(flavors)\n#> [1] 15 19 19\n\nAnswer (d)\n\ntoupper(flavors)\n#> [1] \"COOKIES & CREAM\"     \"AMERICONE DREAM (R)\" \"BOB MARLEY'S 1 LOVE\"\ntolower(flavors)\n#> [1] \"cookies & cream\"     \"americone dream (r)\" \"bob marley's 1 love\""
   },
   {
     "objectID": "Day_1/Day1B_Practice.html#question-2.",
     "href": "Day_1/Day1B_Practice.html#question-2.",
     "title": "Day 1B Practice",
     "section": "Question 2.",
-    "text": "Question 2.\nLoad the economics tibble (included in {tidyverse}). Then create a pipeline to accomplish the following data wrangling steps:\n\nFirst, in the economics tibble, rename the uempmed variable (the median duration of enemployment, in weeks) to duration and the unemploy variable (the number of unemployed, in thousands) to number.\nThen add a new variable called rate that is calculated by dividing number (from part a) by pop (the total population, in thousands).\nThen drop (i.e., unselect) the pce, pop, and psavert variables from the tibble.\nThen relocate the rate variable to be between the date and duration variables.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy)\n\n\n\n  \n\n\n\nAnswer (b)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop)\n\n\n\n  \n\n\n\nAnswer (c)\n\neconomics |> \n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert))\n\n\n\n  \n\n\n\nAnswer (d)\n\neconomics |>\n  rename(duration = uempmed, number = unemploy) |> \n  mutate(rate = number / pop) |> \n  select(-c(pce, pop, psavert)) |> \n  relocate(rate, .after = date)"
+    "text": "Question 2.\nThe following table summarizes the season information for the eight seasons of AMC’s Breaking Bad show.\n\nTidy up this data and save it to a tibble. Decide for yourself how to handle season 5 (should it be a single observation or two?). For the first and last aired dates, just store the year as a number.\nSave the tibble you created to a CSV file named “breaking_bad.csv”.\n\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\nVersion with one observation for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5)\nepisodes <- c(7, 13, 13, 13, 16)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012)\nlast_air <- c(2008, 2009, 2010, 2011, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nVersion with two separate observations for the season five parts\n\nlibrary(tidyverse)\nseason <- c(1, 2, 3, 4, 5.1, 5.2)\nepisodes <- c(7, 13, 13, 13, 8, 8)\nfirst_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nlast_air <- c(2008, 2009, 2010, 2011, 2012, 2013)\nnetwork <- \"AMC\"\nbreaking_bad <- \n  tibble(season, episodes, first_air, last_air, network)\nbreaking_bad\n\n\n\n  \n\n\n\nAnswer (b)\n\nwrite_csv(breaking_bad, \"breaking_bad.csv\")"
   },
   {
     "objectID": "Day_1/Day1B_Practice.html#question-3.",
@@ -74,14 +74,14 @@
     "href": "Day_1/Day1B_Practice.html#resources",
     "title": "Day 1B Practice",
     "section": "Resources",
-    "text": "Resources\n\nBroman & Woo (2018): Read more about tidy data principles\nR4DS Chapter 5 (§5.1–§5.5): Read more about the basic wrangling verbs\nR4DS Chapter 10: Read more about tibbles and data frames\nR4DS Chapter 11: Read more about data reading and writing"
+    "text": "Resources\n\nR4DS Chapter 14: Read more about strings\nBroman & Woo (2018): Read more about tidy data principles\nR4DS Chapter 10: Read more about tibbles and data frames\nR4DS Chapter 11: Read more about data reading and writing"
   },
   {
     "objectID": "Day_1/Day1B_Practice.html#fun-stuff",
     "href": "Day_1/Day1B_Practice.html#fun-stuff",
     "title": "Day 1B Practice",
     "section": "Fun Stuff",
-    "text": "Fun Stuff\n\nFundamentals of Tidying\nShe doesn’t like formatting-as-data either…\n\n\n\n\nStunt Rope\nThese are some advanced wrangling verbs…"
+    "text": "Fun Stuff\n\n“Who’s” on First?\nA lesson about the importance of strings…\n\n\n\n\nFundamentals of Tidying\nShe doesn’t like formatting-as-data either…"
   },
   {
     "objectID": "Day_1/Day1B_Slides.html",

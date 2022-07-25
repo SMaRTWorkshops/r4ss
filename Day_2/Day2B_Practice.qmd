@@ -205,24 +205,30 @@ ggsave("practice.png", plot = p2, width = 6.5, height = 4, units = "in")
 
 ## Resources
 
+- [R4DS Chapter 5](https://r4ds.had.co.nz/transform.html) (§5.6–§5.7): Read more about grouped summaries and mutates
+
+- [R4DS Chapter 12](https://r4ds.had.co.nz/tidy-data.html): Read more about reshaping and tidying data in R
+
 - [R4DS Chapter 3](https://r4ds.had.co.nz/data-visualisation.html): Read an introduction to visualization
 
 - [GGP2 Chapter 11](https://ggplot2-book.org/scale-colour.html): Read more about color in ggplot2
 
-- [GGP2 Chapter 8](https://ggplot2-book.org/annotations.html): Read about annotating ggplot2 objects
-
-- [GGP2 Chapter 17](https://ggplot2-book.org/facet.html): Read about faceting in ggplot2
-
 ## Fun Stuff
 
-### How to Spot a Misleading Graph
+### Advanced Reshaping
 
-Here are some mistakes to avoid (unless you want to work at a shitty newspaper)...
+"We have to be careful with the <del>clay</del>[data]{.blue} that <del>Mother Nature</del>[Mechanical Turk]{.blue} has given us..."
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/E91bGT9BjYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K_OLh6ZTyhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-### Don McMillan's Gratest Charts
+### Don McMillan's Greatest Charts
 
 Would these be more or less funny if he had used ggplot2... ?
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LYE3GtXqDV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Let's Enhance
+
+If you want to be able to do this, save your images as `.pdf` or `.svg`...
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LhF_56SxrGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

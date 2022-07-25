@@ -14,6 +14,101 @@ format:
 library(tidyverse)
 ```
 
+## Question 3.
+
+Load the `economics` tibble (included in \{tidyverse\}). Then create a pipeline to accomplish the following data wrangling steps:
+
+a)  First, in the `economics` tibble, rename the `uempmed` variable (the median duration of enemployment, in weeks) to `duration` and the `unemploy` variable (the number of unemployed, in thousands) to `number`.
+b)  Then add a new variable called `rate` that is calculated by dividing `number` (from part a) by `pop` (the total population, in thousands).
+c)  Then drop (i.e., unselect) the `pce`, `pop`, and `psavert` variables from the tibble.
+d)  Then relocate the `rate` variable to be between the `date` and `duration` variables.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+economics |> 
+  rename(duration = uempmed, number = unemploy)
+```
+
+**Answer (b)**
+
+```{r}
+economics |> 
+  rename(duration = uempmed, number = unemploy) |> 
+  mutate(rate = number / pop)
+```
+
+**Answer (c)**
+
+```{r}
+economics |> 
+  rename(duration = uempmed, number = unemploy) |> 
+  mutate(rate = number / pop) |> 
+  select(-c(pce, pop, psavert))
+```
+
+**Answer (d)**
+
+```{r}
+economics |>
+  rename(duration = uempmed, number = unemploy) |> 
+  mutate(rate = number / pop) |> 
+  select(-c(pce, pop, psavert)) |> 
+  relocate(rate, .after = date)
+```
+
+</blockquote>
+</details></p>
+
+## Question 3.
+
+Download the [cereal](https://pittmethods.github.io/r4ss/data/cereal.csv) data file from the [workshop website](../Details/datasets.qmd). Copy it to your Project folder and read it into R as a tibble. Then create a pipeline to produce a short list of cereals for me to try. I am only interested in cold cereals with a rating greater than 70. Please arrange the list so that the cereals with the fewest calories are displayed at the top. Finally, write the result of this pipeline to a CSV file called "jeffs_list.csv" (I expect it to be even more popular than Craig's list).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| eval: false
+#| message: false
+
+cereal <- read_csv("cereal.csv") 
+
+jeffs_list <- 
+  cereal |> 
+  filter(type == "cold" & rating > 70) |> 
+  arrange(calories)
+
+jeffs_list
+```
+
+```{r}
+#| echo: false
+#| message: false
+
+cereal <- read_csv("../data/cereal.csv") 
+
+jeffs_list <- 
+  cereal |> 
+  filter(type == "cold" & rating > 70) |> 
+  arrange(calories)
+
+jeffs_list
+```
+
+```{r}
+#| eval: false
+
+write_csv(jeffs_list, "jeffs_list.csv")
+```
+
+</blockquote>
+</details></p>
+
 ## Question 1
 
 a) Transform the `drv` variable in the `mpg` tibble into a factor where "4" is labeled Four Wheel Drive, "r" is labelled Rear Wheel Drive, and "f" is labeled Front Wheel Drive. Save this updated tibble as `mpg2`.
@@ -208,24 +303,14 @@ txhousing |>
 
 ## Resources
 
-- [R4DS Chapter 5](https://r4ds.had.co.nz/transform.html) (§5.6–§5.7): Read more about grouped summaries and mutates
-
-- [R4DS Chapter 14](https://r4ds.had.co.nz/strings.html): Read more about working with strings in R
+-   [R4DS Chapter 5](https://r4ds.had.co.nz/transform.html) (§5.1–§5.5): Read more about the basic wrangling verbs 
 
 - [R4DS Chapter 15](https://r4ds.had.co.nz/factors.html): Read more about working with factors in R
 
-- [R4DS Chapter 12](https://r4ds.had.co.nz/tidy-data.html): Read more about reshaping and tidying data in R
-
 ## Fun Stuff
 
-### Advanced Reshaping
+### Stunt Rope
 
-"We have to be careful with the <del>clay</del>[data]{.blue} that <del>Mother Nature</del>[Mechanical Turk]{.blue} has given us..."
+These are some advanced wrangling verbs...
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/K_OLh6ZTyhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Let's Enhance
-
-If you want to be able to do this, save your images as `.pdf` or `.svg`...
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LhF_56SxrGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/flcFl8z_hF4?start=99" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
