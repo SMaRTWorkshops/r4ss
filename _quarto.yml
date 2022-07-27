@@ -47,7 +47,7 @@ website:
           - text: "Day 3B Slides"
             href: Day_3/Day3B_Slides.qmd
           - text: "Day 3B Practice"
-            href: construction.qmd #Day_3/Day3B_Practice.qmd
+            href: Day_3/Day3B_Practice.qmd
           - text: "Extra Slides"
             href: Day_3/Extra_Slides.qmd
       - icon: github

@@ -152,56 +152,56 @@ salaries |>
 
 library(tidyverse)
 
-mpg
+salaries <- read_csv("salaries.csv")
 
 # ==============================================================================
 
 # USECASE: Creating histograms
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_histogram()
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_histogram(bins = 20)
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_histogram(binwidth = 2)
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_histogram(binwidth = 2, color = "red", size = 1)
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_histogram(binwidth = 2, color = "red", size = 1, fill = "white")
 
 # ==============================================================================
 
 # USECASE: Creating density plots
 
-ggplot(mpg, aes(x = hwy)) + geom_density()
+ggplot(salaries, aes(x = salary)) + geom_density()
 
-ggplot(mpg, aes(x = hwy)) + 
+ggplot(salaries, aes(x = salary)) + 
   geom_density(color = "red", size = 1, fill = "white")
 
 # ==============================================================================
 
 # USECASE: Creating box plots
 
-ggplot(mpg, aes(x = hwy)) + geom_boxplot()
+ggplot(salaries, aes(x = salary)) + geom_boxplot()
 
-ggplot(mpg, aes(x = hwy, y = class)) + 
+ggplot(salaries, aes(x = salary, y = rank)) + 
   geom_boxplot(varwidth = TRUE)
 
 # ==============================================================================
 
 # USECASE: Creating bar plots to count categorical variables
 
-ggplot(mpg, aes(x = class)) + geom_bar()
+ggplot(salaries, aes(x = rank)) + geom_bar()
 
 # ==============================================================================
 
 # PITFALL: Don't try to create histograms for categorical variables
 
-ggplot(mpg, aes(x = class)) + geom_histogram() #error
+ggplot(salaries, aes(x = rank)) + geom_histogram() #error
 ```
 
 ::: footer

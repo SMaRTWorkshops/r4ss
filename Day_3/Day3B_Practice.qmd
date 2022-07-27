@@ -1,0 +1,123 @@
+---
+title: "Day 3B Practice"
+format:
+  html:
+    df-print: paged
+---
+
+![](../img/growth_curve_2780E3.svg){.hero}
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## Question 1.
+
+a) Download the [political](https://pittmethods.github.io/r4ss/data/political.csv) dataset from the [workshop website](https://pittmethods.github.io/r4ss/Details/datasets.html), copy it to your project folder, and read it into R. Mutate this tibble such that the `sex` variable is a factor (0=Male, 1=Female). 
+
+b) Create a histogram to view the distributions of the `informed` and `tv_news` variables and a bar plot to view the counts of the `sex` variable. What do these distributions look like?
+
+c) Build a regression model to predict each student's self-reported level of political informedness (`informed`) from the degree to which they watch television news (`tv_news`). What is the standardized slope for the television news predictor? *Bonus:* What is the model's adjusted R-squared?
+
+d) Expand your regression model from Question 1(b) to become a multiple regression model that also includes students' sex (`sex`) as a predictor. What are the two predictor variables' partial effects?
+
+e) Statistically test whether the effect of television watching depends on students' sex and generate a plot that shows the model's predictions (to help you interpret any interaction effect).
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| eval: false
+#| collapse: true
+
+library(tidyverse)
+political <- 
+  read_csv("political.csv") |> 
+  mutate(sex = factor(sex, levels = c(0, 1), labels = c("Male", "Female"))) |> 
+  print()
+```
+
+```{r}
+#| comment: "#>"
+#| echo: false
+#| collapse: true
+#| message: false
+
+library(tidyverse)
+political <- 
+  read_csv("../data/political.csv") |> 
+  mutate(sex = factor(sex, levels = c(0, 1), labels = c("Male", "Female"))) |> 
+  print()
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+#| message: false
+
+ggplot(political, aes(x = informed)) + geom_histogram()
+ggplot(political, aes(x = tv_news)) + geom_histogram()
+ggplot(political, aes(x = sex)) + geom_bar()
+```
+
+The `informed` variable is discrete at 1, 2, 3, 4, or 5 with a triangular pattern where 3 is most common. The `tv_news` variable is discreet at 0, 1, 2, 3, or 4 with a pattern where 0 and 3 are most common. The `sex` variable is relatively balanced between male and female.
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+library(parameters)
+library(performance)
+fit <- lm(informed ~ tv_news, data = political)
+model_parameters(fit, standardized = "refit")
+model_performance(fit)
+```
+
+The standardized slope is 0.21 for `tv_news` and it is significantly different from zero $(p=.004)$. This simple model explains 12% of the variance in `informed` $(R^2_{adj}=0.123)$.
+
+**Answer (d)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+fit2 <- lm(informed ~ tv_news + sex, data = political)
+model_parameters(fit2)
+```
+
+The partial effect of television news was $0.20$ and the partial effect of sex was $-0.44$ (females reported feeling/being less informed than males).
+
+**Answer (e)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+library(ggeffects)
+fit3 <- lm(informed ~ tv_news * sex, data = political)
+model_parameters(fit3)
+ggeffect(fit3, terms = c("tv_news", "sex")) |> plot()
+```
+
+The effect of television news does not seem to depend on sex, as the interaction effect was not significant $(p=.887)$ and the prediction lines were very close to parallel.
+
+</blockquote></details></p>
+
+## Question 2
+
+Did you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating a few regression models. If not, then look through the datasets on the [workshop website](https://pittmethods.github.io/r4ss/Details/datasets.html) and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner.

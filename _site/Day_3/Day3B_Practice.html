@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R4SS Workshop - Day 3B Practice</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">R4SS Workshop</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-details" role="button" data-bs-toggle="dropdown" aria-expanded="false">Details</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-details">    
+        <li>
+    <a class="dropdown-item" href="../Details/instructor.html">
+ <span class="dropdown-text">Instructor</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Details/schedule.html">
+ <span class="dropdown-text">Schedule</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Details/datasets.html">
+ <span class="dropdown-text">Datasets</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-day-1" role="button" data-bs-toggle="dropdown" aria-expanded="false">Day 1</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-day-1">    
+        <li>
+    <a class="dropdown-item" href="../Day_1/Day1A_Slides.html">
+ <span class="dropdown-text">Day 1A Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_1/Day1A_Practice.html">
+ <span class="dropdown-text">Day 1A Practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_1/Day1B_Slides.html">
+ <span class="dropdown-text">Day 1B Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_1/Day1B_Practice.html">
+ <span class="dropdown-text">Day 1B Practice</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-day-2" role="button" data-bs-toggle="dropdown" aria-expanded="false">Day 2</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-day-2">    
+        <li>
+    <a class="dropdown-item" href="../Day_2/Day2A_Slides.html">
+ <span class="dropdown-text">Day 2A Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_2/Day2A_Practice.html">
+ <span class="dropdown-text">Day 2A Practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_2/Day2B_Slides.html">
+ <span class="dropdown-text">Day 2B Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_2/Day2B_Practice.html">
+ <span class="dropdown-text">Day 2B Practice</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-day-3" role="button" data-bs-toggle="dropdown" aria-expanded="false">Day 3</a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-day-3">    
+        <li>
+    <a class="dropdown-item" href="../Day_3/Day3A_Slides.html">
+ <span class="dropdown-text">Day 3A Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_3/Day3A_Practice.html">
+ <span class="dropdown-text">Day 3A Practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_3/Day3B_Slides.html">
+ <span class="dropdown-text">Day 3B Slides</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_3/Day3B_Practice.html">
+ <span class="dropdown-text">Day 3B Practice</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Day_3/Extra_Slides.html">
+ <span class="dropdown-text">Extra Slides</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com/pittmethods/r4ss"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Day 3B Practice</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><img src="../img/growth_curve_2780E3.svg" class="hero img-fluid"></p>
+<div class="cell">
+
+</div>
+<section id="question-1." class="level2">
+<h2 class="anchored" data-anchor-id="question-1.">Question 1.</h2>
+<ol type="a">
+<li><p>Download the <a href="https://pittmethods.github.io/r4ss/data/political.csv">political</a> dataset from the <a href="https://pittmethods.github.io/r4ss/Details/datasets.html">workshop website</a>, copy it to your project folder, and read it into R. Mutate this tibble such that the <code>sex</code> variable is a factor (0=Male, 1=Female).</p></li>
+<li><p>Create a histogram to view the distributions of the <code>informed</code> and <code>tv_news</code> variables and a bar plot to view the counts of the <code>sex</code> variable. What do these distributions look like?</p></li>
+<li><p>Build a regression model to predict each student’s self-reported level of political informedness (<code>informed</code>) from the degree to which they watch television news (<code>tv_news</code>). What is the standardized slope for the television news predictor? <em>Bonus:</em> What is the model’s adjusted R-squared?</p></li>
+<li><p>Expand your regression model from Question 1(b) to become a multiple regression model that also includes students’ sex (<code>sex</code>) as a predictor. What are the two predictor variables’ partial effects?</p></li>
+<li><p>Statistically test whether the effect of television watching depends on students’ sex and generate a plot that shows the model’s predictions (to help you interpret any interaction effect).</p></li>
+</ol>
+<p>
+</p><details>
+<summary>
+Click here for the answer key
+</summary>
+<blockquote class="blockquote">
+<p><strong>Answer (a)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>political <span class="ot">&lt;-</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="st">"political.csv"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(sex, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<pre><code>#&gt; # A tibble: 59 × 9
+#&gt;    student  year sex    voting         read_news read_…¹ tv_news ethic…² infor…³
+#&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+#&gt;  1       1     1 Female Not Registered         3       1       0       2       2
+#&gt;  2       2     4 Female Voted                  1       1       3       2       2
+#&gt;  3       3     2 Male   Voted                  4       1       3       2       3
+#&gt;  4       4     3 Female Voted                  3       1       0       3       2
+#&gt;  5       5     1 Female Voted                  2       0       0       2       3
+#&gt;  6       6     2 Female Didn't Vote            3       1       3       2       4
+#&gt;  7       7     1 Male   Didn't Vote            4       1       0       4       4
+#&gt;  8       8     3 Female Voted                  2       1       1       2       3
+#&gt;  9       9     4 Male   Voted                  3       1       0       4       3
+#&gt; 10      10     4 Female Voted                  3       0       4       3       3
+#&gt; # … with 49 more rows, and abbreviated variable names ¹​read_edit,
+#&gt; #   ²​ethical_practical, ³​informed
+#&gt; # ℹ Use `print(n = ...)` to see more rows</code></pre>
+</div>
+<p><strong>Answer (b)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(political, <span class="fu">aes</span>(<span class="at">x =</span> informed)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Day3B_Practice_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(political, <span class="fu">aes</span>(<span class="at">x =</span> tv_news)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Day3B_Practice_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(political, <span class="fu">aes</span>(<span class="at">x =</span> sex)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Day3B_Practice_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The <code>informed</code> variable is discrete at 1, 2, 3, 4, or 5 with a triangular pattern where 3 is most common. The <code>tv_news</code> variable is discreet at 0, 1, 2, 3, or 4 with a pattern where 0 and 3 are most common. The <code>sex</code> variable is relatively balanced between male and female.</p>
+<p><strong>Answer (c)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parameters)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(informed <span class="sc">~</span> tv_news, <span class="at">data =</span> political)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">model_parameters</span>(fit, <span class="at">standardized =</span> <span class="st">"refit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Parameter"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Coefficient"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["CI"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["CI_low"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CI_high"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["df_error"],"name":[8],"type":["int"],"align":["right"]},{"label":["p"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"2.6428571","3":"0.16547032","4":"0.95","5":"2.31150855","6":"2.9742057","7":"15.971790","8":"57","9":"1.045676e-22"},{"1":"tv_news","2":"0.2142857","3":"0.07094039","4":"0.95","5":"0.07223003","6":"0.3563414","7":"3.020645","8":"57","9":"3.771569e-03"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_performance</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["AIC"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["R2"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["R2_adjusted"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["RMSE"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Sigma"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"151.2369","2":"157.4695","3":"0.137987","4":"0.122864","5":"0.8285172","6":"0.8429272","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The standardized slope is 0.21 for <code>tv_news</code> and it is significantly different from zero <span class="math inline">\((p=.004)\)</span>. This simple model explains 12% of the variance in <code>informed</code> <span class="math inline">\((R^2_{adj}=0.123)\)</span>.</p>
+<p><strong>Answer (d)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(informed <span class="sc">~</span> tv_news <span class="sc">+</span> sex, <span class="at">data =</span> political)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">model_parameters</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Parameter"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Coefficient"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["CI"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["CI_low"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CI_high"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["df_error"],"name":[8],"type":["int"],"align":["right"]},{"label":["p"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"2.8793172","3":"0.19785260","4":"0.95","5":"2.4829708","6":"3.27566357","7":"14.552839","8":"56","9":"1.112085e-20"},{"1":"tv_news","2":"0.1990028","3":"0.06941375","4":"0.95","5":"0.0599504","6":"0.33805528","7":"2.866908","8":"56","9":"5.830966e-03"},{"1":"sexFemale","2":"-0.4420359","3":"0.21503449","4":"0.95","5":"-0.8728018","6":"-0.01127008","7":"-2.055651","8":"56","9":"4.448990e-02"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The partial effect of television news was <span class="math inline">\(0.20\)</span> and the partial effect of sex was <span class="math inline">\(-0.44\)</span> (females reported feeling/being less informed than males).</p>
+<p><strong>Answer (e)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(informed <span class="sc">~</span> tv_news <span class="sc">*</span> sex, <span class="at">data =</span> political)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">model_parameters</span>(fit3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Parameter"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Coefficient"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["CI"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["CI_low"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["CI_high"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["t"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["df_error"],"name":[8],"type":["int"],"align":["right"]},{"label":["p"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"(Intercept)","2":"2.89508580","3":"0.22815351","4":"0.95","5":"2.43785594","6":"3.3523157","7":"12.6892010","8":"55","9":"5.657806e-18"},{"1":"tv_news","2":"0.19071763","3":"0.09096843","4":"0.95","5":"0.00841282","6":"0.3730224","7":"2.0965254","8":"55","9":"4.064881e-02"},{"1":"sexFemale","2":"-0.47674409","3":"0.32592150","4":"0.95","5":"-1.12990537","6":"0.1764172","7":"-1.4627574","8":"55","9":"1.492251e-01"},{"1":"tv_news:sexFemale","2":"0.02033765","3":"0.14252442","4":"0.95","5":"-0.26528767","6":"0.3059630","7":"0.1426959","8":"55","9":"8.870518e-01"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggeffect</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"tv_news"</span>, <span class="st">"sex"</span>)) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Day3B_Practice_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The effect of television news does not seem to depend on sex, as the interaction effect was not significant <span class="math inline">\((p=.887)\)</span> and the prediction lines were very close to parallel.</p>
+</blockquote>
+</details>
+<p></p>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>Did you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating a few regression models. If not, then look through the datasets on the <a href="https://pittmethods.github.io/r4ss/Details/datasets.html">workshop website</a> and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022 © Jeffrey Girard</div>
+  </div>
+</footer>
+
+
+
+</body></html>
