@@ -309,7 +309,7 @@ Click here for the answer key
 
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["sex"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_cites"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.dev"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["iqr"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["skewness"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["n.obs"],"name":[11],"type":["int"],"align":["right"]},{"label":["missing.obs"],"name":[12],"type":["int"],"align":["right"]},{"label":["expression"],"name":[13],"type":["list"],"align":["right"]},{"label":["n.expression"],"name":[14],"type":["chr"],"align":["left"]}],"data":[{"1":"female","2":"37.33333","3":"14.49934","4":"19","5":"32.05463","6":"42.41111","7":"14","8":"83","9":"1.5610480","10":"3.17683201","11":"27","12":"0","13":"<language>","14":"female\\n(n = 27)"},{"1":"male","2":"42.45714","3":"18.88096","4":"27","5":"36.52214","6":"49.53643","7":"1","8":"90","9":"0.2581231","10":"0.05289193","11":"35","12":"0","13":"<language>","14":"male\\n(n = 35)"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["sex"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n_cites"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["std.dev"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["iqr"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["skewness"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["n.obs"],"name":[11],"type":["int"],"align":["right"]},{"label":["missing.obs"],"name":[12],"type":["int"],"align":["right"]},{"label":["expression"],"name":[13],"type":["list"],"align":["right"]},{"label":["n.expression"],"name":[14],"type":["chr"],"align":["left"]}],"data":[{"1":"female","2":"37.33333","3":"14.49934","4":"19","5":"31.92130","6":"42.40926","7":"14","8":"83","9":"1.5610480","10":"3.17683201","11":"27","12":"0","13":"<language>","14":"female\\n(n = 27)"},{"1":"male","2":"42.45714","3":"18.88096","4":"27","5":"35.91571","6":"48.70643","7":"1","8":"90","9":"0.2581231","10":"0.05289193","11":"35","12":"0","13":"<language>","14":"male\\n(n = 35)"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -342,6 +342,37 @@ Click here for the answer key
 </section>
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>Using the <code>mpg</code> tibble from the {tidyverse} package, statistically test whether cars with the three different drive trains (<code>drv</code>) get significantly different city fuel efficiency (<code>cty</code>) on average. Calculate the effect size for this difference.</p>
+<p>
+</p><details>
+<summary>
+Click here for the answer key
+</summary>
+<blockquote class="blockquote">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway_anova</span>(mpg, <span class="at">x =</span> drv, <span class="at">y =</span> cty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["statistic"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["df.error"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["method"],"name":[5],"type":["chr"],"align":["left"]},{"label":["effectsize"],"name":[6],"type":["chr"],"align":["left"]},{"label":["estimate"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["conf.level"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["conf.low"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["conf.method"],"name":[11],"type":["chr"],"align":["left"]},{"label":["conf.distribution"],"name":[12],"type":["chr"],"align":["left"]},{"label":["n.obs"],"name":[13],"type":["int"],"align":["right"]},{"label":["expression"],"name":[14],"type":["list"],"align":["right"]}],"data":[{"1":"89.53976","2":"2","3":"78.87858","4":"5.069122e-21","5":"One-way analysis of means (not assuming equal variances)","6":"Omega2","7":"0.6838153","8":"0.95","9":"0.5882818","10":"1","11":"ncp","12":"F","13":"234","14":"<language>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The effect size was <span class="math inline">\(\omega^2=0.68\)</span> and the difference was significant <span class="math inline">\((p&lt;.001)\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(mpg, <span class="at">x =</span> drv, <span class="at">y =</span> cty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Day3A_Practice_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</blockquote>
+</details>
+<p></p>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
 <p>Did you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating correlations and comparing group means. If not, then look through the datasets on the <a href="https://pittmethods.github.io/r4ss/Details/datasets.html">workshop website</a> and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner.</p>
 </section>
 <section id="resources" class="level2">
