@@ -5,4 +5,106 @@ format:
     df-print: paged
 ---
 
-https://easystats.github.io/correlation/articles/types.html
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+```
+
+## Question 1.
+
+a) Download the [yearspubs](https://pittmethods.github.io/r4ss/data/yearspubs.csv) dataset from the [workshop website](https://pittmethods.github.io/r4ss/Details/datasets.html), copy it to your project folder, and read it into R.
+
+b) Estimate the correlation between academics' number of publications (`n_pubs`) and number of citations (`n_cites`) in this sample.
+
+c) Estimate the average number of citations for male and female academics (with 95\% confidence intervals).
+
+d) Estimate the effect size of this difference and test whether it is statistically significant. You can decide whether to use a parametric or nonparametric approach.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+**Answer (a)**
+
+```{r}
+#| comment: "#>"
+#| eval: false
+#| collapse: true
+
+library(tidyverse)
+yearspubs <- read_csv("yearspubs.csv")
+yearspubs
+```
+
+```{r}
+#| comment: "#>"
+#| echo: false
+#| collapse: true
+#| message: false
+
+yearspubs <- read_csv("../data/yearspubs.csv")
+yearspubs
+```
+
+**Answer (b)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+library(correlation)
+correlation(yearspubs)
+```
+
+The correlation between number of publications and citations is 0.34.
+
+**Answer (c)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+library(statsExpressions)
+centrality_description(yearspubs, x = sex, y = n_cites)
+```
+
+The average was estimates as 37.3 \[33.4, 43.5\] for females and 42.4 \[35.0, 48.7\] for males.
+
+**Answer (d)**
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+two_sample_test(yearspubs, x = sex, y = n_cites, type = "parametric")
+```
+
+The effect size was $g=-0.3$ but the difference was not significant $(p=.232)$.
+
+```{r}
+#| message: false
+
+# Optionally:
+library(ggstatsplot)
+ggbetweenstats(yearspubs, x = sex, y = n_cites)
+```
+
+
+</blockquote></details></p>
+
+## Question 2
+
+Did you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating correlations and comparing group means. If not, then look through the datasets on the [workshop website](https://pittmethods.github.io/r4ss/Details/datasets.html) and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner.
+
+## Resources
+
+-   [Web](https://easystats.github.io/correlation/articles/types.html): Read more about the methods offered by the \{correlation\} package
+
+-   [Web](https://indrajeetpatil.github.io/statsExpressions/articles/statsExpressions.html#expressions-for-plots): Read more about all the information in a \{ggstatsplot\} graphic
+
+-   [Learning Statistics with R](https://learningstatisticswithr.com/): A free textbook on the ideas/theory underlying the statistical models we just discussed

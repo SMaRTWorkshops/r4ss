@@ -168,11 +168,25 @@
     "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
   },
   {
-    "objectID": "Day_3/Day3A_Practice.html",
-    "href": "Day_3/Day3A_Practice.html",
+    "objectID": "Day_3/Day3A_Practice.html#question-1.",
+    "href": "Day_3/Day3A_Practice.html#question-1.",
     "title": "Day 3A Practice",
-    "section": "",
-    "text": "https://easystats.github.io/correlation/articles/types.html"
+    "section": "Question 1.",
+    "text": "Question 1.\n\nDownload the yearspubs dataset from the workshop website, copy it to your project folder, and read it into R.\nEstimate the correlation between academics’ number of publications (n_pubs) and number of citations (n_cites) in this sample.\nEstimate the average number of citations for male and female academics (with 95% confidence intervals).\nEstimate the effect size of this difference and test whether it is statistically significant. You can decide whether to use a parametric or nonparametric approach.\n\n\n\n\nClick here for the answer key\n\n\nAnswer (a)\n\nlibrary(tidyverse)\nyearspubs <- read_csv(\"yearspubs.csv\")\nyearspubs\n\n\n\n\n\n  \n\n\n\nAnswer (b)\n\nlibrary(correlation)\ncorrelation(yearspubs)\n\n\n\n  \n\n\n\nThe correlation between number of publications and citations is 0.34.\nAnswer (c)\n\nlibrary(statsExpressions)\ncentrality_description(yearspubs, x = sex, y = n_cites)\n\n\n\n  \n\n\n\nThe average was estimates as 37.3 [33.4, 43.5] for females and 42.4 [35.0, 48.7] for males.\nAnswer (d)\n\ntwo_sample_test(yearspubs, x = sex, y = n_cites, type = \"parametric\")\n\n\n\n  \n\n\n\nThe effect size was \\(g=-0.3\\) but the difference was not significant \\((p=.232)\\).\n\n# Optionally:\nlibrary(ggstatsplot)\nggbetweenstats(yearspubs, x = sex, y = n_cites)"
+  },
+  {
+    "objectID": "Day_3/Day3A_Practice.html#question-2",
+    "href": "Day_3/Day3A_Practice.html#question-2",
+    "title": "Day 3A Practice",
+    "section": "Question 2",
+    "text": "Question 2\nDid you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating correlations and comparing group means. If not, then look through the datasets on the workshop website and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner."
+  },
+  {
+    "objectID": "Day_3/Day3A_Practice.html#resources",
+    "href": "Day_3/Day3A_Practice.html#resources",
+    "title": "Day 3A Practice",
+    "section": "Resources",
+    "text": "Resources\n\nWeb: Read more about the methods offered by the {correlation} package\nWeb: Read more about all the information in a {ggstatsplot} graphic\nLearning Statistics with R: A free textbook on the ideas/theory underlying the statistical models we just discussed"
   },
   {
     "objectID": "Day_3/Day3A_Slides.html",
@@ -200,7 +214,7 @@
     "href": "Details/datasets.html#datasets-to-download",
     "title": "Datasets",
     "section": "Datasets to download",
-    "text": "Datasets to download\n\ncereal\nReal data on 77 cereal products from the early 1990s. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ndiary\nReal data from 112 participants in a “daily diary” study on stress and affect. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nelicitation\nReal data about 139 participants’ emotions during four emotion elicitation tasks. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nexercise\nSimulated data about 900 participants’ weight loss under different exercise programs.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ngradebook\nSimulated data on the scores of 10 students on 5 tests.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ninterpersonal\nReal data about the interpersonal problems of 34 psychotherapy clients. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nsalaries\nReal data about 397 professors during 2008 to 2009. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nyearspubs\nDownload CSV"
+    "text": "Datasets to download\n\ncereal\nReal data on 77 cereal products from the early 1990s. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ndiary\nReal data from 112 participants in a “daily diary” study on stress and affect. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nds_salaries\nReal data about 607 data scientist’s jobs and salaries during 2020-2022. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nelicitation\nReal data about 139 participants’ emotions during four emotion elicitation tasks. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nexercise\nSimulated data about 900 participants’ weight loss under different exercise programs.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ngradebook\nSimulated data on the scores of 10 students on 5 tests.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ninterpersonal\nReal data about the interpersonal problems of 34 psychotherapy clients. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\npolitical\nReal data about the political activities of 59 college students.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nsalaries\nReal data about 397 professors during 2008 to 2009. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nyearspubs\nDownload CSV"
   },
   {
     "objectID": "Details/datasets.html#datasets-in-packages",

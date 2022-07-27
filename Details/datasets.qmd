@@ -41,6 +41,19 @@ Real data from 112 participants in a "daily diary" study on stress and affect. \
 read_csv("../data/diary.csv")
 ```
 
+### ds_salaries
+
+Real data about 607 data scientist's jobs and salaries during 2020-2022. \[[Source](https://www.kaggle.com/datasets/saurabhshahane/data-science-jobs-salaries)\]
+
+<a href="https://pittmethods.github.io/r4ss/data/ds_salaries.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/ds_salaries.csv")
+```
+
 ### elicitation
 
 Real data about 139 participants' emotions during four emotion elicitation tasks. \[[Source](https://doi.org/10.1016/j.imavis.2014.06.002)\]
@@ -91,6 +104,19 @@ Real data about the interpersonal problems of 34 psychotherapy clients. \[[Sourc
 #| message: false
 
 read_csv("../data/interpersonal.csv")
+```
+
+### political
+
+Real data about the political activities of 59 college students.
+
+<a href="https://pittmethods.github.io/r4ss/data/political.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/political.csv")
 ```
 
 ### salaries
