@@ -99,6 +99,34 @@ ggbetweenstats(yearspubs, x = sex, y = n_cites)
 
 ## Question 2
 
+Using the `mpg` tibble from the \{tidyverse\} package, statistically test whether cars with the three different drive trains (`drv`) get significantly different city fuel efficiency (`cty`) on average. Calculate the effect size for this difference.
+
+<p><details>
+<summary>Click here for the answer key</summary>
+<blockquote>
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+oneway_anova(mpg, x = drv, y = cty)
+```
+
+The effect size was $\omega^2=0.68$ and the difference was significant $(p<.001)$.
+
+```{r}
+#| comment: "#>"
+#| collapse: true
+#| warning: false
+
+ggbetweenstats(mpg, x = drv, y = cty)
+```
+
+</blockquote></details></p>
+
+## Question 3
+
 Did you bring your own data? If so, load it into R and explore it using the tools we learned this week. Wrangle it a bit and maybe do some basic statistics on it, estimating correlations and comparing group means. If not, then look through the datasets on the [workshop website](https://pittmethods.github.io/r4ss/Details/datasets.html) and find one that is interesting to you; do the same process I described above to practice your skills in a more self-directed manner.
 
 ## Resources
