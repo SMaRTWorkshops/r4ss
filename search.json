@@ -182,6 +182,13 @@
     "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
   },
   {
+    "objectID": "Day_3/Day3B_Slides.html",
+    "href": "Day_3/Day3B_Slides.html",
+    "title": "Day 3B Slides",
+    "section": "",
+    "text": "Note. To view the slideshow in full screen mode, click inside it and press the “f” key on your keyboard. You can also use the menu by clicking on the icon at the bottom-left of each slide."
+  },
+  {
     "objectID": "Day_3/Extra_Slides.html",
     "href": "Day_3/Extra_Slides.html",
     "title": "Extra Slides",
@@ -193,7 +200,7 @@
     "href": "Details/datasets.html#datasets-to-download",
     "title": "Datasets",
     "section": "Datasets to download",
-    "text": "Datasets to download\n\ncereal\nReal data on 77 cereal products from the early 1990s. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ndiary\nReal data from 112 participants in a “daily diary” study on stress and affect. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nelicitation\nReal data about 139 participants’ emotions during four emotion elicitation tasks. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ngradebook\nSimulated data on the scores of 10 students on 5 tests.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ninterpersonal\nReal data about the interpersonal problems of 34 psychotherapy clients. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nsalaries\nReal data about 397 professors during 2008 to 2009. [Source]\nDownload CSV"
+    "text": "Datasets to download\n\ncereal\nReal data on 77 cereal products from the early 1990s. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ndiary\nReal data from 112 participants in a “daily diary” study on stress and affect. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nelicitation\nReal data about 139 participants’ emotions during four emotion elicitation tasks. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nexercise\nSimulated data about 900 participants’ weight loss under different exercise programs.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ngradebook\nSimulated data on the scores of 10 students on 5 tests.\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\ninterpersonal\nReal data about the interpersonal problems of 34 psychotherapy clients. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nsalaries\nReal data about 397 professors during 2008 to 2009. [Source]\nDownload CSV\n\n\n\n\n  \n\n\n\n\n\nyearspubs\nDownload CSV"
   },
   {
     "objectID": "Details/datasets.html#datasets-in-packages",
