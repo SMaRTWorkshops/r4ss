@@ -54,6 +54,19 @@ Real data about 139 participants' emotions during four emotion elicitation tasks
 read_csv("../data/elicitation.csv")
 ```
 
+### exercise
+
+Simulated data about 900 participants' weight loss under different exercise programs.
+
+<a href="https://pittmethods.github.io/r4ss/data/exercise.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/exercise.csv")
+```
+
 ### gradebook
 
 Simulated data on the scores of 10 students on 5 tests.
@@ -91,6 +104,17 @@ Real data about 397 professors during 2008 to 2009. \[[Source](https://cran.r-pr
 #| message: false
 
 read_csv("../data/salaries.csv")
+```
+
+### yearspubs
+
+<a href="https://pittmethods.github.io/r4ss/data/yearspubs.csv"><button type="button" class="btn btn-primary">Download CSV</button></a>
+
+```{r}
+#| echo: false
+#| message: false
+
+read_csv("../data/yearspubs.csv")
 ```
 
 ## Datasets in Packages

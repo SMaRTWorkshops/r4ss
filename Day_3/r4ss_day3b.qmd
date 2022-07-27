@@ -34,18 +34,22 @@ format:
 
 # Model II 
 
-## Basic Regression
+## Basic Regression {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-A
+-   [Basic regression]{.b .blue} predicts one variable $y$ from another variable $x$ using a straight line
 
 ::: {.fragment .mt1}
-B
+-   This line is defined by two parameters
+    -   The [intercept]{.b .green} is the value of $y$ when $x=0$
+    -   The [slope]{.b .green} is the change in $y$ expected for a change of 1 in $x$ (from $x=0$ to $x=1$)
 :::
 
 ::: {.fragment .mt1}
-C
+-   We will use `lm()` to fit regression models
+    -   This will solve using ordinary least squares
+    -   We need to give it the [data]{.b .green} and a [formula]{.b .green}
 :::
 :::
 
@@ -55,7 +59,7 @@ C
 :::
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
 ## Basic Regression Live Coding
@@ -75,64 +79,76 @@ library(performance)
 library(effects)
 library(ggeffects)
 
-salaries <- read_csv("salaries.csv")
-salaries
+yearspubs <- read_csv("yearspubs.csv")
+yearspubs
 
 # ==============================================================================
 
-# 
+# LESSON: Regression is a special case of the linear model, so we use lm()
 
 fit <- lm(
-  formula = salary ~ yrs.since.phd,
-  data = salaries
+  formula = salary ~ yrs_since,
+  data = yearspubs
 )
+
+# ==============================================================================
+
+# TIP: Get a parameter summary using model_parameters() from {parameters}
 
 fit
 
 model_parameters(fit)
 
-# Centering the predictor
+# ==============================================================================
 
-salaries <- mutate(salaries, yrs.since.phd.c = center(yrs.since.phd))
+# TIP: Get effect sizes (standardized results) using standardize = "refit"
+
+model_parameters(fit, standardize = "refit")
+
+# ==============================================================================
+
+# TIP: Get a performance summary using model_performance() from {performance}
+
+model_performance(fit)
+
+# ==============================================================================
+
+# TIP: Visualize the model's predictions using ggeffect() from {ggeffects}
+
+ggeffect(fit, terms = "yrs_since") |> plot()
+
+# ==============================================================================
+
+# LESSON: To center the predictor, use mutate() and center() from {datawizard}
+
+yearspubs <- mutate(yearspubs, yrs_since_c = center(yrs_since))
 
 fit_c <- lm(
-  formula = salary ~ yrs.since.phd.c,
-  data = salaries
+  formula = salary ~ yrs_since_c,
+  data = yearspubs
 )
 
 model_parameters(fit_c)
 
-# Standardized results
-
-model_parameters(fit, standardize = "refit")
-
-# Model performance
-
-model_performance(fit)
-
-# Plotting
-
-plot(ggeffect(fit, terms = "yrs.since.phd"))
-
-plot(ggeffect(fit, terms = "yrs.since.phd"), add.data = TRUE)
+# NOTE: Centering will change the intercept in basic regression (not the slope)
 ```
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
-## Multiple Regression
+## Multiple Regression {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-A
+-   We can also include [multiple predictors]{.b .blue} to assess the [partial effect]{.b .green} of each predictor
+    -   This allows us to account for the variance shared by the predictors and the outcome
 
 ::: {.fragment .mt1}
-B
-:::
-
-::: {.fragment .mt1}
-C
+-   This changes the slopes' interpretations
+    -   The slope of $x_1$ is no longer just the change in $y$ expected for a change of 1 in $x_1$
+    -   It is now the change in $y$ expected for a change of 1 in $x_1$ **when controlling for $x_2$**
+    -   The slope of $x_2$ similarly controls for $x_1$
 :::
 :::
 
@@ -142,7 +158,40 @@ C
 :::
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
+:::
+
+## Multiple Regression {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="45%"}
+- In the model $y \sim x_1$
+    -   The $x_1$ slope captures [b]{.b .green} + [c]{.b .green}
+
+::: {.fragment .mt1}
+- In the model $y \sim x_2$
+    -   The $x_2$ slope captures [c]{.b .green} + [f]{.b .green}
+:::
+
+::: {.fragment .mt1}
+- In the model $y \sim x_1 + x_2$
+    -   The $x_1$ slope captures [b]{.b .green} only
+    -   The $x_2$ slope captures [f]{.b .green} only
+    -   So the overlap of [c]{.b .green} is removed
+:::
+
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+![](../img/venn.png)
+:::
+:::
+
+::: footer
+\[3B\] Model II
 :::
 
 ## Multiple Regression Live Coding
@@ -156,68 +205,79 @@ C
 # SETUP: Load the used packages (if needed) and read in the example dataset
 
 library(tidyverse)
-library(datawizard)
 library(parameters)
 library(performance)
 library(ggeffects)
 
-salaries <- read_csv("salaries.csv")
-salaries
+yearspubs <- read_csv("../data/yearspubs.csv")
+yearspubs
 
 # ==============================================================================
 
-fit2 <- lm(
-  formula = salary ~ yrs.since.phd + yrs.service,
-  data = salaries
+# LESSON: To add more predictors to the formula, just separate them by +
+
+fit3 <- lm(
+  formula = salary ~ yrs_since + n_pubs,
+  data = yearspubs
 )
 
-model_parameters(fit2)
+model_parameters(fit3)
 
-model_parameters(fit2, standardize = "refit")
+model_performance(fit3)
 
-model_performance(fit2)
+model_parameters(fit3, standardize = "refit")
 
-# Plotting marginal effects
+# ==============================================================================
 
-plot(ggeffect(fit2, terms = "yrs.since.phd"))
+# LESSON: Our effect plots are now "marginalized" across the other variable
 
-plot(ggeffect(fit2, terms = "yrs.service"))
+ggeffect(fit3, terms = "yrs_since") |> plot()
 
-# Compare to the model with just years since PhD
+ggeffect(fit3, terms = "n_pubs") |> plot()
 
-compare_parameters(fit, fit2)
+# ==============================================================================
 
-compare_performance(fit, fit2)
+# USECASE: We can compare our models in terms of parameters and performance
 
-anova(fit, fit2)
+fit1 <- lm(salary ~ yrs_since, data = yearspubs)
+fit2 <- lm(salary ~ n_pubs, data = yearspubs)
+
+compare_parameters(fit1, fit2, fit3)
+
+compare_performance(fit1, fit2, fit3)
 ```
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
-## Categorical Predictors
+## Categorical Predictors {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-A
+-   To include categorical predictors in regression models, we can use [dummy coding]{.b .blue}
+    -   This creates binary predictor variables
 
 ::: {.fragment .mt1}
-B
+-   One [reference group]{.b .green} does not get a slope
+    -   Instead, it controls the model intercept
+    -   All other groups' slopes are just deviations from the intercept
 :::
 
 ::: {.fragment .mt1}
-C
+-   There is no need to create dummy codes in R
+    -   Just include a [factor]{.b .green} as a predictor variable
+    -   The **first level** will be the reference group
 :::
 :::
 
 ::: {.column .tc .pv5 width="40%"}
-{{< li rwotyanb trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+{{< li cdbgwqyw trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
 :::
 :::
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
 ## Categorical Live Coding
@@ -228,9 +288,9 @@ C
 #| error: true
 #| code-line-numbers: false
 
+# SETUP: Load the used packages (if needed) and read in the example dataset
+
 library(tidyverse)
-library(datawizard)
-library(modelbased)
 library(parameters)
 library(performance)
 library(ggeffects)
@@ -240,50 +300,59 @@ salaries
 
 # ==============================================================================
 
-# Example with two levels
+# USECASE: Compare three groups with regression (instead of oneway anova)
 
-fit <- lm(salary ~ sex, data = salaries)
+salaries <- 
+  salaries |> 
+  mutate(
+    rank = factor(
+      rank, 
+      levels = c("Assistant", "Associate", "Full") # put Assistant first
+    )
+  )
 
-model_parameters(fit)
+fit <- lm(salary ~ rank, data = salaries)
 
-model_parameters(fit, standardize = "refit")
+model_parameters(fit) # estimate intercept and slopes
 
-model_performance(fit)
+model_parameters(fit, standardize = "refit") # estimate standardized effects
 
-plot(ggeffect(fit, terms = "sex"))
+model_performance(fit) # estimate model performance
 
-estimate_means(fit, at = "sex")
+ggeffect(fit, terms = "rank") # estimate group means for rank
 
-# Change the reference group (whatever level is first)
+ggeffect(fit, terms = "rank") |> plot() # plot group means for rank
 
-salaries2 <- salaries |> mutate(sex = factor(sex, levels = c("Male", "Female")))
+fit |> aov() |> model_parameters() # recreate ANOVA-style F-test
 
-fit2 <- lm(salary ~ sex, data = salaries2)
+# ==============================================================================
 
-model_parameters(fit2)
+# USECASE: Change the reference group to the Associate rank
 
-# Example with three levels
+salaries2 <- 
+  salaries |> 
+  mutate(
+    rank = factor(
+      rank, 
+      levels = c("Associate", "Assistant", "Full") # put Associate first
+    )
+  )
 
-fit2 <- lm(salary ~ rank, data = salaries)
+fit2 <- lm(salary ~ rank, data = salaries2)
 
-model_parameters(fit2)
+model_parameters(fit2) # now the intercept is the Associate rank's mean
 
-model_parameters(fit2, standardize = "refit")
+ggeffect(fit2, terms = "rank") # these estimates are identical to before
 
-model_performance(fit2)
+# ==============================================================================
 
-plot(ggeffect(fit2, terms = "rank"))
+# USECASE: Regression can even mix categorical and continuous predictors!
 
-estimate_means(fit2, at = "rank")
-
-fit2 |> aov() |> model_parameters()
-
-# Example with categorical and continuous predictors
-
-fit3 <- lm(salary ~ rank + yrs.since.phd, 
-           data = salaries)
+fit3 <- lm(salary ~ rank + yrs.since.phd, data = salaries)
 
 model_parameters(fit3)
+
+# NOTE: The intercept is now the mean of Assistant rank with 0 years since PhD
 
 model_parameters(fit3, standardize = "refit")
 
@@ -293,21 +362,21 @@ ggeffect(fit3, terms = c("yrs.since.phd", "rank")) |> plot()
 ```
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
-## Interaction Effects
+## Interaction Effects {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-A
+-   We may want to know if the effect of one predictor [depends on]{.b .green} the value on another predictor
+    -   Does the effect of hours of **exercise** on weight loss *depend on* biological **sex**?
+    -   Does the effect of hours of **exercise** on weight loss *depend on* the **effort** put in?
 
 ::: {.fragment .mt1}
-B
-:::
-
-::: {.fragment .mt1}
-C
+-   To answer these, we can test [interaction effects]{.b .blue}
+    -   Interaction effects are just slopes for the [product]{.b .green} of two or more predictors
+    -   We can include continuous and categorical predictors in interaction effects
 :::
 :::
 
@@ -317,7 +386,7 @@ C
 :::
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
 ## Interactions Live Coding
@@ -328,26 +397,183 @@ C
 #| error: true
 #| code-line-numbers: false
 
+# SETUP: Load the used packages (if needed) and read in the example dataset
 
+library(tidyverse)
+library(parameters)
+library(performance)
+library(ggeffects)
+
+exercise <- read_csv("exercise.csv")
+exercise
+
+# ==============================================================================
+
+# LESSON: Fit a model with no interaction effect for comparison
+
+fit1 <- lm(loss ~ hours + sex, data = exercise)
+
+model_parameters(fit1)
+
+ggeffect(fit1, terms = c("hours", "sex")) |> plot()
+
+
+# ==============================================================================
+
+# LESSON: Does the effect of hours depend on sex (and vice versa)?
+
+fit2 <- lm(loss ~ hours * sex, data = exercise)
+
+model_parameters(fit2)
+
+ggeffect(fit2, terms = c("hours", "sex")) |> plot()
+
+# ==============================================================================
+
+# LESSON: Fit a model with no interaction effect for comparison
+
+fit3 <- lm(loss ~ hours + effort, data = exercise)
+
+model_parameters(fit3)
+
+ggeffect(fit3, terms = c("hours", "effort")) |> plot()
+
+# NOTE: A model with no interaction will have parallel lines
+
+# ==============================================================================
+
+# LESSON: Does the effect of hours depend on effort (and vice versa)?
+
+fit4 <- lm(loss ~ hours * effort, data = exercise)
+
+model_parameters(fit4)
+
+ggeffect(fit4, terms = c("hours", "effort")) |> plot() # put hours on x-axis
+
+ggeffect(fit4, terms = c("effort", "hours")) |> plot() # put effort on x-axis
+
+# ==============================================================================
+
+# LESSON: Be cautious about higher-level interactions
+
+fit5 <- lm(loss ~ hours * effort * sex, data = exercise)
+
+model_parameters(fit5)
+
+ggeffect(fit5, terms = c("hours", "effort", "sex")) |> plot()
 ```
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
-## Regression Diagnostics
+## A Formula Resource {.smaller}
+
+::: {.pv4}
+
+<table width="100%">
+<tr>
+  <th>Formula</th>
+  <th colspan=7>Slopes Estimated</th>
+</tr>
+<tr>
+  <td width="30%">`y ~ x`</td>
+  <td width="10%">$x$</td>
+  <td width="10%"></td>
+  <td width="10%"></td>
+  <td width="10%"></td>
+  <td width="10%"></td>
+  <td width="10%"></td>
+  <td width="10%"></td>
+</tr>
+<tr>
+  <td>`y ~ x + w`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>`y ~ x * w`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td></td>
+  <td>$xw$</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>`y ~ x + w + z`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td>$z$</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>`y ~ x * w + z`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td>$z$</td>
+  <td>$xw$</td>
+  <td></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>`y ~ x * (w + z)`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td>$z$</td>
+  <td>$xw$</td>
+  <td>$xz$</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td>`y ~ x * w * z`</td>
+  <td>$x$</td>
+  <td>$w$</td>
+  <td>$z$</td>
+  <td>$xw$</td>
+  <td>$xz$</td>
+  <td>$wz$</td>
+  <td>$xwz$</td>
+</tr>
+</table>
+
+::: {.pv4}
+Note that predictors can be continuous (i.e., numbers) or categorical (i.e., factors), but if a categorical predictor has more than two levels, you will end up with additional slopes.
+:::
+:::
+
+::: footer
+\[3B\] Model II
+:::
+
+## Regression Diagnostics {.smaller}
 
 ::: {.columns .pv4}
 ::: {.column width="60%"}
-A
+-   LM makes some [assumptions]{.b .green} about the data
+    -   If violated, this can lead to...
+    -   Biased [coefficient]{.b} estimates
+    -   Biased [standard error]{.b} estimates
 
 ::: {.fragment .mt1}
-B
+-   [Regression Diagnostics]{.b .blue} check for...
+    -   Violated assumptions
+    -   Outlier observations
+    -   Multicollinearity
+    -   Prediction quality
 :::
 
-::: {.fragment .mt1}
-C
-:::
 :::
 
 ::: {.column .tc .pv5 width="40%"}
@@ -356,7 +582,7 @@ C
 :::
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
 
 ## Diagnostics Live Coding
@@ -368,90 +594,50 @@ C
 #| code-line-numbers: false
 
 
+fit <- lm(salary ~ yrs.since.phd + yrs.service, data = salaries)
+
+# ==============================================================================
+
+# USECASE: Check if the residuals appear normally distributed
+
+fit |> check_normality()
+
+fit |> check_normality() |> plot()
+
+# ==============================================================================
+
+# USECASE: Check if the residuals show heteroscedasticity (constant variance)
+
+fit |> check_heteroscedasticity()
+
+fit |> check_heteroscedasticity() |> plot()
+
+# ==============================================================================
+
+# USECASE: Check if the model's predictions match the observed distribution
+
+fit |> check_predictions()
+
+# ==============================================================================
+
+# USECASE: Check if any of the predictors show collinearity with others
+
+fit |> check_collinearity()
+
+fit |> check_collinearity() |> plot()
+
+# ==============================================================================
+
+# USECASE: Check if any of the observations would be considered outliers
+
+fit |> check_outliers()
+
+fit |> check_outliers() |> plot()
 ```
 
 ::: footer
-\[3A\] Model II
+\[3B\] Model II
 :::
-
-## Polynomial Regression
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-A
-
-::: {.fragment .mt1}
-B
-:::
-
-::: {.fragment .mt1}
-C
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li lcellbfh trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[3A\] Model II
-:::
-
-## Polynomial Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-
-```
-
-::: footer
-\[3A\] Model II
-:::
-
-## Logistic Regression
-
-::: {.columns .pv4}
-::: {.column width="60%"}
-A
-
-::: {.fragment .mt1}
-B
-:::
-
-::: {.fragment .mt1}
-C
-:::
-:::
-
-::: {.column .tc .pv5 width="40%"}
-{{< li lcellbfh trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
-:::
-:::
-
-::: footer
-\[3A\] Model II
-:::
-
-## Logistic Live Coding
-
-```{r}
-#| echo: true
-#| eval: false
-#| error: true
-#| code-line-numbers: false
-
-
-```
-
-::: footer
-\[3A\] Model II
-:::
-
 
 <!-- Practice V -->
 
