@@ -102,28 +102,106 @@ data_tabulate(salaries, exclude = is.numeric)
 
 # ==============================================================================
 
-# LESSON: Then visualize the variable's distributions
-
-ggplot(salaries, aes(x = rank)) + geom_bar()
-
-ggplot(salaries, aes(x = discipline)) + geom_bar()
-
-ggplot(salaries, aes(x = sex)) + geom_bar()
-
-ggplot(salaries, aes(x = yrs.since.phd)) + geom_histogram()
-
-ggplot(salaries, aes(x = yrs.service)) + geom_histogram()
-
-ggplot(salaries, aes(x = salary)) + geom_histogram()
-
-# ==============================================================================
-
 # LESSON: Finally, check for empty level-combinations
 
 salaries |> 
   group_by(rank, discipline, sex) |> 
   summarize(n = n()) |> 
   arrange(n)
+```
+
+::: footer
+\[3A\] Model I
+:::
+
+## Distribution Geoms {.smaller}
+
+::: {.columns .pv4}
+::: {.column width="60%"}
+-   [Variable distributions]{.b .blue} are critical in data analysis
+    -   What are the most and least [common values]{.b .green}?
+    -   What are the [extrema]{.b .green} (min and max values)?
+    -   Are there any [outliers]{.b .green} or impossible values?
+    -   How much [spread]{.b .green} is there in the variable?
+    -   What [shape]{.b .green} does the distribution take?
+
+::: {.fragment .mt1}
+-   Visualization is a quick way to [assess]{.b .green} this
+    -   They can also [communicate]{.b .green} it to others
+:::
+:::
+
+::: {.column .tc .pv5 width="40%"}
+{{< li wovwohsm trigger=loop delay=3000 colors=secondary:#2a76dd class=rc >}}
+:::
+:::
+
+::: footer
+\[3A\] Model I
+:::
+
+## Distribution Live Coding
+
+```{r}
+#| echo: true
+#| eval: false
+#| error: true
+#| code-line-numbers: false
+
+# SETUP: We will need tidyverse and an example dataset
+
+library(tidyverse)
+
+mpg
+
+# ==============================================================================
+
+# USECASE: Creating histograms
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(bins = 20)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1)
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(binwidth = 2, color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating density plots
+
+ggplot(mpg, aes(x = hwy)) + geom_density()
+
+ggplot(mpg, aes(x = hwy)) + 
+  geom_density(color = "red", size = 1, fill = "white")
+
+# ==============================================================================
+
+# USECASE: Creating box plots
+
+ggplot(mpg, aes(x = hwy)) + geom_boxplot()
+
+ggplot(mpg, aes(x = hwy, y = class)) + 
+  geom_boxplot(varwidth = TRUE)
+
+# ==============================================================================
+
+# USECASE: Creating bar plots to count categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_bar()
+
+# ==============================================================================
+
+# PITFALL: Don't try to create histograms for categorical variables
+
+ggplot(mpg, aes(x = class)) + geom_histogram() #error
 ```
 
 ::: footer

@@ -5,6 +5,8 @@ format:
     df-print: paged
 ---
 
+![](../img/statistics_2780E3.svg){.hero}
+
 ```{r}
 #| echo: false
 #| message: false

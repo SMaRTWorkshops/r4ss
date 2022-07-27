@@ -18,8 +18,6 @@ website:
             href: Details/schedule.qmd
           - text: "Datasets"
             href: Details/datasets.qmd
-          - text: "Resources"
-            href: construction.qmd #Details/resources.qmd
       - text: "Day 1"
         menu:
           - text: "Day 1A Slides"
