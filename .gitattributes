@@ -2,3 +2,5 @@
 *.[Rr]md  linguist-detectable
 *.qmd linguist-detectable
 *.html linguist-documentation
+site_libs/** linguist-vendor
+_extensions/** linguist-vendor
