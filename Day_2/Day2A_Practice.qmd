@@ -115,8 +115,6 @@ a) Transform the `drv` variable in the `mpg` tibble into a factor where "4" is l
 
 b) Transform the `manufacturer` and `model` variables in the `mpg2` tibble so that the first letter of each word is capitalized. Save this updated tibble as `mpg3`.
 
-c) Create a new variable in the `mpg3` tibble called `name` which merges/unites the `manufacturer`, `model`, and `drv` variables into a single string (separated by spaces).
-
 <p><details>
 <summary>Click here for the answer key</summary>
 <blockquote>
@@ -153,17 +151,6 @@ mpg3 <-
     model = str_to_title(model)
   )
 mpg3
-```
-
-**Answer (c)**
-
-```{r}
-#| comment: "#>"
-#| collapse: true
-#| warning: false
-
-mpg3 |> 
-  unite(col = "name", manufacturer, model, drv, sep = " ")
 ```
 
 </blockquote></details></p>

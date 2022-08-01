@@ -1,1 +1,3 @@
 *.qmd linguist-language=RMarkdown
+*.[Rr]md  linguist-detectable
+*.qmd linguist-detectable
