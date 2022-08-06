@@ -2,6 +2,8 @@
 *.[Rr]md  linguist-detectable
 *.qmd linguist-detectable
 *.html linguist-documentation
+_freeze/** linguist-generated
+_site/** linguist-generated
 site_libs/** linguist-vendored
-site/site_libs/** linguist-vendored
 _extensions/** linguist-vendored
+tachyons.css linguist-vendored
