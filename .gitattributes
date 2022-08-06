@@ -3,4 +3,5 @@
 *.qmd linguist-detectable
 *.html linguist-documentation
 site_libs/** linguist-vendored
+site/site_libs/** linguist-vendored
 _extensions/** linguist-vendored
